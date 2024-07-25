@@ -6,6 +6,6 @@ Feature: Logon to amazon
     Given User launches "https://www.amazon.com/"
     When username and password are entered
       | UserName           | Password  |
-      | satyen02@gmail.com | Syntel@1a |
+      | test@email.com | RandomPassword |
     And user clicks on submit button
     Then user should get logged in
