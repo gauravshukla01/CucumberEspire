@@ -11,8 +11,8 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/Stories"
         ,glue={"stepDefinitions"}
         ,dryRun = false
-        ,monochrome = false
-        ,tags = "@Amazon"
+        ,monochrome = true
+        ,tags = "@DemoQa"
 )
 
 public class TestRunner {
