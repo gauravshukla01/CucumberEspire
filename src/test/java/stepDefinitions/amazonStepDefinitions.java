@@ -4,7 +4,8 @@ import CommmonUtils.CollectionsTransformation;
 
 import io.cucumber.java.en.*;
 import otherResources.TestContext;
-import pageObjects.amazon.AmazonHomePage;
+import pageObjects.AmazonHomePage;
+
 import java.util.List;
 import java.util.Map;
 

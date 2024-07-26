@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = false
-        ,tags = "@Amazon"
+        ,tags = "@TextBox"
 )
 
 public class TestRunner {
