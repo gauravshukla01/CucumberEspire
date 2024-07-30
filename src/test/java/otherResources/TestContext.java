@@ -2,6 +2,7 @@ package otherResources;
 
 import TestResourceManager.PageObjectManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 
 public class TestContext {
@@ -12,7 +13,7 @@ public class TestContext {
 
     public TestContext(){
         //webDriverManager = new WebDriverManager();
-        WebDriver driver = new EdgeDriver();
+        WebDriver driver = new ChromeDriver();
         pageObjectManager = new PageObjectManager(driver);
     }
 

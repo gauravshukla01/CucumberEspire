@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = true
-        ,tags = "@DemoQa"
+        ,tags = (" (@TextBox or @DemoQa) and @smoke")
 )
 
 public class TestRunner {
