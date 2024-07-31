@@ -1,28 +1,27 @@
 package otherResources;
 
 import TestResourceManager.PageObjectManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
+import TestResourceManager.WebDrivermanager;
 
 public class TestContext {
 
 
-    private PageObjectManager pageObjectManager;
+	private PageObjectManager pageObjectManager;
+	private WebDrivermanager webdrivermanager;
 
 
-    public TestContext(){
-        //webDriverManager = new WebDriverManager();
-//        WebDriver driver = new EdgeDriver();
-        ChromeDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        pageObjectManager = new PageObjectManager(driver);
-    }
+	public TestContext(){
+		webdrivermanager = new WebDrivermanager();
+		pageObjectManager = new PageObjectManager(webdrivermanager.getDriver());
+	}
 
 
-    public PageObjectManager getPageObjectManager() {
-        return pageObjectManager;
-    }
+	public PageObjectManager getPageObjectManager() {
+		return pageObjectManager;
+	}
 
+	public WebDrivermanager getWebDriverManager() {
+		return webdrivermanager;
+	}
 
 }

@@ -1,8 +1,10 @@
 package stepDefinitions;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-
-import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.*;
 import otherResources.TestContext;
 import pageObjects.DemoQATextBoxPage;
@@ -17,16 +19,10 @@ public class DemoQATextBoxStepDefinition {
 	public DemoQATextBoxStepDefinition(TestContext tstContext){
 		testContext = tstContext;
 		dqtbp = testContext.getPageObjectManager().getDemoQaTextBoxPage();
+		this.driver = testContext.getWebDriverManager().getDriver();
 	}
 	
-	@After
-	public void tearDown()
-	{
-		  if (driver != null) {
-	            driver.quit();
-	        }
-	}
-	
+
 	@Given("User enter and Launches website {string}")
 	public void user_enter_and_launches_website(String url) {
 
@@ -90,6 +86,13 @@ public class DemoQATextBoxStepDefinition {
 
 	}
 	
+	@AfterStep
+	public void addScreenshot(Scenario scenario)
+	{
+		final byte[] screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+		
+		scenario.attach(screenshot,"img/png",scenario.getName());
+	}
 
 
 
