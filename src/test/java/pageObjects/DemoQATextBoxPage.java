@@ -4,6 +4,7 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -24,6 +25,8 @@ public class DemoQATextBoxPage {
 	public DemoQATextBoxPage(WebDriver driver)
 	{
 		this.driver = driver;
+		
+		PageFactory.initElements(driver, this); // need to work on 1st august
 	}
 
 	public void openDemoQATextBoxPage(String url){
@@ -41,6 +44,8 @@ public class DemoQATextBoxPage {
 		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(elementsButton)));
 
 		driver.findElement(elementsButton).click();
+		
+		
 	}
 
 	public void clickonTextBoxButton()

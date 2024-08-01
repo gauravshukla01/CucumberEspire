@@ -1,5 +1,6 @@
 package otherResources;
 
+import CommmonUtils.BaseAction;
 import TestResourceManager.PageObjectManager;
 import TestResourceManager.WebDrivermanager;
 
@@ -8,7 +9,7 @@ public class TestContext {
 
 	private PageObjectManager pageObjectManager;
 	private WebDrivermanager webdrivermanager;
-
+	private BaseAction baseaction;
 
 	public TestContext(){
 		webdrivermanager = new WebDrivermanager();
@@ -24,4 +25,7 @@ public class TestContext {
 		return webdrivermanager;
 	}
 
+	public BaseAction getBaseAction() {
+		return baseaction;
+	}
 }

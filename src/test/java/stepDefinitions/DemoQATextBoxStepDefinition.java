@@ -3,6 +3,8 @@ package stepDefinitions;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
+import CommmonUtils.BaseAction;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.*;
@@ -15,6 +17,7 @@ public class DemoQATextBoxStepDefinition {
 	DemoQATextBoxPage dqtbp;
 	TestContext testContext;
 	private WebDriver driver;
+	 private BaseAction baseaction;
 
 	public DemoQATextBoxStepDefinition(TestContext tstContext){
 		testContext = tstContext;

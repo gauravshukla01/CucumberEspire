@@ -47,5 +47,15 @@ public class BaseAction {
         }
         return false;
     }
+    
+    public static void uploadFile(WebDriver driver, WebElement fileInputElement, String filePath) {
+        if (fileInputElement != null && fileInputElement.isDisplayed() && fileInputElement.isEnabled()) {
+            fileInputElement.sendKeys(filePath);
+        } else {
+            throw new IllegalArgumentException("File input element is not displayed or not enabled.");
+        }
+   
+}
+ 
 
 }
