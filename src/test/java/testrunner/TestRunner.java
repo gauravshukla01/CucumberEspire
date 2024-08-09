@@ -7,13 +7,13 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-       // plugin = { "pretty", "html:target/cucumber-reports.html" },
-		plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-        features = "src/test/resources/Stories"
+       plugin = { "pretty", "html:target/cucumber-reports.html" },
+		//plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
+        features = "C:\\Users\\chetan.patel\\Epro_Workspace\\CucumberEspire\\src\\test\\resources\\Stories\\Epro.feature"
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = false
-        ,tags = "@TextBox"
+        ,tags = "@EproCampaignCreation"
 )
 
 public class TestRunner {
