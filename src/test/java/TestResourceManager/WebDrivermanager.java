@@ -12,6 +12,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import enums.DriverType;
 import enums.EnvironmentType;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import otherResources.ConfigFileReader;
 
 public class WebDrivermanager {
 
@@ -19,12 +20,15 @@ public class WebDrivermanager {
 	private static DriverType driverType;
 	private static EnvironmentType environmentType;
 	private ChromeOptions chromeOptions;
+	private ConfigFileReader configReader;
+	
 //	private static final String CHROME_DRIVER_PROPERTY = "webdriver.chrome.driver";
 //	private static final String EDGE_DRIVER_PROPERTY = "webdriver.edge.driver";
 
 	public WebDrivermanager() {
 		driverType = FileReaderManager.getInstance().getConfigReader().getBrowser();
 		environmentType = FileReaderManager.getInstance().getConfigReader().getEnvironment();
+	//	configReader = FileReaderManager.getInstance().getConfigReader().getApplicationUrl();
 	}
 
 	public WebDriver getDriver() {
@@ -64,6 +68,7 @@ public class WebDrivermanager {
 			chromeOptions.addArguments("--remote-allow-origins=*");
 			//            chromeOptions.addArguments("--headless");
 			driver = new ChromeDriver(chromeOptions);
+			configReader.getApplicationUrl();
 			//            chromeOptions.setHeadless(true);
 			break;
 		case EDGE : 

@@ -31,11 +31,7 @@ public class EproStepDefinition {
     }
 
 	
-	@Given("User launches {string}")
-	public void User_launches (String url) {
-		
-		eprologin.launchurl(url);
-	}
+
 	
 	
 	
@@ -72,7 +68,7 @@ public class EproStepDefinition {
 	@When("user selects the business Unit")
 	public void user_selects_the_business_unit() throws InterruptedException {
 		
-		eprocreatecamp.selectBusinessUnit();
+		
 	}
 
 	@When("user select the customer and customer entity")

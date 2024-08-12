@@ -20,33 +20,36 @@ public class EproHomePage {
 	public EproHomePage(WebDriver driver) {
 		this.driver = driver;
 		this.js = (JavascriptExecutor) driver;
+		 this.wait = new WebDriverWait(driver,java.time.Duration.ofSeconds(20));
 	}
 
 	public void ClkCampaign() throws InterruptedException {
 
-		// WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+		// step to click on campaign icon
+				// *[text()=' Campaigns']
+				// action class and move to element
+				Actions action = new Actions(driver);
+				
+				
+				
+				
+				// webelement for side nav
+				Thread.sleep(3000);
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='sideNav']"))).click();
+				// WebElement ele = driver.findElement(By.xpath("//*[@id='sideNav']"));
+				// action.moveToElement(ele);
+				// click on workflow icon
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Workflow ']"))).click();
 
-		// Actions actions = new Actions(driver);
-
-		// Click on sidBar
-		// driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(30));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='sideNav']"))).click(); // Adjust the
-		// locator as // needed
-		// WebElement ele = driver.findElement(By.xpath("//*[@id='sideNav']"));
-//		       action.moveToElement(ele);
-
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Workflow ']"))).click();
-		//Thread.sleep(3000);
-
-		// Click on campaign button
-
-		WebElement campaignButton = driver.findElement(element4);
-		js.executeScript("arguments[0].scrollIntoView();", campaignButton);
-
-		wait.until(ExpectedConditions.elementToBeClickable(element4)).click();
-
-		Thread.sleep(4000);
+				WebElement campRetry = driver.findElement(By.xpath("//a[normalize-space()='Campaigns']"));
+				
+				while(campRetry.isDisplayed() != true) {
+					
+					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Workflow ']"))).click();
+				}
+			
+			   // click on campaign icon
+			   wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[normalize-space()='Campaigns']"))).click();
 
 	}
 
