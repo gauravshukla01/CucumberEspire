@@ -28,7 +28,7 @@ public class WebDrivermanager {
 	public WebDrivermanager() {
 		driverType = FileReaderManager.getInstance().getConfigReader().getBrowser();
 		environmentType = FileReaderManager.getInstance().getConfigReader().getEnvironment();
-	//	configReader = FileReaderManager.getInstance().getConfigReader().getApplicationUrl();
+		configReader = FileReaderManager.getInstance().getConfigReader();
 	}
 
 	public WebDriver getDriver() {

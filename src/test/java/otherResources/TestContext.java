@@ -19,11 +19,11 @@ public class TestContext {
 	public HashMap<String,String> Hmap;
 
 	public TestContext(){
-		// webdrivermanager = new WebDrivermanager();
-		driver = new ChromeDriver();
+		webdrivermanager = new WebDrivermanager();
+		//driver = new ChromeDriver();
 		Hmap = new HashMap<String,String>();
-		//pageObjectManager = new PageObjectManager(webdrivermanager.getDriver());
-		pageObjectManager = new PageObjectManager(driver);
+		pageObjectManager = new PageObjectManager(webdrivermanager.getDriver());
+		//pageObjectManager = new PageObjectManager(driver);
 	}
 
 

@@ -35,11 +35,11 @@ public class amazonStepDefinitions {
     }
 
 
-    @When("user clicks on submit button")
+    @When("user clicks on submit button for test")
     public void user_clicks_on_submit_button() {
         System.out.println("Click on submit");
     }
-    @Then("user should get logged in")
+    @Then("user should get logged in amazon")
     public void user_should_get_logged_in() {
         System.out.println("user should be logged in");
     }

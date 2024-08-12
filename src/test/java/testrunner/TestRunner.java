@@ -7,9 +7,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-       plugin = { "pretty", "html:target/cucumber-reports.html" },
-	//	plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-        features = "C:\\Users\\chetan.patel\\Epro_Workspace\\CucumberEspire\\src\\test\\resources\\Stories\\Epro.feature"
+       //plugin = { "pretty", "html:target/cucumber-reports.html" },
+		plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
+      // this needs to be localized
+		features = "C:\\Users\\gaurav.shukla.ESPIRE\\git\\CucumberEspire\\src\\test\\resources\\Stories\\Epro.feature"
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = false

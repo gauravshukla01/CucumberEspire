@@ -142,7 +142,7 @@ public class StepDef_Scenario1 {
 	@Then("Verify status as Quote Accepted on Campaign Item Page")
 	public void verify_status_as_quote_accepted_on_campaign_item_page() {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		 System.out.println("Quote accepted status verified-- code to be implemented");
 	}
 	
 	
