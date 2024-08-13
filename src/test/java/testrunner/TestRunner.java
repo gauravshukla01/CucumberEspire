@@ -10,11 +10,11 @@ import org.junit.runner.RunWith;
        //plugin = { "pretty", "html:target/cucumber-reports.html" },
 		plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
       // this needs to be localized
-		features = "C:\\Users\\gaurav.shukla.ESPIRE\\git\\CucumberEspire\\src\\test\\resources\\Stories\\Epro.feature"
+		features = "C:\\Users\\rahul\\Workspace3\\CucumberEspire\\src\\test\\resources\\Stories\\Epro.feature"
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = false
-        ,tags = "@Scenario1"
+        ,tags = "@Scenario2"
 )
 
 public class TestRunner {

@@ -21,7 +21,7 @@ Feature: Create a campaign
 
   @Scenario2
   Scenario Outline: Validate PO Generation and Receipt Creation
-    Given User launches "https://uat.paragon-epro.com/"
+   Given User launches Epro url
     Then user login with valid <UserName> and <Password>
     And On Campaign Item Page verify Status as Quote Accepted after Accepting the quote
     And User will Send and the create PO

@@ -1,16 +1,61 @@
 package stepDefinitions;
 
+import TestResourceManager.WebDrivermanager;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import otherResources.TestContext;
+import pageObjects.AddCampaignItemPage;
+import pageObjects.EditCampaignItemPage;
+import pageObjects.EproCampaignPage;
+import pageObjects.EproCreateCampaignPage;
+import pageObjects.EproHomePage;
+import pageObjects.EproLoginPage;
+import pageObjects.ManageCampaignPage;
+import pageObjects.ManagePricePage;
+import pageObjects.QuoteManagementPage;
+import pageObjects.SubmitSupplierPricePage;
 
 public class StepDef_Scenario2 {
 	
-
+	TestContext testContext;
+    EproLoginPage eprologin;
+    EproHomePage eprohome;
+    EproCampaignPage eprocamppage;
+    EproCreateCampaignPage eprocreatecamp;	
+	AddCampaignItemPage addCampaignItem;
+	EditCampaignItemPage editCampPage;
+	SubmitSupplierPricePage submitSupplier;
+	ManagePricePage managePrice;
+    QuoteManagementPage quoteManage;
+    ManageCampaignPage manageCampPage;
+    WebDrivermanager webdrivermanager;
+    
+    
+	
+	
+	 public StepDef_Scenario2(TestContext tstContext){
+	        testContext = tstContext;
+	      
+	        eprologin = testContext.getPageObjectManager().getEproLoginPage();
+	        eprohome =  testContext.getPageObjectManager().getEproHomePage();
+	        eprocamppage =  testContext.getPageObjectManager().getEproCampaignPage();
+	        eprocreatecamp =  testContext.getPageObjectManager().getEproCreateCampaignPage();
+	        addCampaignItem = testContext.getPageObjectManager().getAddCampaignItemPage();
+	        editCampPage = testContext.getPageObjectManager().getEditCampaignItemPage();
+	        submitSupplier = testContext.getPageObjectManager().getSubmitSpplierPricePage();
+	        managePrice = testContext.getPageObjectManager().getManagePricePage();
+	        manageCampPage = testContext.getPageObjectManager().getManageCampaignPage();
+	        quoteManage = testContext.getPageObjectManager().getQuoteManagementPage();
+	      
+	    }
+	 
+	
 
 	@And("On Campaign Item Page verify Status as Quote Accepted after Accepting the quote")
-	public void on_campaign_item_page_verify_status_as_quote_accepted_after_accepting_the_quote() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void on_campaign_item_page_verify_status_as_quote_accepted_after_accepting_the_quote() throws InterruptedException {
+	    eprohome.ClkCampaign();
+	    eprocamppage.clickOnCampaignId("UT01118");
 	}
 
 	@And("User will Send and the create PO")

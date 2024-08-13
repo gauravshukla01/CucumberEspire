@@ -60,4 +60,21 @@ public class EproCampaignPage {
 		// wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='UT01118']"))).click();
 
 	}
+	
+	public void clickOnSendPO() throws InterruptedException {
+		 // click on send po button
+	     
+	       String campaign_ID = ba.handleWebTable("//*[@role='table']/tbody/tr", "Quote Accepted", 2, "getText");
+	       System.out.println("campaign_ID = "+campaign_ID);
+	       int rowNum = ba.getMatchRowNum("//*[@role='table']/tbody/tr", "Quote Accepted", 2, "getRowNum");
+	       System.out.println("rowNum  = "+rowNum);
+	      //*[@role='table']/tbody/tr[5]/td[11]/button[not(@hidden)]//img[@src='assets/images/send-for-approval.svg']
+	       ba.retryMechanism(driver, driver.findElement(By.xpath("//table[@role=\"table\"]//tbody/tr["+rowNum+"]/td/button[not(@hidden)]//img[@src='assets/images/send-for-approval.svg']"))); 
+			
+
+	       ba.retryMechanism(driver, driver.findElement(By.xpath("//button[@type='submit']//span[contains(text(),' Yes')]")));
+	       
+	}
+	
+	
 }
