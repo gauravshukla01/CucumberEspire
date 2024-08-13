@@ -21,6 +21,7 @@ public class BaseAction {
 
 	public BaseAction(WebDriver driver) {
 		this.driver = driver;
+		// sample comment
 
 	}
 
