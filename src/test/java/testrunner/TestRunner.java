@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
        //plugin = { "pretty", "html:target/cucumber-reports.html" },
 		plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
       // this needs to be localized
-		features = "C:\\Users\\gaurav.shukla.ESPIRE\\git\\CucumberEspire\\src\\test\\resources\\Stories\\Epro.feature"
+		features = "C:\\Users\\chetan.patel\\Epro_Workspace\\Epro\\CucumberEspire\\src\\test\\resources\\Stories\\Epro.feature"
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = false

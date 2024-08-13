@@ -72,8 +72,10 @@ public class EproCreateCampaignPage {
 		WebElement customer_camping_ref = driver.findElement(By.xpath("//input[@id='reference']"));
 		ba.retryMechanismWithSendKeys(driver, customer_camping_ref, "CR124324332");
 
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+		
 		WebElement date = driver.findElement(By.xpath("//button[@aria-label='Open calendar']//span[@class='mat-button-wrapper']//*[name()='svg']"));
+		js.executeScript("arguments[0].scrollIntoView();", date);
+		js.executeScript("window.scrollBy(0, -100);"); 
 		ba.retryMechanism(driver,date);
 		WebElement Value_31 = driver.findElement(By.xpath("//*[contains(@aria-label,'August 31, 2024')]"));
 		ba.retryMechanism(driver,Value_31);
@@ -87,18 +89,24 @@ public class EproCreateCampaignPage {
 		 */
 
 		WebElement VAT = driver.findElement(By.xpath("//div[@id='mat-select-value-27']"));
+		
 		js.executeScript("arguments[0].scrollIntoView();", VAT);
+		js.executeScript("window.scrollBy(0, -100);"); 
 		ba.retryMechanism(driver,VAT);
 		WebElement vat20 = driver.findElement(By.xpath("//span[normalize-space()='VAT20']"));
 		ba.retryMechanism(driver,vat20);
 
 
 		WebElement purchase_order_number = driver.findElement(By.xpath("//input[@id='ponumber']"));
+		
 		js.executeScript("arguments[0].scrollIntoView();", purchase_order_number);
+		js.executeScript("window.scrollBy(0, -100);"); 
 		ba.retryMechanismWithSendKeys(driver, purchase_order_number, "PO12421331");
 
 		WebElement purchase_order_value = driver.findElement(By.xpath("//input[@id='povalue']"));
+		
 		js.executeScript("arguments[0].scrollIntoView();", purchase_order_value);
+		js.executeScript("window.scrollBy(0, -100);"); 
 		ba.retryMechanismWithSendKeys(driver, purchase_order_value, "2");
 
 
@@ -113,9 +121,20 @@ public class EproCreateCampaignPage {
 	public String submitCreateCampaignDetails() throws InterruptedException {
 
 		WebElement SUBMIT = driver.findElement(By.xpath("//button[@type='submit']"));
-		js.executeScript("arguments[0].scrollIntoView();", SUBMIT);
-		ba.retryMechanism(driver,SUBMIT);
 		
+		js.executeScript("arguments[0].scrollIntoView();", SUBMIT);
+		js.executeScript("window.scrollBy(0, -100);"); 
+		ba.retryMechanism(driver,SUBMIT);
+	
+		
+		//wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).clear();
+		
+	try {	WebElement  clearSearch = driver.findElement(By.xpath("//div[@class='input-group-append']"));
+		ba.retryMechanism(driver, clearSearch);
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
 		 String campaign_Number = ba.handleWebTable("//*[@role='table']/tbody/tr", "Created", 1, "getText");
 	        
 	        
