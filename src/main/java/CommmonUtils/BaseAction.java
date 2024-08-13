@@ -7,6 +7,7 @@ import java.util.function.Function;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,10 +19,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BaseAction {
 
 	private WebDriver driver;
+	public JavascriptExecutor js;
 
 	public BaseAction(WebDriver driver) {
 		this.driver = driver;
-
+		this.js = (JavascriptExecutor) driver;
 	}
 
 	public boolean safeClick(By by, long timeout, long pollingInterval) {
@@ -69,7 +71,8 @@ public class BaseAction {
 		while (attempt <= maxAttempts) {
 			try {
 				WebElement element = wait.until(ExpectedConditions.elementToBeClickable(ele));
-				element.click(); // Click the element once it becomes clickable
+				
+				 element.click(); // Click the element once it becomes clickable
 
 				elementClickable = true; // Set the flag to indicate it was clicked
 
