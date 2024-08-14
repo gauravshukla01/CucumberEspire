@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
+
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -18,10 +20,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BaseAction {
 
 	private WebDriver driver;
-
+   public WebDriverWait wait;
 	public BaseAction(WebDriver driver) {
 		this.driver = driver;
 		// sample comment
+		this.wait = new WebDriverWait(driver,java.time.Duration.ofSeconds(20));
 
 	}
 
@@ -245,5 +248,23 @@ public class BaseAction {
 
 		return rowNum;
 	}
+	
+	@SuppressWarnings("deprecation")
+	public void validatePopUp (String PopUpText,String ValidationMessage) {
+
+		WebElement popup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".snackbar-text")));
+		String popupText = popup.getText();
+	//	System.out.println("Pop up text is = "+popupText);
+		try {
+
+			Assert.assertEquals(PopUpText, popupText);       
+			System.out.println(ValidationMessage);
+		} catch (AssertionError e) {	      
+			System.out.println("validation fail");
+		}
+	
+
+}
+
 
 }
