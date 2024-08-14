@@ -1,5 +1,7 @@
 package pageObjects;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -29,12 +31,12 @@ public class EproHomePage {
 				// *[text()=' Campaigns']
 				// action class and move to element
 				Actions action = new Actions(driver);
-				
-				
+					
 				
 				
 				// webelement for side nav
 				Thread.sleep(3000);
+				 wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='sideNav']"))).click();
 				// WebElement ele = driver.findElement(By.xpath("//*[@id='sideNav']"));
 				// action.moveToElement(ele);
