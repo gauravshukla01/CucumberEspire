@@ -43,7 +43,7 @@ public class SubmitSupplierPricePage {
 				WebElement Search = driver.findElement(By.xpath(
 						"//input[@class='mat-input-element mat-form-field-autofill-control mat-select-search-input cdk-text-field-autofill-monitored']"));
 
-				ba.retryMechanismWithSendKeys(driver, Search, "Paragon");
+				ba.retryMechanismWithSendKeys(driver, Search, "Dagenham");
 
 				WebElement selectDagenham = driver.findElement(By.xpath("//span[contains(text(),'Paragon CC (Dagenham)')]"));
 				// js.executeScript("arguments[0].scrollIntoView();", selectDagenham);

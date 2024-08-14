@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import CommmonUtils.BaseAction;
@@ -118,23 +119,28 @@ public void validateSubmitCostPopup() {
 		//add value of i(rownum) in the hashmap
 				WebElement ClckManagePrice = driver.findElement(By
 						.xpath("//*[@role='table']//tbody/tr[" + i + "]//img[@src='assets/images/submit-supplier-price.svg']"));
-				js.executeScript("arguments[0].scrollIntoView();", ClckManagePrice);
+			//	js.executeScript("arguments[0].scrollIntoView();", ClckManagePrice);
 				ba.retryMechanism(driver, ClckManagePrice);
 
 				Thread.sleep(2000);
 				WebElement checkBox = driver.findElement(By.xpath("//campaign-item-supplier-price-table[@class='ng-star-inserted']//span[@class='mat-checkbox-inner-container mat-checkbox-inner-container-no-side-margin']"));
-				js.executeScript("arguments[0].scrollIntoView();", checkBox);
-				checkBox.click();
-
-				WebElement manageQuoteButton = driver.findElement(By.xpath("//i[@class='fas fa-chevron-circle-right fa-3x']"));
-				ba.retryMechanism(driver, manageQuoteButton);
+			//	js.executeScript("arguments[0].scrollIntoView();", checkBox);
+				ba.retryMechanism(driver, checkBox);
+				//checkBox.click();
+				Thread.sleep(4000);
+				//WebElement manageQuoteButton = driver.findElement(By.xpath("//i[@class='fas fa-chevron-circle-right fa-3x']"));
+				//*[text()='Manage Quotes ']
+				//wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='Manage Quotes ']"))).click();
+				
+				//WebElement manageQuoteButton = driver.findElement(By.xpath("//*[text()='Manage Quotes ']"));
+				//js.executeScript("arguments[0].scrollIntoView();", manageQuoteButton);
+				ba.retryMechanism(driver, wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='Manage Quotes ']"))));
 	}
 	
 	
 	public void validateItemSelectedPopup() {
 		
-		ba.validatePopUp("\r\n"
-				+ "Campaign Item selected cost price has been created successfully.", "Campaign item selection popup validated successfully.");
+		ba.validatePopUp("Campaign Item selected cost price has been created successfully.", "Campaign item selection popup validated successfully.");
 	}
 				
 				public void CreateQuote() {

@@ -72,7 +72,8 @@ public class EproCreateCampaignPage {
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		WebElement date = driver.findElement(By.xpath("//button[@aria-label='Open calendar']//span[@class='mat-button-wrapper']//*[name()='svg']"));
 		ba.retryMechanism(driver,date);
-		WebElement Value_31 = driver.findElement(By.xpath("//*[contains(@aria-label,'August 31, 2024')]"));
+		//WebElement Value_31 = driver.findElement(By.xpath("//*[contains(@aria-label,'August 31, 2024')]"));
+		WebElement Value_31 = driver.findElement(By.xpath("//table[@role='grid']/tbody/tr[5]/td[7]"));
 		ba.retryMechanism(driver,Value_31);
 
 		/*

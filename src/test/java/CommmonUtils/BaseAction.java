@@ -84,6 +84,7 @@ public class BaseAction {
 
 				System.out.println("RETRY done " + attempt);
 				attempt++; // Increment the attempt count
+				e.printStackTrace();
 
 			}
 		}
