@@ -52,7 +52,7 @@ public class StepDef_Scenario2 {
 	        manageCampPage = testContext.getPageObjectManager().getManageCampaignPage();
 	        quoteManage = testContext.getPageObjectManager().getQuoteManagementPage();
 	        poManagementPage = testContext.getPageObjectManager().getPOManagementPage();
-	      
+	        webdrivermanager = testContext.getWebDriverManager();
 	    }
 	 
 	
@@ -62,7 +62,7 @@ public class StepDef_Scenario2 {
 	    eprohome.ClkCampaign();
 	  // String campID = testContext.Hmap.get("CampaignId");
 	  // System.out.println(campID);
-	   eprocamppage.clickOnCampaignId("UT01439");
+	   eprocamppage.clickOnCampaignId("UT01667");
 	}
 
 	@And("User will Send and the create PO")
@@ -99,6 +99,7 @@ public class StepDef_Scenario2 {
 	@Then("Verify Receipted column status with green tick")
 	public void verify_receipted_column_status_with_green_tick() {
 	    System.out.println("Receipt status verified");
+	 //   webdrivermanager.closeDriver();
 	}
 
 

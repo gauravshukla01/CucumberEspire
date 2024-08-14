@@ -17,7 +17,7 @@ Feature: Create a campaign
 
     Examples: 
       | UserName      | Password        |
-      | Staginguser_2 | Password@123456 |
+      | Staginguser_3 | Paragon@2024    |
 
   @Scenario2
   Scenario Outline: Validate PO Generation and Receipt Creation
@@ -34,13 +34,14 @@ Feature: Create a campaign
 
     Examples: 
       | UserName      | Password        |
-      | Staginguser_2 | Password@123456 |
+      | Staginguser_3 | Paragon@2024    |
 
   @Scenario3
   Scenario Outline: Validate Draft and Final Invoice Generation
-    Given User launches "https://uat.paragon-epro.com/"
+    Given User launches Epro url
     Then user login with valid <UserName> and <Password>
-    And Click on Finance and navigate to Sales Order
+    And User get the required Campaign id for PO Receipted 
+    And  Click on Finance and navigate to Sales Order
     Then User will Create Draft Invoice
     And Click on Finance and navigate to Sales Invoice
     And Click on resepctive Invoice number (Manage Invoice)
@@ -48,4 +49,4 @@ Feature: Create a campaign
 
     Examples: 
       | UserName      | Password        |
-      | Staginguser_2 | Password@123456 |
+      | Staginguser_3 | Paragon@2024    |
