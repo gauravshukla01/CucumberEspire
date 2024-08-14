@@ -116,6 +116,13 @@ public class EproCreateCampaignPage {
 		js.executeScript("arguments[0].scrollIntoView();", SUBMIT);
 		ba.retryMechanism(driver,SUBMIT);
 		
+		try {	WebElement  clearSearch = driver.findElement(By.xpath("//div[@class='input-group-append']"));
+		ba.retryMechanism(driver, clearSearch);
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+		
 		 String campaign_Number = ba.handleWebTable("//*[@role='table']/tbody/tr", "Created", 1, "getText");
 	        
 	        
