@@ -84,6 +84,15 @@ public class SubmitSupplierPricePage {
 				System.out.println("Submit button is clicked after supplier submit");
 
 		
+	}
+
+
+
+
+
+	public void validateSubmitSupplierCostPopup() {
+		ba.validatePopUp("Campaign Item Supplier Cost Price has been created successfully.", "Submit Supplier Cost popup validated successfully.");
+		
 	}	
 	
 	

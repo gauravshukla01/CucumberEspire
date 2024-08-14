@@ -10,11 +10,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import CommmonUtils.BaseAction;
+
 public class EproHomePage {
 
 	public WebDriver driver;
 	public WebDriverWait wait;
 	public JavascriptExecutor js;
+	public BaseAction ba;
 
 	private final By element4 = By
 			.xpath("//*[@class='sideNavDropDown ng-star-inserted']//a[normalize-space()='Campaigns'][1]");
@@ -23,6 +26,7 @@ public class EproHomePage {
 		this.driver = driver;
 		this.js = (JavascriptExecutor) driver;
 		 this.wait = new WebDriverWait(driver,java.time.Duration.ofSeconds(20));
+		 ba = new BaseAction(driver);
 	}
 
 	public void ClkCampaign() throws InterruptedException {
@@ -31,28 +35,34 @@ public class EproHomePage {
 				// *[text()=' Campaigns']
 				// action class and move to element
 				Actions action = new Actions(driver);
-					
+				
+				
 				
 				
 				// webelement for side nav
 				Thread.sleep(3000);
-				 wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='sideNav']"))).click();
+				//wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='sideNav']"))).click();
+				WebElement sideNAV = driver.findElement(By.xpath("//*[@id='sideNav']"));
+				ba.retryMechanism(driver, sideNAV);
 				// WebElement ele = driver.findElement(By.xpath("//*[@id='sideNav']"));
 				// action.moveToElement(ele);
 				// click on workflow icon
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Workflow ']"))).click();
+				// wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Workflow ']"))).click();
+				 WebElement workflow = driver.findElement(By.xpath("//*[text()=' Workflow ']"));
+				ba.retryMechanism(driver, workflow);
 
-				WebElement campRetry = driver.findElement(By.xpath("//a[normalize-space()='Campaigns']"));
+			   
 				
-				while(campRetry.isDisplayed() != true) {
+			/*	while(clkCampaign.isDisplayed() != true) {
 					
 					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Workflow ']"))).click();
 				}
-			
+			*/
 			   // click on campaign icon
-			   wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[normalize-space()='Campaigns']"))).click();
-
+			 //  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[normalize-space()='Campaigns']"))).click();
+				WebElement clkCampaign = driver.findElement(By.xpath("//a[normalize-space()='Campaigns']"));
+			   ba.retryMechanism(driver, clkCampaign);
 	}
+
 
 }

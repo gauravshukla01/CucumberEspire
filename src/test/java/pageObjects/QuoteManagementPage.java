@@ -30,7 +30,9 @@ public class QuoteManagementPage {
 	}
 
 	
-	public void generateQuote() throws InterruptedException {
+	public void verifyQuote() throws InterruptedException {
+		
+		
 		
 		// Click on Quote Management
 				WebElement quoteManagement = driver.findElement(By.xpath("//div[contains(text(),'Quote Management')]"));
@@ -66,5 +68,14 @@ public class QuoteManagementPage {
 				WebElement finalAccept = driver.findElement(By.xpath("//*[text()='Accept Quote']"));
 				ba.retryMechanism(driver, finalAccept);
 
+	}
+
+
+	
+
+
+	public void validateAcceptQuotePopup() {
+		
+		ba.validatePopUp("Campaign Quote has been modified successfully.", "Quote Accepted Popup validated successfully.");
 	}
 }

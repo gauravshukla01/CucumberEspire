@@ -34,37 +34,34 @@ public class EproCreateCampaignPage {
 
 	public void fillRequiredDetails() throws InterruptedException {
 
-
 		// retry mechanism implementation
 		WebElement element = driver.findElement(By.xpath("//*[@id='BusinessUnitId']"));
-		ba.retryMechanism(driver,element);
+		ba.retryMechanism(driver, element);
 		WebElement element1 = driver.findElement(By.xpath("//span[normalize-space()='PCC UK Lead Supply']"));
-		ba.retryMechanism(driver,element1);
+		ba.retryMechanism(driver, element1);
 
-
-
-		WebElement customertxtBox = driver.findElement(By.xpath("//span[@class='mat-select-placeholder mat-select-min-line ng-tns-c91-28 ng-star-inserted']"));
-		ba.retryMechanism(driver,customertxtBox);
+		WebElement customertxtBox = driver.findElement(
+				By.xpath("//span[@class='mat-select-placeholder mat-select-min-line ng-tns-c91-28 ng-star-inserted']"));
+		ba.retryMechanism(driver, customertxtBox);
 		WebElement stagingClient_1 = driver.findElement(By.xpath("//*[text()=' StagingClient_1 ']"));
 		ba.retryMechanism(driver, stagingClient_1);
 
-
-		WebElement customer_entities = driver.findElement(By.xpath("//span[@class='mat-select-placeholder mat-select-min-line ng-tns-c91-30 ng-star-inserted']"));
-		ba.retryMechanism(driver,customer_entities);
+		WebElement customer_entities = driver.findElement(
+				By.xpath("//span[@class='mat-select-placeholder mat-select-min-line ng-tns-c91-30 ng-star-inserted']"));
+		ba.retryMechanism(driver, customer_entities);
 		WebElement AdminClient = driver.findElement(By.xpath("//span[normalize-space()='AdminClient 1 - GBP']"));
-		ba.retryMechanism(driver,AdminClient);
+		ba.retryMechanism(driver, AdminClient);
 
 		/*
 		 * WebElement Account_Manager =
 		 * driver.findElement(By.xpath("//*[@id='title']"));
 		 * ba.retryMechanism(driver,Account_Manager);
-		 */        
+		 */
 		/*
 		 * WebElement Staging_user =
 		 * driver.findElement(By.xpath("//span[normalize-space()='Staging User3']"));
 		 * ba.retryMechanism(driver,Staging_user);
 		 */
-
 
 		WebElement Campaign_title = driver.findElement(By.xpath("//input[@id='title']"));
 		ba.retryMechanismWithSendKeys(driver, Campaign_title, "Test_3");
@@ -78,12 +75,12 @@ public class EproCreateCampaignPage {
 		WebElement Value_31 = driver.findElement(By.xpath("//*[contains(@aria-label,'August 31, 2024')]"));
 		ba.retryMechanism(driver,Value_31);
 
-
-
-		/*   WebElement sales_representative = driver.findElement(By.xpath("//div[@id='mat-select-value-23']"));
-        retryMechanism(driver,sales_representative);
-        WebElement David_Reynolds = driver.findElement(By.xpath("//span[normalize-space()='David Reynolds']"));
-        retryMechanism(driver,David_Reynolds);
+		/*
+		 * WebElement sales_representative =
+		 * driver.findElement(By.xpath("//div[@id='mat-select-value-23']"));
+		 * retryMechanism(driver,sales_representative); WebElement David_Reynolds =
+		 * driver.findElement(By.xpath("//span[normalize-space()='David Reynolds']"));
+		 * retryMechanism(driver,David_Reynolds);
 		 */
 
 		WebElement VAT = driver.findElement(By.xpath("//div[@id='mat-select-value-27']"));
@@ -91,7 +88,6 @@ public class EproCreateCampaignPage {
 		ba.retryMechanism(driver,VAT);
 		WebElement vat20 = driver.findElement(By.xpath("//span[normalize-space()='VAT20']"));
 		ba.retryMechanism(driver,vat20);
-
 
 		WebElement purchase_order_number = driver.findElement(By.xpath("//input[@id='ponumber']"));
 		js.executeScript("arguments[0].scrollIntoView();", purchase_order_number);
@@ -110,28 +106,35 @@ public class EproCreateCampaignPage {
 
 	}
 
-	public String submitCreateCampaignDetails() throws InterruptedException {
+	public void submitCreateCampaignDetails() throws InterruptedException {
 
 		WebElement SUBMIT = driver.findElement(By.xpath("//button[@type='submit']"));
 		js.executeScript("arguments[0].scrollIntoView();", SUBMIT);
-		ba.retryMechanism(driver,SUBMIT);
-		
-		try {	WebElement  clearSearch = driver.findElement(By.xpath("//div[@class='input-group-append']"));
-		ba.retryMechanism(driver, clearSearch);
+		ba.retryMechanism(driver, SUBMIT);
 	}
-	catch(Exception e) {
-		e.printStackTrace();
+
+	public void ValidateCreateCampaignPopUp() {
+
+		ba.validatePopUp("Campaign has been created successfully.", "Campaign creation popup validated successfully.");
 	}
+
+	public String storeCampaignID() throws InterruptedException {
+
+		try {
+			WebElement clearSearch = driver.findElement(By.xpath("//div[@class='input-group-append']"));
+			ba.retryMechanism(driver, clearSearch);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+      //  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
-		 String campaign_Number = ba.handleWebTable("//*[@role='table']/tbody/tr", "Created", 1, "getText");
-	        
-	        
-	        //add this to hashmap
-		 
-		 
-	        System.out.println("Campaign number = "+campaign_Number);
-	        
-  return campaign_Number;
+		String campaign_Number = ba.handleWebTable("//*[@role='table']/tbody/tr", "Created", 1, "getText");
+
+		// add this to hashmap
+
+		System.out.println("Campaign number = " + campaign_Number);
+
+		return campaign_Number;
 	}
 
 

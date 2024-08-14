@@ -32,8 +32,8 @@ public class EproCampaignPage {
 
 		
 		 // click on add icon
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='assets/images/assign-suppliers.svg']"))).click();
-        // click on business unit box //div[@id='mat-select-value-13']
+       wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='assets/images/assign-suppliers.svg']"))).click();
+       // click on business unit box //div[@id='mat-select-value-13']
 
 		
 		
@@ -61,6 +61,7 @@ public class EproCampaignPage {
 		// wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='UT01118']"))).click();
 
 	}
+
 	
 	public void clickOnSendPO() throws InterruptedException {
 		 // click on send po button

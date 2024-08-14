@@ -31,7 +31,7 @@ public class ManageCampaignPage {
 	}
 	
 	
-	public void submitCosting() throws InterruptedException {
+	public void DetailsForsubmitCosting() throws InterruptedException {
 		
 		List<WebElement> listEle = driver.findElements(By.xpath("//*[@role='table']/tbody/tr"));
 
@@ -77,8 +77,8 @@ public class ManageCampaignPage {
 		 * clck100 = driver.findElement(By.xpath(" //span[normalize-space()='100']"));
 		 * ba.retryMechanism(driver,pageEntry); ba.retryMechanism(driver,clck100);
 		 */
-		Thread.sleep(2000);
-
+		
+    Thread.sleep(1000);
 		// Submit for costing
 
 		// List<WebElement> listEle =
@@ -87,13 +87,24 @@ public class ManageCampaignPage {
 		// System.out.println(listEle.size());
 
 		// click on submit costing Remove this
+	}
+	public void validateItemAddedPopup() {
+		
+		ba.validatePopUp("Campaign Item has been modified successfully.", "Campaign item modification popup validated successfully.");
+	}
+	
+	public void ClicksubmitCostingButton() throws InterruptedException {
 		WebElement submitCosting = driver.findElement(By.xpath(
 				"//*[@role='table']//tbody/tr[" + i + "]//img[@src='assets/images/submit-for-costing-pound.svg']"));
 		js.executeScript("arguments[0].scrollIntoView();", submitCosting);
 		ba.retryMechanism(driver, submitCosting);
 		//// tbody/tr[9]/td[11]/button[2]/span[1]/div[1]/img[1]
 		// *[@role='table']//tbody/tr
-		Thread.sleep(2000);
+		Thread.sleep(1000);
+	}
+public void validateSubmitCostPopup() {
+		
+		ba.validatePopUp("Submit Campaign Item Submitted", "Campaign item Cost submission popup validated successfully.");
 	}
 	
 	
@@ -117,13 +128,31 @@ public class ManageCampaignPage {
 
 				WebElement manageQuoteButton = driver.findElement(By.xpath("//i[@class='fas fa-chevron-circle-right fa-3x']"));
 				ba.retryMechanism(driver, manageQuoteButton);
-
+	}
+	
+	
+	public void validateItemSelectedPopup() {
+		
+		ba.validatePopUp("\r\n"
+				+ "Campaign Item selected cost price has been created successfully.", "Campaign item selection popup validated successfully.");
+	}
+				
+				public void CreateQuote() {
 				WebElement markup = driver.findElement(By.xpath("//input[@name='markUp']"));
 				ba.retryMechanismWithSendKeys(driver, markup, "10");
 
 				WebElement generateQuote = driver.findElement(By.xpath("//i[@class='fas fa-chevron-circle-right fa-3x']"));
 				ba.retryMechanism(driver, generateQuote);
 	}
+				
+				
+				public void validateQuoteGeneratedPopup() {
+					
+					ba.validatePopUp("Campaign Item quote generated has been created successfully.", "Quote Generation popup validated successfully.");
+				}
+				
+				
+				
 	
 	public void clickSupplierPricebutton() {
 		// Submit supplier price
