@@ -15,6 +15,7 @@ public class EproCampaignPage {
 	public WebDriverWait wait;
 	public JavascriptExecutor js;
 	public BaseAction ba;
+	public int rowNum;
 
 	private final By element5 = By.xpath("//img[@src='assets/images/assign-suppliers.svg']");
 	private final By element = By.xpath("//div[@id='mat-select-value-13']");
@@ -66,7 +67,7 @@ public class EproCampaignPage {
 	     
 	       String campaign_ID = ba.handleWebTable("//*[@role='table']/tbody/tr", "Quote Accepted", 2, "getText");
 	       System.out.println("campaign_ID = "+campaign_ID);
-	       int rowNum = ba.getMatchRowNum("//*[@role='table']/tbody/tr", "Quote Accepted", 2, "getRowNum");
+	       rowNum = ba.getMatchRowNum("//*[@role='table']/tbody/tr", "Quote Accepted", 2, "getRowNum");
 	       System.out.println("rowNum  = "+rowNum);
 	      //*[@role='table']/tbody/tr[5]/td[11]/button[not(@hidden)]//img[@src='assets/images/send-for-approval.svg']
 	       ba.retryMechanism(driver, driver.findElement(By.xpath("//table[@role=\"table\"]//tbody/tr["+rowNum+"]/td/button[not(@hidden)]//img[@src='assets/images/send-for-approval.svg']"))); 
@@ -75,6 +76,16 @@ public class EproCampaignPage {
 	       ba.retryMechanism(driver, driver.findElement(By.xpath("//button[@type='submit']//span[contains(text(),' Yes')]")));
 	       
 	}
+	
+	public void clickOnCreatePO () {
+		// click on create PO
+	       ba.retryMechanism(driver, driver.findElement(By.xpath("//table[@role='table']//tbody/tr["+rowNum+"]/td/button[not(@hidden)]//img[@src='assets/images/generate_doc_create_po.svg']"))); // hard coded value
+	       //click on close (popup)
+	       ba.retryMechanism(driver, driver.findElement(By.xpath("//*[text()='Close']")));
+	       
+	}
+	
+	
 	
 	
 }
