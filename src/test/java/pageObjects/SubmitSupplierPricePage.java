@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import CommmonUtils.BaseAction;
@@ -43,13 +44,13 @@ public class SubmitSupplierPricePage {
 				WebElement Search = driver.findElement(By.xpath(
 						"//input[@class='mat-input-element mat-form-field-autofill-control mat-select-search-input cdk-text-field-autofill-monitored']"));
 
-				ba.retryMechanismWithSendKeys(driver, Search, "Dagenham");
-
-				WebElement selectDagenham = driver.findElement(By.xpath("//span[contains(text(),'Paragon CC (Dagenham)')]"));
+				ba.retryMechanismWithSendKeys(driver, Search, "Paragon");
+				Thread.sleep(3000);
+				//WebElement selectDagenham = driver.findElement(By.xpath("//span[contains(text(),'Paragon CC (Dagenham)')]"));
 				// js.executeScript("arguments[0].scrollIntoView();", selectDagenham);
 				// ba.retryMechanismWithSendKeys(driver, ClickSearchBox, "paragon CC
 				// (Dagenham)");
-				ba.retryMechanism(driver, selectDagenham);
+				ba.retryMechanism(driver, wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Paragon CC (Dagenham)')]"))));
 
 				// //enter estimate ref no
 				Thread.sleep(2000);

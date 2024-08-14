@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import CommmonUtils.BaseAction;
@@ -35,8 +36,10 @@ public class QuoteManagementPage {
 		
 		
 		// Click on Quote Management
-				WebElement quoteManagement = driver.findElement(By.xpath("//div[contains(text(),'Quote Management')]"));
-				ba.retryMechanism(driver, quoteManagement);
+				//WebElement quoteManagement = driver.findElement(By.xpath("//div[contains(text(),'Quote Management')]"));
+			//	ba.retryMechanism(driver, quoteManagement);
+		Thread.sleep(3000);
+				ba.retryMechanism(driver, wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'Quote Management')]"))));
 
 				// click on 1st quote
 
