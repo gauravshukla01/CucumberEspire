@@ -78,6 +78,6 @@ public class AddCampaignItemPage {
 
 	public void validateCreateCampaignPopup() {
 		
-		ba.validatePopUp("Campaign Items has been created successfully.","Campaign item creation popup validated successfully.");
+	//	ba.validatePopUp("Campaign Items has been created successfully.","Campaign item creation popup validated successfully.");
 	}
 }

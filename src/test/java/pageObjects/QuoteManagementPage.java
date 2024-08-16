@@ -38,7 +38,9 @@ public class QuoteManagementPage {
 		// Click on Quote Management
 				//WebElement quoteManagement = driver.findElement(By.xpath("//div[contains(text(),'Quote Management')]"));
 			//	ba.retryMechanism(driver, quoteManagement);
-		Thread.sleep(3000);
+				Thread.sleep(3000);
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).clear();
+
 				ba.retryMechanism(driver, wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'Quote Management')]"))));
 
 				// click on 1st quote

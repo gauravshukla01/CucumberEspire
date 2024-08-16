@@ -257,11 +257,12 @@ public class BaseAction {
 		String popupText = popup.getText();
 	//	System.out.println("Pop up text is = "+popupText);
 		try {
-
+			// this code needs to be fixed
 			Assert.assertEquals(PopUpText, popupText);       
 			System.out.println(ValidationMessage);
-		} catch (AssertionError e) {	      
-			System.out.println("validation fail");
+		} catch (AssertionError e) {	
+			e.printStackTrace();
+			//System.out.println("validation fail");
 		}
 	
 

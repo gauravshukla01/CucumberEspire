@@ -62,7 +62,7 @@ public class StepDef_Scenario2 {
 	    eprohome.ClkCampaign();
 	  // String campID = testContext.Hmap.get("CampaignId");
 	  // System.out.println(campID);
-	   eprocamppage.clickOnCampaignId("UT01667");
+	   eprocamppage.clickOnCampaignId("UT01673");
 	}
 
 	@And("User will Send and the create PO")

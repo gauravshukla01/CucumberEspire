@@ -90,7 +90,7 @@ public class POManagementPage {
 	public void uploadPOD () throws InterruptedException {
 	       // code to be analysed ///////////////////////////////////////////////////////////////////////////////
 	       
-	       int rowNum1 = ba.getMatchRowNum("//*[@role='table']/tbody/tr", "UT01667-001", 2, "getRowNum");
+	       int rowNum1 = ba.getMatchRowNum("//*[@role='table']/tbody/tr", "UT01673-001", 2, "getRowNum");
 	       System.out.println("rownum 2 in PO section ="+rowNum1);
 	       wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@role='table']/tbody/tr["+rowNum1+"]/td/button//img[@src='assets/images/attach_user_guide.svg']"))).click();
 	       Thread.sleep(3000);
@@ -116,10 +116,10 @@ public class POManagementPage {
 	       ba.retryMechanism(driver, driver.findElement(By.xpath("//*[@class='mat-tab-header']//div[text()='Receipt']")));
 	       
 	       // select the checkbox on receipt tab
-	       ba.handleWebTable("//*[@role='table']/tbody/tr", "UT01667-001", 2, "clickItem");  // hard coded value
+	       ba.handleWebTable("//*[@role='table']/tbody/tr", "UT01673-001", 2, "clickItem");  // hard coded value
 	       
 	       // click the receipt action
-	       ba.handleWebTable("//*[@role='table']/tbody/tr", "UT01667-001", 14, "clickItem");  // hard coded value
+	       ba.handleWebTable("//*[@role='table']/tbody/tr", "UT01673-001", 14, "clickItem");  // hard coded value
 	       
 	       // click on Close button on the popup
 	       ba.retryMechanism(driver, driver.findElement(By.xpath("//button/span[text()='Close']")));
