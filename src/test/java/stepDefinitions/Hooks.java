@@ -23,7 +23,7 @@ public class Hooks{
 
 	public Hooks(TestContext tstContext) {
 		testContext = tstContext;
-		driver = TestContext.getWebDriverManager().getDriver();
+		driver = testContext.getWebDriverManager().getDriver();
 
 	}
 
