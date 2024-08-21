@@ -32,7 +32,7 @@ public class AddCampaignItemPage {
 	private WebElement numbOfQuatity;
 	@FindBy(xpath="//label[@for='check203-input']//span[@class='mat-checkbox-inner-container mat-checkbox-inner-container-no-side-margin']")
 	private WebElement clickcheckbox;
-	@FindBy(xpath="//tbody/tr[1]/td[11]/button[1]/span[1]/img[1]")
+	@FindBy(xpath="//tbody/tr[2]/td[11]/button[1]/span[1]/img[1]")
 	private WebElement clickonaddsign;
 	@FindBy(xpath="//*[@class='mat-focus-indicator mat-raised-button mat-button-base mat-primary']")
 	private WebElement clickOnYes;
@@ -99,7 +99,9 @@ public class AddCampaignItemPage {
 
 
 		// click on Plus sign
-		ba.retryMechanism(driver, getclickonaddsign());
+		
+		ba.handleWebTable("//*[@role='table']/tbody/tr", "C5 test", 11, "clickItem");
+		//ba.retryMechanism(driver, getclickonaddsign());
 
 
 

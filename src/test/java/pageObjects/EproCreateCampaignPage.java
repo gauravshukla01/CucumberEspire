@@ -202,7 +202,7 @@ public class EproCreateCampaignPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-      //  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
 		String campaign_Number = ba.handleWebTable("//*[@role='table']/tbody/tr", "Created", 1, "getText");
 
