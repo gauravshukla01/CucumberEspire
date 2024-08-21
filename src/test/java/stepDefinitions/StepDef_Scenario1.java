@@ -1,13 +1,11 @@
 package stepDefinitions;
 
-import CommmonUtils.BaseAction;
 import TestResourceManager.WebDrivermanager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import otherResources.TestContext;
 import pageObjects.AddCampaignItemPage;
-import pageObjects.AmazonHomePage;
 import pageObjects.EditCampaignItemPage;
 import pageObjects.EproCampaignPage;
 import pageObjects.EproCreateCampaignPage;
@@ -52,15 +50,13 @@ public class StepDef_Scenario1 {
 
 	}
 
-	@Given("User launches Epro url")
-	public void User_launches_Epro_url() {
+	
+
+	@Given("^User launches Epro url and login with valid (.*) and (.*)$")
+	public void User_launches_Epro_url_and_login_with_valid_staginguser_and_password(String Username, String Password) {
 		eprologin.launchurl("https://uat.paragon-epro.com/");
 		System.out.println("Browser launched");
-
-	}
-
-	@Then("^user login with valid (.*) and (.*)$")
-	public void user_login_with_valid_staginguser_and_password(String Username, String Password) {
+		
 		eprologin.EnterUsernameAndPassword(Username, Password);
 		System.out.println("User Credentials entered");
 		eprologin.Clksubmit();
@@ -140,6 +136,9 @@ public class StepDef_Scenario1 {
 		quoteManage.validateAcceptQuotePopup();
 	}
 
+	
+	
+	
 	
 	
 
