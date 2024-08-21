@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,9 +18,36 @@ public class EproCampaignPage {
 	public BaseAction ba;
 	public int rowNum;
 
-	private final By element5 = By.xpath("//img[@src='assets/images/assign-suppliers.svg']");
-	private final By element = By.xpath("//div[@id='mat-select-value-13']");
 
+	@FindBy(xpath = "//img[@src='assets/images/assign-suppliers.svg']") 
+	private WebElement addIconButton;
+	@FindBy(xpath = "//input[@placeholder='Search..']") 
+	private WebElement clearSearch;
+	@FindBy(xpath = "//*[@role='table']/tbody/tr") 
+	private WebElement baseTable;
+	
+	
+	
+	
+	public WebElement getaddIconButton() {
+		return addIconButton;
+	}
+	
+	public WebElement getclearSearch() {
+		return clearSearch;
+	}
+	
+	public WebElement getManageCAmp(String num) {
+		return driver.findElement(By.xpath("//*[text()='" + num + "']"));
+	}
+	
+	public WebElement getbaseTable() {
+		return baseTable;
+	}
+	
+	
+	
+	
 	public EproCampaignPage(WebDriver driver) {
 		this.driver = driver;
 		this.js = (JavascriptExecutor) driver;
@@ -32,7 +60,7 @@ public class EproCampaignPage {
 
 		
 		 // click on add icon
-       wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='assets/images/assign-suppliers.svg']"))).click();
+       wait.until(ExpectedConditions.elementToBeClickable(getaddIconButton())).click();
        // click on business unit box //div[@id='mat-select-value-13']
 
 		
@@ -47,21 +75,21 @@ public class EproCampaignPage {
 		// String UTnumber = "UT01183";
 		//String UTnumber = num;
 		
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).clear();
+		wait.until(ExpectedConditions.elementToBeClickable(getclearSearch())).clear();
 
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']")))
+		wait.until(ExpectedConditions.elementToBeClickable(getclearSearch()))
 				.sendKeys(num);
 
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(getclearSearch())).click();
 
-		WebElement ManageCAmp = driver.findElement(By.xpath("//*[text()='" + num + "']"));
-		ba.retryMechanism(driver, ManageCAmp);
+		
+		ba.retryMechanism(driver, getManageCAmp(num));
 
 		// click on Manage campaign
 		// wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='UT01118']"))).click();
 
 	}
-
+	//*[@role='table']/tbody/tr
 	
 	public void clickOnSendPO() throws InterruptedException {
 		 // click on send po button

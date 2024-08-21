@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,6 +24,79 @@ public class EproCreateCampaignPage {
 
 	private final By element1 = By.xpath("//span[normalize-space()='PCC UK Lead Supply']");
 	private final By element2 = By.xpath("//*[@id='mat-select-value-15']");
+	
+	@FindBy(xpath="//*[@id='BusinessUnitId']")
+	private WebElement BusinessID;
+	
+	@FindBy(xpath="//span[normalize-space()='PCC UK Lead Supply']")
+	private WebElement pccUKLeadSupply;
+	@FindBy(xpath="//span[@class='mat-select-placeholder mat-select-min-line ng-tns-c91-28 ng-star-inserted']")
+	private WebElement customertxtBox;
+	@FindBy(xpath="//*[text()=' StagingClient_1 ']")
+	private WebElement stagingClient_1;
+	@FindBy(xpath="//span[@class='mat-select-placeholder mat-select-min-line ng-tns-c91-30 ng-star-inserted']")
+	private WebElement customer_entities;
+	@FindBy(xpath="//span[normalize-space()='AdminClient 1 - GBP']")
+	private WebElement AdminClient;
+	@FindBy(xpath="//input[@id='title']")
+	private WebElement Campaign_title;
+	@FindBy(xpath="//input[@id='reference']")
+	private WebElement customer_camping_ref;
+	@FindBy(xpath="//button[@aria-label='Open calendar']//span[@class='mat-button-wrapper']//*[name()='svg']")
+	private WebElement date;
+	@FindBy(xpath="//table[@role='grid']/tbody/tr[5]/td[7]")
+	private WebElement Value_31;
+	@FindBy(xpath="//div[@id='mat-select-value-27']")
+	private WebElement VAT;
+	@FindBy(xpath="//span[normalize-space()='VAT20']")
+	private WebElement vat20;
+	@FindBy(xpath="//input[@id='ponumber']")
+	private WebElement purchase_order_number;
+	
+	
+	
+	
+	public WebElement getBusinessID() {
+		return BusinessID;
+	}
+	public WebElement getpccUKLeadSupply() {
+		return pccUKLeadSupply;
+	}
+	public WebElement getcustomertxtBox() {
+		return customertxtBox;
+	}
+	public WebElement getstagingClient_1() {
+		return stagingClient_1;
+	}
+	public WebElement getcustomer_entities() {
+		return customer_entities;
+	}
+	public WebElement getAdminClient() {
+		return AdminClient;
+	}
+	public WebElement getCampaign_title() {
+		return Campaign_title;
+	}
+	public WebElement getcustomer_camping_ref() {
+		return customer_camping_ref;
+	}
+	public WebElement getdate() {
+		return date;
+	}
+	public WebElement getValue_31() {
+		return Value_31;
+	}
+	public WebElement getVAT() {
+		return VAT;
+	}
+	public WebElement getvat20() {
+		return vat20;
+	}
+	public WebElement getpurchase_order_number() {
+		return purchase_order_number;
+	}
+	
+	
 
 	public EproCreateCampaignPage(WebDriver driver) {
 		this.driver = driver;
@@ -35,22 +109,20 @@ public class EproCreateCampaignPage {
 	public void fillRequiredDetails() throws InterruptedException {
 
 		// retry mechanism implementation
-		WebElement element = driver.findElement(By.xpath("//*[@id='BusinessUnitId']"));
-		ba.retryMechanism(driver, element);
-		WebElement element1 = driver.findElement(By.xpath("//span[normalize-space()='PCC UK Lead Supply']"));
-		ba.retryMechanism(driver, element1);
+		
+		ba.retryMechanism(driver, getBusinessID());
+		ba.retryMechanism(driver, getpccUKLeadSupply());
 
-		WebElement customertxtBox = driver.findElement(
-				By.xpath("//span[@class='mat-select-placeholder mat-select-min-line ng-tns-c91-28 ng-star-inserted']"));
-		ba.retryMechanism(driver, customertxtBox);
-		WebElement stagingClient_1 = driver.findElement(By.xpath("//*[text()=' StagingClient_1 ']"));
-		ba.retryMechanism(driver, stagingClient_1);
+		
+		ba.retryMechanism(driver, getcustomertxtBox());	
+		ba.retryMechanism(driver, getstagingClient_1());
+		
 
-		WebElement customer_entities = driver.findElement(
-				By.xpath("//span[@class='mat-select-placeholder mat-select-min-line ng-tns-c91-30 ng-star-inserted']"));
-		ba.retryMechanism(driver, customer_entities);
-		WebElement AdminClient = driver.findElement(By.xpath("//span[normalize-space()='AdminClient 1 - GBP']"));
-		ba.retryMechanism(driver, AdminClient);
+		
+				
+		ba.retryMechanism(driver, getcustomer_entities());
+		ba.retryMechanism(driver, getAdminClient());
+		
 
 		/*
 		 * WebElement Account_Manager =
@@ -63,18 +135,19 @@ public class EproCreateCampaignPage {
 		 * ba.retryMechanism(driver,Staging_user);
 		 */
 
-		WebElement Campaign_title = driver.findElement(By.xpath("//input[@id='title']"));
-		ba.retryMechanismWithSendKeys(driver, Campaign_title, "Test_3");
+		
+		ba.retryMechanismWithSendKeys(driver, getCampaign_title(), "Test_3");
 
-		WebElement customer_camping_ref = driver.findElement(By.xpath("//input[@id='reference']"));
-		ba.retryMechanismWithSendKeys(driver, customer_camping_ref, "CR124324332");
+		
+		ba.retryMechanismWithSendKeys(driver, getcustomer_camping_ref(), "CR124324332");
 
+		
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-		WebElement date = driver.findElement(By.xpath("//button[@aria-label='Open calendar']//span[@class='mat-button-wrapper']//*[name()='svg']"));
-		ba.retryMechanism(driver,date);
+		
+		ba.retryMechanism(driver,getdate());
 		//WebElement Value_31 = driver.findElement(By.xpath("//*[contains(@aria-label,'August 31, 2024')]"));
-		WebElement Value_31 = driver.findElement(By.xpath("//table[@role='grid']/tbody/tr[5]/td[7]"));
-		ba.retryMechanism(driver,Value_31);
+		
+		ba.retryMechanism(driver,getValue_31());
 
 		/*
 		 * WebElement sales_representative =
@@ -84,19 +157,19 @@ public class EproCreateCampaignPage {
 		 * retryMechanism(driver,David_Reynolds);
 		 */
 
-		WebElement VAT = driver.findElement(By.xpath("//div[@id='mat-select-value-27']"));
-		js.executeScript("arguments[0].scrollIntoView();", VAT);
-		ba.retryMechanism(driver,VAT);
-		WebElement vat20 = driver.findElement(By.xpath("//span[normalize-space()='VAT20']"));
-		ba.retryMechanism(driver,vat20);
+		
+		js.executeScript("arguments[0].scrollIntoView();", getVAT());
+		ba.retryMechanism(driver,getVAT());
+		
+		ba.retryMechanism(driver,getvat20());
 
 		WebElement purchase_order_number = driver.findElement(By.xpath("//input[@id='ponumber']"));
 		js.executeScript("arguments[0].scrollIntoView();", purchase_order_number);
 		ba.retryMechanismWithSendKeys(driver, purchase_order_number, "PO12421331");
 
 		WebElement purchase_order_value = driver.findElement(By.xpath("//input[@id='povalue']"));
-		js.executeScript("arguments[0].scrollIntoView();", purchase_order_value);
-		ba.retryMechanismWithSendKeys(driver, purchase_order_value, "2");
+		js.executeScript("arguments[0].scrollIntoView();", getpurchase_order_number());
+		ba.retryMechanismWithSendKeys(driver, getpurchase_order_number(), "2");
 
 
 		/*  WebElement cost_centre = driver.findElement(By.xpath("//span[@class='mat-select-placeholder mat-select-min-line ng-tns-c91-51 ng-star-inserted']"));

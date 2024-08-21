@@ -7,6 +7,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -19,9 +20,29 @@ public class EproHomePage {
 	public JavascriptExecutor js;
 	public BaseAction ba;
 
-	private final By element4 = By
-			.xpath("//*[@class='sideNavDropDown ng-star-inserted']//a[normalize-space()='Campaigns'][1]");
+	
+	@FindBy(xpath = "//*[@id='sideNav']")
+	private WebElement sideNAV;
+	@FindBy(xpath = "//*[text()=' Workflow ']")
+	private WebElement workflow;
+	@FindBy(xpath = "//a[normalize-space()='Campaigns']")
+	private WebElement clkCampaign;
+	
+	
+	
+	public WebElement getsideNAV() {
+		return sideNAV;
+	}
 
+	public WebElement getworkflow() {
+		return workflow;
+	}
+
+	public WebElement getclkCampaign() {
+		return clkCampaign;
+	}
+	
+	
 	public EproHomePage(WebDriver driver) {
 		this.driver = driver;
 		this.js = (JavascriptExecutor) driver;
@@ -42,14 +63,14 @@ public class EproHomePage {
 				// webelement for side nav
 				Thread.sleep(3000);
 				//wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='sideNav']"))).click();
-				WebElement sideNAV = driver.findElement(By.xpath("//*[@id='sideNav']"));
-				ba.retryMechanism(driver, sideNAV);
+				
+				ba.retryMechanism(driver, getsideNAV());
 				// WebElement ele = driver.findElement(By.xpath("//*[@id='sideNav']"));
 				// action.moveToElement(ele);
 				// click on workflow icon
 				// wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Workflow ']"))).click();
-				 WebElement workflow = driver.findElement(By.xpath("//*[text()=' Workflow ']"));
-				ba.retryMechanism(driver, workflow);
+				
+				ba.retryMechanism(driver, getworkflow());
 
 			   
 				
@@ -60,8 +81,8 @@ public class EproHomePage {
 			*/
 			   // click on campaign icon
 			 //  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[normalize-space()='Campaigns']"))).click();
-				WebElement clkCampaign = driver.findElement(By.xpath("//a[normalize-space()='Campaigns']"));
-			   ba.retryMechanism(driver, clkCampaign);
+				
+			   ba.retryMechanism(driver, getclkCampaign());
 	}
 
 
