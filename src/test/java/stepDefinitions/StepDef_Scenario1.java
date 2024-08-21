@@ -136,10 +136,4 @@ public class StepDef_Scenario1 {
 		quoteManage.validateAcceptQuotePopup();
 	}
 
-	
-	
-	
-	
-	
-
 }

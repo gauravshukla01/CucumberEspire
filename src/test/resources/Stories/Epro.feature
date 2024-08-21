@@ -20,21 +20,19 @@ Feature: Create a campaign
 
   @Scenario2
   Scenario Outline: Validate PO Generation and Receipt Creation
-    Given User launches Epro url
-    Then user login with valid <UserName> and <Password>
-    And On Campaign Item Page verify Status as Quote Accepted after Accepting the quote
-    And User will Send and the create PO
+    Given User launches Epro url and login with valid <UserName> and <Password>
+    And On Campaign Item Page verify Status as Quote Accepted and User will Send and the create PO
     Then Verify Status as PO Created after creating the PO on Campaign Item Page
     And User will navigate to Finance page to create receipt
     Then User will upload POD document
     And Verify Has POD column status with green tick
     And User navigate to the Receipt Tab and click on required Checkbox
     Then Verify Receipted column status with green tick
-
-    Examples: 
-      | UserName      | Password     |
-      | Staginguser_3 | Paragon@2024 |
-
+ 
+    Examples:
+      | UserName      | Password        |
+      | Staginguser_3 | Paragon@2024    |
+ 
   @Scenario3
   Scenario Outline: Validate Draft and Final Invoice Generation
     Given User launches Epro url
@@ -45,7 +43,7 @@ Feature: Create a campaign
     And Click on Finance and navigate to Sales Invoice
     And Click on resepctive Invoice number (Manage Invoice)
     Then User will send Final Invoice to customer
-
-    Examples: 
-      | UserName      | Password     |
-      | Staginguser_3 | Paragon@2024 |
+ 
+    Examples:
+      | UserName      | Password        |
+      | Staginguser_3 | Paragon@2024    |

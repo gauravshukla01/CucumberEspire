@@ -17,7 +17,6 @@ public class EproCampaignPage {
 	public WebDriverWait wait;
 	public JavascriptExecutor js;
 	public BaseAction ba;
-	public int rowNum;
 
 
 	@FindBy(xpath = "//img[@src='assets/images/assign-suppliers.svg']") 
@@ -91,32 +90,51 @@ public class EproCampaignPage {
 		// wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='UT01118']"))).click();
 
 	}
-	//*[@role='table']/tbody/tr
-	
-	public void clickOnSendPO() throws InterruptedException {
-		 // click on send po button
-	     
-	       String campaign_ID = ba.handleWebTable("//*[@role='table']/tbody/tr", "Quote Accepted", 2, "getText");
-	       System.out.println("campaign_ID = "+campaign_ID);
-	       rowNum = ba.getMatchRowNum("//*[@role='table']/tbody/tr", "Quote Accepted", 2, "getRowNum");
-	       System.out.println("rowNum  = "+rowNum);
-	      //*[@role='table']/tbody/tr[5]/td[11]/button[not(@hidden)]//img[@src='assets/images/send-for-approval.svg']
-	       ba.retryMechanism(driver, driver.findElement(By.xpath("//table[@role=\"table\"]//tbody/tr["+rowNum+"]/td/button[not(@hidden)]//img[@src='assets/images/send-for-approval.svg']"))); 
-			
-
-	       ba.retryMechanism(driver, driver.findElement(By.xpath("//button[@type='submit']//span[contains(text(),' Yes')]")));
-	       
+	public void clickOnCampID(String status) throws InterruptedException {
+		 
+		
+		 
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).clear();
+ 
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']")))
+				.sendKeys(status);
+ 
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).click();
+ 
+		ba.handleWebTable("//*[@role='table']/tbody/tr", "Quote Accepted", 1, "clickItem");
+		
+ 
 	}
-	
-	public void clickOnCreatePO () {
-		// click on create PO
-	       ba.retryMechanism(driver, driver.findElement(By.xpath("//table[@role='table']//tbody/tr["+rowNum+"]/td/button[not(@hidden)]//img[@src='assets/images/generate_doc_create_po.svg']"))); // hard coded value
-	       //click on close (popup)
-	       ba.retryMechanism(driver, driver.findElement(By.xpath("//*[text()='Close']")));
-	       
+ 
+	public void SendAndCreatePO() throws InterruptedException {
+		// click on send po button
+ 
+		int rowNum;
+		String campaign_ID = ba.handleWebTable("//*[@role='table']/tbody/tr", "Quote Accepted", 2, "getText");
+		System.out.println("campaign_ID = " + campaign_ID);
+ 
+		rowNum = ba.getMatchRowNum("//*[@role='table']/tbody/tr", "Quote Accepted", 2, "getRowNum");
+		System.out.println("rowNum  = " + rowNum);
+		// *[@role='table']/tbody/tr[5]/td[11]/button[not(@hidden)]//img[@src='assets/images/send-for-approval.svg']
+		ba.retryMechanism(driver, driver.findElement(By.xpath("//table[@role=\"table\"]//tbody/tr[" + rowNum
+				+ "]/td/button[not(@hidden)]//img[@src='assets/images/send-for-approval.svg']")));
+ 
+		ba.retryMechanism(driver,
+				driver.findElement(By.xpath("//button[@type='submit']//span[contains(text(),' Yes')]")));
+		//Create PO
+		ba.retryMechanism(driver, driver.findElement(By.xpath("//table[@role='table']//tbody/tr[" + rowNum
+				+ "]/td/button[not(@hidden)]//img[@src='assets/images/generate_doc_create_po.svg']"))); // hard coded
+																										// value
+		// click on close (popup)
+		ba.retryMechanism(driver, driver.findElement(By.xpath("//*[text()='Close']")));
+ 
 	}
-	
-	
-	
-	
+ 
+	public String getIndexValue() throws InterruptedException {
+		String indcampaign_ID = ba.handleWebTable("//*[@role='table']/tbody/tr", "PO Created", 2, "getText");
+		System.out.println("campaign_ID = " + indcampaign_ID);
+ 
+		return indcampaign_ID;
+ 
+	}
 }

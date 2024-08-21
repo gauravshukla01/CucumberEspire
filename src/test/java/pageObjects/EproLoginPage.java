@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.aventstack.extentreports.Status;
 
 import CommmonUtils.BaseAction;
-import CommmonUtils.ExtentConfiguration;
+
 
 public class EproLoginPage {
 
@@ -91,7 +91,7 @@ public class EproLoginPage {
 
 	public void Clksubmit() {
 
-		ExtentConfiguration.addStepWithScreenshotInReport(driver, "test1.png", Status.PASS);
+		
 		ba.retryMechanism(driver, getclkSubmit());
 	}
 	
