@@ -160,7 +160,8 @@ public class EproCreateCampaignPage {
 		 */
 
 		
-		js.executeScript("arguments[0].scrollIntoView();", getVAT());
+		//js.executeScript("arguments[0].scrollIntoView();", getVAT());
+		Thread.sleep(2000);
 		ba.retryMechanism(driver,getVAT());
 		
 		ba.retryMechanism(driver,getvat20());
