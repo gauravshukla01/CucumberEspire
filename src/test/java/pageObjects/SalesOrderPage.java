@@ -1,12 +1,13 @@
 package pageObjects;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -19,11 +20,7 @@ public class SalesOrderPage {
 	public WebDriverWait wait;
 	public JavascriptExecutor js;
 	public BaseAction ba;
-	public String campaign_ID = null;
 	
-
-//	private final By element1 = By.xpath("//span[normalize-space()='PCC UK Lead Supply']");
-//	private final By element2 = By.xpath("//*[@id='mat-select-value-15']");
 
 	public SalesOrderPage(WebDriver driver) {
 		this.driver = driver;
@@ -33,74 +30,102 @@ public class SalesOrderPage {
 	}
 
 	public void goToCampaingPg() {
-		 wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-	     wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='sideNav']"))).click();
-	      //WebElement ele = driver.findElement(By.xpath("//*[@id='sideNav']"));
-//	    action.moveToElement(ele);
+		
 	      // click on workflow icon
-	      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Workflow ']"))).click();
+	      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a/img[@src='assets/images/workflow.svg']"))).click();
 	      
 	      // click on campaign icon
 	      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[normalize-space()='Campaigns']"))).click();
-	 //   driver.findElement(By.xpath("//*[text()=' Campaigns']")).click();	
+	      
+	      //clear search
+	      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).clear();
+	      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).click();
+	 
 	}
 	
-	public void clickOnCampId(String num) {
+	public void searchItem(String status) {
 		 // click on the search icon to get the context on the base page
 	      
 	      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).clear();
 	      
-	      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).sendKeys(num);
+	      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).sendKeys(status);
 	      
 	      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).click();
 	      
-	      // click on the specific campaign -- //*[text()='UT01108']
-	      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='" + num + "']"))).click(); // hard coded value
+	      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='" + status + "']"))).click(); 
 	      
 	}
+	
 	public String getCampIdPOReciept (String status) throws InterruptedException { 
-	      //validating status as PO receipted   
-	      campaign_ID = ba.handleWebTable("//*[@role='table']/tbody/tr", status , 2, "getText");
-	      System.out.println("campaign_ID = "+campaign_ID);
 	      
+	     String campaign_ID = ba.handleWebTable("//*[@role='table']/tbody/tr", status , 1, "getText");
+	     System.out.println("campaign_ID = "+campaign_ID); 
 	      return campaign_ID;		
 	}
+ 
+	public void clickOnCampID(String cmpId, int td) throws InterruptedException {
+       
+		 for (int i = 0; i < 3; i++) {
+	    	   try {
+	    		   
+	    			ba.handleWebTable("//*[@role='table']/tbody/tr", cmpId , td, "clickItem");
+	    		  break;}
+	    	   catch (StaleElementReferenceException e) {
+	    		   e.printStackTrace();
+	    	   }
 
+	    	    } // end of for loop
+		
+		
+	}
 	
+	public String getIndexCampId (String status) throws InterruptedException { 
+	      //validating status as PO receipted   
+	     String indexId = ba.handleWebTable("//*[@role='table']/tbody/tr", status , 2, "getText");
+	      System.out.println("campaign_Index_ID = "+indexId);
+	      
+	      return indexId;		
+	}
 	
-	public void goToSaleOrderPg() {
+	public void goToSaleOrderPg() throws InterruptedException {
 		//navigating to Finance
-	      wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-	      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='sideNav']"))).click();
-	       //WebElement ele = driver.findElement(By.xpath("//*[@id='sideNav']"));
-//	     action.moveToElement(ele);
-	       // click on workflow icon
-	       wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Finance ']"))).click();
+	
+	       wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a/*[@src='assets/images/finance-module.svg']"))).click();
 	       
 	       // click on Sales order
 	       wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Sales Orders']"))).click();
+	       //clear search
+		      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).clear();
+		      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).click();
+		    
+	       
 	}
 	
-	public void createDraftInvoice() throws InterruptedException {
-		  // click on check box 
-	
-		      for (int i = 0; i < 3; i++) {
-		    	   try {
-		    		   ba.handleWebTable("//*[@role='table']/tbody/tr", campaign_ID.trim(), 2, "clickItem");  // hard coded value
-		    		  break;}
-		    	   catch (StaleElementReferenceException e) {
-		    		   e.printStackTrace();
-		    	   }
-
-		    	    } // end of for loop
-		       
+	public void createDraftInvoice(String campId) throws InterruptedException {
+			
+		//enter PO number  
 		      
+				WebElement poNoBox = driver.findElement(By.xpath("//*[@role='table']/tbody/tr//div/input"));
+				wait.until(ExpectedConditions.elementToBeClickable(poNoBox)).clear();
+				ba.retryMechanismWithSendKeys(driver, poNoBox, "PO1010101");
+				
+		// click on check box 
+		
+	      for (int i = 0; i < 3; i++) {
+	    	   try {
+	    		   ba.handleWebTable("//*[@role='table']/tbody/tr", campId.trim(), 2, "clickItem");  // hard coded value
+	    		  break;}
+	    	   catch (StaleElementReferenceException e) {
+	    		   e.printStackTrace();
+	    	   }
+
+	    	    } // end of for loop
+	      
 		       // click on create draft invoice
-		      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Create Draft Invoice']"))); // hard coded value
+		    //  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Create Draft Invoice']"))); // hard coded value
 		     
 		     ba.retryMechanism(driver, driver.findElement(By.xpath("//*[text()=' Create Draft Invoice']")));
-		     driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-		      
+		     		      
 		      // click on ok in pop-up
 		      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button/span[text()=' OK ']")));
 		      ba.retryMechanism(driver, driver.findElement(By.xpath("//button/span[text()=' OK ']")));

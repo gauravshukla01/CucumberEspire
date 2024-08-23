@@ -57,40 +57,46 @@ public class StepDef_Scenario3 {
 	    }
 	
 	
-	 @Then("User get the required Campaign id for PO Receipted")
-	 public void user_get_the_required_campaign_id_for_po_receipted() throws InterruptedException {
+	 @Then("User get the Campaign id for PO Receipted and navigate to Sales Order page")
+	 public void User_get_the_Campaign_id_for_PO_Receipted_and_navigate_to_Sales_Order_page() throws InterruptedException {
 		 salesOrderPg.goToCampaingPg();
-		 salesOrderPg.clickOnCampId("UT01667");
-	     salesOrderPg.getCampIdPOReciept("PO Receipted");
+		 salesOrderPg.searchItem("PO Receipted");
+		 String campId = salesOrderPg.getCampIdPOReciept("PO Receipted");
+		 testContext.Hmap.put("Camp_Id", campId);
+		 salesOrderPg.clickOnCampID("PO Receipted",1);
+		 String indexcampId = salesOrderPg.getIndexCampId("PO Receipted");
+		 testContext.Hmap.put("index_campId", indexcampId);
+		 salesOrderPg.goToSaleOrderPg();
+		 salesOrderPg.searchItem(campId);
+		 salesOrderPg.clickOnCampID(campId,2);
+		 
 	 }
 	 
-	@And("Click on Finance and navigate to Sales Order")
-	public void click_on_finance_and_navigate_to_sales_order() {
-	   
-		 salesOrderPg.goToSaleOrderPg();
-		 salesOrderPg.clickOnCampId("UT01667");
-	}
 
 	@Then("User will Create Draft Invoice")
 	public void user_will_create_draft_invoice() throws InterruptedException {
-	   salesOrderPg.createDraftInvoice();
+		
+	  
+	   salesOrderPg.createDraftInvoice(testContext.Hmap.get("index_campId"));
 	}
 
 	@And("Click on Finance and navigate to Sales Invoice")
 	public void click_on_finance_and_navigate_to_sales_invoice() throws InterruptedException {
 	    salesOrderPg.goToCampaingPg();
-	    salesOrderPg.clickOnCampId("UT01667");
-	    salesInvoicePg.getCampIdDraftInvoiced("Draft Invoiced");
-	    salesInvoicePg.getPDFPOname();
+	    salesOrderPg.searchItem(testContext.Hmap.get("Camp_Id"));
+	    salesOrderPg.clickOnCampID(testContext.Hmap.get("Camp_Id"),1);
+	   // salesInvoicePg.getCampIdDraftInvoiced("Draft Invoiced");
+	    String pdfName = salesInvoicePg.getPDFPOname();
+	    testContext.Hmap.put("PDF_Name", pdfName);
 	    salesInvoicePg.goToSaleInvoicePg();
 	    
 	}
 
 	@And("Click on resepctive Invoice number \\(Manage Invoice)")
 	public void click_on_resepctive_invoice_number_manage_invoice() throws InterruptedException {
-		salesOrderPg.clickOnCampId("UT01667");
-		salesInvoicePg.clickOnInvoiceNo();
-		salesInvoicePg.clickOnCheckboxs();
+		salesOrderPg.clickOnCampID(testContext.Hmap.get("Camp_Id"),2);
+		salesInvoicePg.clickOnInvoiceNo(testContext.Hmap.get("PDF_Name"));
+		salesInvoicePg.clickOnCheckboxs(testContext.Hmap.get("index_campId"));
 	}
 
 	@Then("User will send Final Invoice to customer")
