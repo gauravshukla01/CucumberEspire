@@ -113,7 +113,13 @@ public class POManagementPage {
 		ba.handleWebTable("//*[@role='table']/tbody/tr", indexID, 2, "clickItem"); // hard coded value
  
 		// click the receipt action
-		ba.handleWebTable("//*[@role='table']/tbody/tr", indexID, 14, "clickItem"); // hard coded value
+		
+		int rowNum = ba.getMatchRowNum("//*[@role='table']/tbody/tr", indexID, 2, "getRowNum");
+		System.out.println("rowNumPO  = " + rowNum);
+		
+		ba.retryMechanism(driver, driver.findElement(By.xpath("//table[@role=\"table\"]//tbody/tr[" + rowNum
+				+ "]/td/button[@id='receiptButton']")));
+		
  
 		// click on Close button on the popup
 		ba.retryMechanism(driver, driver.findElement(By.xpath("//button/span[text()='Close']")));
