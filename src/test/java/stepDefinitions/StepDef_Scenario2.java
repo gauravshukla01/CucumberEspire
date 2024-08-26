@@ -77,7 +77,7 @@ public class StepDef_Scenario2 {
 	public void user_will_upload_pod_document() throws InterruptedException {
  
 		poManagementPage.uploadPOD(testContext.Hmap.get("Index ID"));   //add underscore
-		
+		poManagementPage.download();
 	}
  
 	@And("Verify Has POD column status with green tick")

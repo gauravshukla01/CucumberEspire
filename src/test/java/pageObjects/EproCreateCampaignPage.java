@@ -23,8 +23,7 @@ public class EproCreateCampaignPage {
 
 	TestContext testContext;
 
-	private final By element1 = By.xpath("//span[normalize-space()='PCC UK Lead Supply']");
-	private final By element2 = By.xpath("//*[@id='mat-select-value-15']");
+	
 	
 	@FindBy(xpath="//*[@id='BusinessUnitId']")
 	private WebElement BusinessID;
@@ -53,6 +52,12 @@ public class EproCreateCampaignPage {
 	private WebElement vat20;
 	@FindBy(xpath="//input[@id='ponumber']")
 	private WebElement purchase_order_number;
+	@FindBy(xpath="//input[@id='povalue']")
+	private WebElement purchase_order_value;
+	@FindBy(xpath="//button[@type='submit']")
+	private WebElement SUBMIT;
+	@FindBy(xpath="//div[@class='input-group-append']")
+	private WebElement clearSearch;
 	
 	
 	
@@ -96,6 +101,17 @@ public class EproCreateCampaignPage {
 	public WebElement getpurchase_order_number() {
 		return purchase_order_number;
 	}
+	public WebElement getSUBMIT() {
+		return SUBMIT;
+	}
+	public WebElement getpurchase_order_value() {
+		return purchase_order_value;
+	}
+	public WebElement getclearSearch() {
+		return clearSearch;
+	}
+	
+	
 	
 	
 
@@ -138,7 +154,7 @@ public class EproCreateCampaignPage {
 		 */
 
 		
-		ba.retryMechanismWithSendKeys(driver, getCampaign_title(), "Test_3");
+		ba.retryMechanismWithSendKeys(driver, getCampaign_title(), "Test_3"); 
 
 		
 		ba.retryMechanismWithSendKeys(driver, getcustomer_camping_ref(), "CR124324332");
@@ -166,13 +182,13 @@ public class EproCreateCampaignPage {
 		
 		ba.retryMechanism(driver,getvat20());
 
-		WebElement purchase_order_number = driver.findElement(By.xpath("//input[@id='ponumber']"));
-		js.executeScript("arguments[0].scrollIntoView();", purchase_order_number);
-		ba.retryMechanismWithSendKeys(driver, purchase_order_number, "PO12421331");
-
-		WebElement purchase_order_value = driver.findElement(By.xpath("//input[@id='povalue']"));
+		
 		js.executeScript("arguments[0].scrollIntoView();", getpurchase_order_number());
-		ba.retryMechanismWithSendKeys(driver, getpurchase_order_number(), "2");
+		ba.retryMechanismWithSendKeys(driver, getpurchase_order_number(), "PO12421331");
+
+		
+		js.executeScript("arguments[0].scrollIntoView();", getpurchase_order_value());
+		ba.retryMechanismWithSendKeys(driver, getpurchase_order_value(), "2");
 
 
 		/*  WebElement cost_centre = driver.findElement(By.xpath("//span[@class='mat-select-placeholder mat-select-min-line ng-tns-c91-51 ng-star-inserted']"));
@@ -185,9 +201,9 @@ public class EproCreateCampaignPage {
 
 	public void submitCreateCampaignDetails() throws InterruptedException {
 
-		WebElement SUBMIT = driver.findElement(By.xpath("//button[@type='submit']"));
-		js.executeScript("arguments[0].scrollIntoView();", SUBMIT);
-		ba.retryMechanism(driver, SUBMIT);
+	
+		js.executeScript("arguments[0].scrollIntoView();", getSUBMIT());
+		ba.retryMechanism(driver, getSUBMIT());
 	}
 
 	public void ValidateCreateCampaignPopUp() {
@@ -198,8 +214,8 @@ public class EproCreateCampaignPage {
 	public String storeCampaignID() throws InterruptedException {
 
 		try {
-			WebElement clearSearch = driver.findElement(By.xpath("//div[@class='input-group-append']"));
-			ba.retryMechanism(driver, clearSearch);
+		
+			ba.retryMechanism(driver, getclearSearch());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

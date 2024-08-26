@@ -92,7 +92,12 @@ public class EproCampaignPage {
 	}
 	public void clickOnCampID(String status) throws InterruptedException {
 		 
-		
+		try {
+			WebElement clearSearch = driver.findElement(By.xpath("//div[@class='input-group-append']"));
+			ba.retryMechanism(driver, clearSearch);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).clear();
  

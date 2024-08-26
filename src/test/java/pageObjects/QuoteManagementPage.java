@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,9 +18,40 @@ public class QuoteManagementPage {
 	public WebDriverWait wait;
 	public JavascriptExecutor js;
 	public BaseAction ba;
-
-	private final By element1 = By.xpath("//span[normalize-space()='PCC UK Lead Supply']");
-	private final By element2 = By.xpath("//*[@id='mat-select-value-15']");
+    
+	
+	@FindBy(xpath="//input[@placeholder='Search..']")
+	private WebElement ClearSearch;
+	@FindBy(xpath="//div[contains(text(),'Quote Management')]")
+	private WebElement QuoteManagementTab;
+	@FindBy(xpath="//*[@role='table']//tbody/tr")
+	private WebElement qQuoteManagementTableEntries;
+	@FindBy(xpath="//div[@class='table-grid']//span[@class='mat-radio-container']")
+	private WebElement ClickRadioB;
+	
+	
+	
+	
+	
+	public WebElement getClearSearch() {
+		return ClearSearch;
+	}
+	public WebElement getquote1(int j) {
+		return driver
+				.findElement(By.xpath("//*[@role='table']//tbody/tr[" + j + "]//a[@class='btn bg-orange']"));
+	}
+	
+	public WebElement getClickRadioB() {
+		return ClickRadioB;
+	}
+	
+	public WebElement getQuoteManagementTab() {
+		return QuoteManagementTab;
+	}
+	
+	
+	
+	
 
 	public QuoteManagementPage(WebDriver driver) {
 		this.driver = driver;
@@ -39,9 +71,9 @@ public class QuoteManagementPage {
 				//WebElement quoteManagement = driver.findElement(By.xpath("//div[contains(text(),'Quote Management')]"));
 			//	ba.retryMechanism(driver, quoteManagement);
 				Thread.sleep(3000);
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Search..']"))).clear();
+				wait.until(ExpectedConditions.elementToBeClickable(getClearSearch())).clear();
 
-				ba.retryMechanism(driver, wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'Quote Management')]"))));
+				ba.retryMechanism(driver, wait.until(ExpectedConditions.elementToBeClickable(getQuoteManagementTab())));
 
 				// click on 1st quote
 
@@ -49,11 +81,10 @@ public class QuoteManagementPage {
 
 				System.out.println("quote table rows ="+quoteTableEntries.size());
 				int j = quoteTableEntries.size();
-				WebElement quote1 = driver
-						.findElement(By.xpath("//*[@role='table']//tbody/tr[" + j + "]//a[@class='btn bg-orange']"));
+				
 				// WebElement quote1 =
 				// driver.findElement(By.xpath("//a[normalize-space()='"+UTnumber+"-Q-008']"));
-				ba.retryMechanism(driver, quote1);
+				ba.retryMechanism(driver, getquote1(j));
 
 				// click on radio button to select the quote and accept
 				Thread.sleep(2000);

@@ -104,6 +104,15 @@ public class POManagementPage {
 		ba.retryMechanism(driver, driver.findElement(By.xpath("//button[@type='submit']")));
  
 	}
+	
+	public void download () {
+		
+		WebElement ele1 =driver.findElement(By.xpath("//div[contains(text(),'Supporting Documents')]"));
+		ba.retryMechanism(driver, ele1);
+		WebElement ele2 =driver.findElement(By.xpath(" //tbody/tr[1]/td[6]/button[1]/span[1]/img[1]"));
+		ba.retryMechanism(driver, ele2);
+		
+	}
  
 	public void validateReciept(String indexID) throws InterruptedException {
 		// click on Receipt tab

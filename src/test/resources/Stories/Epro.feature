@@ -28,11 +28,11 @@ Feature: Create a campaign
     And Verify Has POD column status with green tick
     And User navigate to the Receipt Tab and click on required Checkbox
     Then Verify Receipted column status with green tick
- 
-    Examples:
+
+    Examples: 
       | UserName      | Password        |
-      | Staginguser_3 | Paragon@2024    |
- 
+      | Staginguser_2 | Password@123456 |
+
   @Scenario3
   Scenario Outline: Validate Draft and Final Invoice Generation
     Given User launches Epro url
@@ -43,7 +43,7 @@ Feature: Create a campaign
     And Click on Finance and navigate to Sales Invoice
     And Click on resepctive Invoice number (Manage Invoice)
     Then User will send Final Invoice to customer
- 
-    Examples:
-      | UserName      | Password        |
-      | Staginguser_3 | Paragon@2024    |
+
+    Examples: 
+      | UserName      | Password     |
+      | Staginguser_3 | Paragon@2024 |
