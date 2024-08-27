@@ -74,7 +74,7 @@ public class AddCampaignItemPage {
 	}
 
 
-	public void addItemDetails() throws InterruptedException {
+	public void addItemDetails(String NumberOfItems, String Quantity ) throws InterruptedException {
 
 		// Click add item button
 		ba.retryMechanism(driver, getaddItemButton());
@@ -86,11 +86,11 @@ public class AddCampaignItemPage {
 
 
 		// enter number of item
-		ba.retryMechanismWithSendKeys(driver, getnumbOfItem(), "1");
+		ba.retryMechanismWithSendKeys(driver, getnumbOfItem(), NumberOfItems);
 
 
 		// enter quantity			
-		ba.retryMechanismWithSendKeys(driver, getnumbOfQuatity(), "20");
+		ba.retryMechanismWithSendKeys(driver, getnumbOfQuatity(), Quantity);
 
 
 		// clickcheckbox

@@ -34,7 +34,7 @@ public class SubmitSupplierPricePage {
 
 	
 	
-	public void addSupplierPriceDetails() throws InterruptedException {
+	public void addSupplierPriceDetails(String Supplier,String Estimate_ref_num, String delivery,String Paper_cost, String Production_cost) throws InterruptedException {
 	
 				// Select Paragon Dagenham from searchbox
 
@@ -50,27 +50,27 @@ public class SubmitSupplierPricePage {
 				// js.executeScript("arguments[0].scrollIntoView();", selectDagenham);
 				// ba.retryMechanismWithSendKeys(driver, ClickSearchBox, "paragon CC
 				// (Dagenham)");
-				ba.retryMechanism(driver, wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Paragon CC (Dagenham)')]"))));
+				ba.retryMechanism(driver, wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'"+Supplier+"')]"))));
 
 				// //enter estimate ref no
 				Thread.sleep(2000);
 				WebElement enterEstimateRefNo = driver.findElement(By.xpath("//input[@id='f']"));
-				ba.retryMechanismWithSendKeys(driver, enterEstimateRefNo, "ERN09876");
+				ba.retryMechanismWithSendKeys(driver, enterEstimateRefNo, Estimate_ref_num);
 
 				Thread.sleep(2000);
 
 				WebElement deliveryCost = driver.findElement(By.xpath("(//input[@id='qt'])[1]"));
-				ba.retryMechanismWithSendKeys(driver, deliveryCost, "123");
+				ba.retryMechanismWithSendKeys(driver, deliveryCost, delivery);
 
 				Thread.sleep(2000);
 				WebElement PaperCost = driver.findElement(By.xpath("(//input[@id='qt'])[2]"));
 				// js.executeScript("arguments[0].scrollIntoView();", PaperCost);
-				ba.retryMechanismWithSendKeys(driver, PaperCost, "1234");
+				ba.retryMechanismWithSendKeys(driver, PaperCost, Paper_cost);
 
 				Thread.sleep(2000);
 				WebElement production = driver.findElement(By.xpath("(//input[@id='qt'])[3]"));
 				// js.executeScript("arguments[0].scrollIntoView();", production);
-				ba.retryMechanismWithSendKeys(driver, production, "12");
+				ba.retryMechanismWithSendKeys(driver, production, Production_cost);
 
 				Thread.sleep(2000);
 				WebElement submitcostPrice = driver.findElement(By.xpath("//button[@type='submit']"));

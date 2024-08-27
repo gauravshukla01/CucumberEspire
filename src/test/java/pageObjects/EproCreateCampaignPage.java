@@ -95,8 +95,8 @@ public class EproCreateCampaignPage {
 	public WebElement getVAT() {
 		return VAT;
 	}
-	public WebElement getvat20() {
-		return vat20;
+	public WebElement getvatvalue(String VAT) {
+		return driver.findElement(By.xpath("//span[normalize-space()='"+VAT+"']"));
 	}
 	public WebElement getpurchase_order_number() {
 		return purchase_order_number;
@@ -124,7 +124,7 @@ public class EproCreateCampaignPage {
 		
 	}
 
-	public void fillRequiredDetails() throws InterruptedException {
+	public void fillRequiredDetails(String Campaign_Title, String Campaign_ref_num,String VAT, String Purchase_order_num,String Purchase_order_value  ) throws InterruptedException {
 
 		// retry mechanism implementation
 		
@@ -154,10 +154,10 @@ public class EproCreateCampaignPage {
 		 */
 
 		
-		ba.retryMechanismWithSendKeys(driver, getCampaign_title(), "Test_3"); 
+		ba.retryMechanismWithSendKeys(driver, getCampaign_title(), Campaign_Title); 
 
 		
-		ba.retryMechanismWithSendKeys(driver, getcustomer_camping_ref(), "CR124324332");
+		ba.retryMechanismWithSendKeys(driver, getcustomer_camping_ref(), Campaign_ref_num);
 
 		
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
@@ -180,15 +180,15 @@ public class EproCreateCampaignPage {
 		Thread.sleep(2000);
 		ba.retryMechanism(driver,getVAT());
 		
-		ba.retryMechanism(driver,getvat20());
+		ba.retryMechanism(driver,getvatvalue(VAT));
 
 		
 		js.executeScript("arguments[0].scrollIntoView();", getpurchase_order_number());
-		ba.retryMechanismWithSendKeys(driver, getpurchase_order_number(), "PO12421331");
+		ba.retryMechanismWithSendKeys(driver, getpurchase_order_number(), Purchase_order_num);
 
 		
 		js.executeScript("arguments[0].scrollIntoView();", getpurchase_order_value());
-		ba.retryMechanismWithSendKeys(driver, getpurchase_order_value(), "2");
+		ba.retryMechanismWithSendKeys(driver, getpurchase_order_value(), Purchase_order_value);
 
 
 		/*  WebElement cost_centre = driver.findElement(By.xpath("//span[@class='mat-select-placeholder mat-select-min-line ng-tns-c91-51 ng-star-inserted']"));
