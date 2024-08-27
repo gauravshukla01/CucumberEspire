@@ -1,10 +1,7 @@
 package stepDefinitions;
  
-import org.apache.poi.sl.usermodel.TextRun.TextCap;
- 
 import TestResourceManager.WebDrivermanager;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import otherResources.TestContext;
 import pageObjects.AddCampaignItemPage;
@@ -22,31 +19,16 @@ import pageObjects.SubmitSupplierPricePage;
 public class StepDef_Scenario2 {
  
 	TestContext testContext;
-	EproLoginPage eprologin;
 	EproHomePage eprohome;
 	EproCampaignPage eprocamppage;
-	EproCreateCampaignPage eprocreatecamp;
-	AddCampaignItemPage addCampaignItem;
-	EditCampaignItemPage editCampPage;
-	SubmitSupplierPricePage submitSupplier;
-	ManagePricePage managePrice;
 	QuoteManagementPage quoteManage;
-	ManageCampaignPage manageCampPage;
 	WebDrivermanager webdrivermanager;
 	POManagementPage poManagementPage;
  
 	public StepDef_Scenario2(TestContext tstContext) {
 		testContext = tstContext;
- 
-		eprologin = testContext.getPageObjectManager().getEproLoginPage();
 		eprohome = testContext.getPageObjectManager().getEproHomePage();
 		eprocamppage = testContext.getPageObjectManager().getEproCampaignPage();
-		eprocreatecamp = testContext.getPageObjectManager().getEproCreateCampaignPage();
-		addCampaignItem = testContext.getPageObjectManager().getAddCampaignItemPage();
-		editCampPage = testContext.getPageObjectManager().getEditCampaignItemPage();
-		submitSupplier = testContext.getPageObjectManager().getSubmitSpplierPricePage();
-		managePrice = testContext.getPageObjectManager().getManagePricePage();
-		manageCampPage = testContext.getPageObjectManager().getManageCampaignPage();
 		quoteManage = testContext.getPageObjectManager().getQuoteManagementPage();
 		poManagementPage = testContext.getPageObjectManager().getPOManagementPage();
 		webdrivermanager = testContext.getWebDriverManager();
@@ -77,7 +59,7 @@ public class StepDef_Scenario2 {
 	public void user_will_upload_pod_document() throws InterruptedException {
  
 		poManagementPage.uploadPOD(testContext.Hmap.get("Index ID"));   //add underscore
-		poManagementPage.download();
+		//poManagementPage.download();
 	}
  
 	@And("Verify Has POD column status with green tick")

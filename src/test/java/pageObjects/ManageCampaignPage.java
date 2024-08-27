@@ -16,7 +16,6 @@ import CommmonUtils.BaseAction;
 public class ManageCampaignPage {
 
 	private WebDriver driver;
-	private WebDriverWait wait;
 	private JavascriptExecutor js;
 	private BaseAction ba;
 	private int i;
@@ -73,28 +72,25 @@ public class ManageCampaignPage {
 	public WebElement getgenerateQuote() {
 		return generateQuote;
 	}
-	
-	public WebElement getmanageItemButton(int i)
-	{
+
+	public WebElement getmanageItemButton(int i) {
 		return driver.findElement(By.xpath("//*[@role='table']//tbody/tr[" + i
 				+ "]//*[@class='mat-cell cdk-cell cdk-column-CampaignItemReference mat-column-CampaignItemReference ng-star-inserted']"));
 	}
-	
-	public WebElement getsubmitCosting(int i)
-	{
+
+	public WebElement getsubmitCosting(int i) {
 		return driver.findElement(By.xpath(
 				"//*[@role='table']//tbody/tr[" + i + "]//img[@src='assets/images/submit-for-costing-pound.svg']"));
 	}
-	
+
 	public WebElement getClckManagePrice()
-	
+
 	{
 		return driver.findElement(By
 				.xpath("//*[@role='table']//tbody/tr[" + i + "]//img[@src='assets/images/submit-supplier-price.svg']"));
 	}
-	
-	public WebElement getSupplierPrice()
-	{
+
+	public WebElement getSupplierPrice() {
 		return driver.findElement(
 				By.xpath("//*[@role='table']//tbody/tr[" + i + "]//img[@src='assets/images/view-supplier-price.svg']"));
 	}
@@ -102,7 +98,6 @@ public class ManageCampaignPage {
 	public ManageCampaignPage(WebDriver driver) {
 		this.driver = driver;
 		this.js = (JavascriptExecutor) driver;
-		this.wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(20));
 		ba = new BaseAction(driver);
 		PageFactory.initElements(driver, this);
 
@@ -110,30 +105,24 @@ public class ManageCampaignPage {
 
 	public void DetailsForsubmitCosting() throws InterruptedException {
 
-		List<WebElement> listEle = driver.findElements(By.xpath("//*[@role='table']/tbody/tr"));
-
-		System.out.println("row count =" + listEle.size());
-
 		int rowNum = ba.getMatchRowNum("//*[@role='table']/tbody/tr", "Created", 7, "getRowNum");
-		System.out.println("row num =" + rowNum);
+
 		i = rowNum;
 
-				js.executeScript("arguments[0].scrollIntoView();", getmanageItemButton(i));
+		js.executeScript("arguments[0].scrollIntoView();", getmanageItemButton(i));
 		ba.retryMechanism(driver, getmanageItemButton(i));
 
 		// Edit delivery
 		js.executeScript("arguments[0].scrollIntoView();", EditDelivery);
-
+        
+		Thread.sleep(1000);
 		ba.retryMechanism(driver, EditDelivery);
 
 		// Click checkbox nonApplicable
 		ba.retryMechanism(driver, ChckBoxNonApplicable);
 
-		// Save & close
-		// WebElement saveAndClose 
-				ba.retryMechanism(driver, saveAndClose);
-
-		Thread.sleep(1000);
+		// WebElement saveAndClose
+		ba.retryMechanism(driver, saveAndClose);
 
 	}
 
@@ -144,9 +133,9 @@ public class ManageCampaignPage {
 	}
 
 	public void ClicksubmitCostingButton() throws InterruptedException {
-				js.executeScript("arguments[0].scrollIntoView();", getsubmitCosting(i));
+		js.executeScript("arguments[0].scrollIntoView();", getsubmitCosting(i));
 		ba.retryMechanism(driver, getsubmitCosting(i));
-		Thread.sleep(1000);
+
 	}
 
 	public void validateSubmitCostPopup() {
@@ -160,13 +149,11 @@ public class ManageCampaignPage {
 		// click on manage prices
 
 		// add value of i(rownum) in the hashmap
-				ba.retryMechanism(driver, getClckManagePrice());
+		ba.retryMechanism(driver, getClckManagePrice());
 
-		Thread.sleep(2000);
-		// WebElement checkBox 
+		// WebElement checkBox
 		ba.retryMechanism(driver, checkBox);
 		// checkBox.click();
-		Thread.sleep(4000);
 
 		ba.retryMechanism(driver, getmanageQuoteButton());
 	}
@@ -195,8 +182,7 @@ public class ManageCampaignPage {
 	public void clickSupplierPricebutton() {
 		// Submit supplier price
 
-		// add value of i(rownum) in the hashmap
-				js.executeScript("arguments[0].scrollIntoView();", getSupplierPrice());
+		js.executeScript("arguments[0].scrollIntoView();", getSupplierPrice());
 		ba.retryMechanism(driver, getSupplierPrice());
 	}
 }

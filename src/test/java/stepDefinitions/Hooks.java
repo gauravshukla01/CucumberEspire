@@ -46,7 +46,13 @@ public class Hooks{
 			e.printStackTrace();
 		}
 	}
+	
+	@After
+	public void teardown() {
+		driver.close();
+	}
 }
+
 
 
 //  testContext.getWebDriverManager().closeDriver(); }

@@ -16,17 +16,13 @@ public class EproHomePage {
 	public JavascriptExecutor js;
 	public BaseAction ba;
 
-	@FindBy(xpath = "//*[@id='sideNav']")
-	private WebElement sideNAV;
+	
 	@FindBy(xpath = "//li/a/img[@src='assets/images/workflow.svg']")
 	private WebElement workflow;
 	@FindBy(xpath = "//a[normalize-space()='Campaigns']")
 	private WebElement clkCampaign;
 
-	public WebElement getsideNAV() {
-		return sideNAV;
-	}
-
+	
 	public WebElement getworkflow() {
 		return workflow;
 	}
@@ -44,9 +40,6 @@ public class EproHomePage {
 	}
 
 	public void ClkCampaign() throws InterruptedException {
-
-		// Webelement for side nav
-		Thread.sleep(3000);
 
 		ba.retryMechanism(driver, getworkflow());
 

@@ -1,4 +1,4 @@
-@EproCampaignCreation
+@EproCampaignCreation2
 Feature: Create a campaign
 
   @Scenario1

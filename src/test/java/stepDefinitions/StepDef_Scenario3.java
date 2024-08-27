@@ -21,35 +21,14 @@ import pageObjects.SubmitSupplierPricePage;
 public class StepDef_Scenario3 {
 
 	TestContext testContext;
-	EproLoginPage eprologin;
-	EproHomePage eprohome;
-	EproCampaignPage eprocamppage;
-	EproCreateCampaignPage eprocreatecamp;
-	AddCampaignItemPage addCampaignItem;
-	EditCampaignItemPage editCampPage;
-	SubmitSupplierPricePage submitSupplier;
-	ManagePricePage managePrice;
-	QuoteManagementPage quoteManage;
-	ManageCampaignPage manageCampPage;
+
 	WebDrivermanager webdrivermanager;
-	POManagementPage poManagementPage;
 	SalesOrderPage salesOrderPg;
 	SalesInvoicePage salesInvoicePg;
 
 	public StepDef_Scenario3(TestContext tstContext) {
 		testContext = tstContext;
 
-		eprologin = testContext.getPageObjectManager().getEproLoginPage();
-		eprohome = testContext.getPageObjectManager().getEproHomePage();
-		eprocamppage = testContext.getPageObjectManager().getEproCampaignPage();
-		eprocreatecamp = testContext.getPageObjectManager().getEproCreateCampaignPage();
-		addCampaignItem = testContext.getPageObjectManager().getAddCampaignItemPage();
-		editCampPage = testContext.getPageObjectManager().getEditCampaignItemPage();
-		submitSupplier = testContext.getPageObjectManager().getSubmitSpplierPricePage();
-		managePrice = testContext.getPageObjectManager().getManagePricePage();
-		manageCampPage = testContext.getPageObjectManager().getManageCampaignPage();
-		quoteManage = testContext.getPageObjectManager().getQuoteManagementPage();
-		poManagementPage = testContext.getPageObjectManager().getPOManagementPage();
 		salesOrderPg = testContext.getPageObjectManager().getSalesOrderPage();
 		salesInvoicePg = testContext.getPageObjectManager().getSalesInvoicePage();
 	}

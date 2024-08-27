@@ -30,13 +30,13 @@ Feature: Create a campaign
     Then Verify Receipted column status with green tick
 
     Examples: 
-      | UserName      | Password        |
-      | Staginguser_2 | Password@123456 |
+      | UserName      | Password     |
+      | Staginguser_3 | Paragon@2024 |
 
   @Scenario3
   Scenario Outline: Validate Draft and Final Invoice Generation
     Given User launches Epro url and login with valid <UserName> and <Password>
-   And User get the Campaign id for PO Receipted and navigate to Sales Order page
+    And User get the Campaign id for PO Receipted and navigate to Sales Order page
     Then User will Create Draft Invoice
     And Click on Finance and navigate to Sales Invoice
     And Click on resepctive Invoice number (Manage Invoice)
