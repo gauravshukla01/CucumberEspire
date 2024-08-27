@@ -55,10 +55,8 @@ public class StepDef_Scenario1 {
 	@Given("^User launches Epro url and login with valid (.*) and (.*)$")
 	public void User_launches_Epro_url_and_login_with_valid_staginguser_and_password(String Username, String Password) {
 		eprologin.launchurl("https://uat.paragon-epro.com/");
-		System.out.println("Browser launched");
 		
 		eprologin.EnterUsernameAndPassword(Username, Password);
-		System.out.println("User Credentials entered");
 		eprologin.Clksubmit();
 	}
 
@@ -72,7 +70,6 @@ public class StepDef_Scenario1 {
 
 		String CampaignId = eprocreatecamp.storeCampaignID();
 		testContext.Hmap.put("CampaignId", CampaignId);
-		System.out.println("Campaign created successfully");
 
 	}
 
@@ -82,7 +79,7 @@ public class StepDef_Scenario1 {
 		eprocamppage.clickOnCampaignId(testContext.Hmap.get("CampaignId"));
 		System.out.println("Campaign ID =" + testContext.Hmap.get("CampaignId"));
 		addCampaignItem.addItemDetails();
-		System.out.println("Campaign item added successfully");
+
 	}
 
 	@Then("Verify Campaign status as Created")
@@ -97,7 +94,6 @@ public class StepDef_Scenario1 {
 		manageCampPage.validateItemAddedPopup();
 		manageCampPage.ClicksubmitCostingButton();
 		manageCampPage.validateSubmitCostPopup();
-		System.out.println("Costing submitted for campaign item successfully");
 	}
 
 	@And("User will add Supplier Cost using Submit supplier button")
@@ -105,7 +101,6 @@ public class StepDef_Scenario1 {
 		manageCampPage.clickSupplierPricebutton();
 		submitSupplier.addSupplierPriceDetails();
 		submitSupplier.validateSubmitSupplierCostPopup();
-		System.out.println("Supplier price submitted successfully");
 	}
 
 	@And("User will manage the supplier price and add all required details")
@@ -114,7 +109,6 @@ public class StepDef_Scenario1 {
 		manageCampPage.validateItemSelectedPopup();
 		manageCampPage.CreateQuote();
 		manageCampPage.validateQuoteGeneratedPopup();
-		System.out.println("Quote has been generated successfully");
 
 	}
 
