@@ -76,5 +76,10 @@ public class ConfigFileReader {
 		if(windowSize != null) return Boolean.valueOf(windowSize);
 		return true;
 	}
+	
+	public String getFeaturePath() {
+	    return properties.getProperty("feature.path", "src/test/resources/Stories/Epro.feature");
+	}
+
 
 }

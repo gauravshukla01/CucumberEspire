@@ -1,3 +1,4 @@
+
 package testrunner;
 
 import org.junit.runner.RunWith;
@@ -15,7 +16,8 @@ import otherResources.TestContext;
 				"json:target/cucumber-reports"
 				},
       // this needs to be localized
-		features = "C:\\Users\\chetan.patel\\Epro_Workspace\\Epro\\CucumberEspire\\src\\test\\resources\\Stories\\Epro.feature"
+//		features = "C:\\Users\\chetan.patel\\Epro_Workspace\\Epro\\CucumberEspire\\src\\test\\resources\\Stories\\Epro.feature"
+		features = "src\\test\\resources\\Stories"
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = true
