@@ -193,5 +193,23 @@ public class POManagementPage {
 		// Scenario -2 completed
  
 	}
+	
+	public void downloadPDF(String status) throws InterruptedException {
+		
+		ba.retryMechanism(driver, getSupporting_docs());
+		Thread.sleep(2000);
+		
+		
+		
+		int rowNum = ba.getMatchRowNum("//*[@role='table']/tbody/tr", status, 1, "getRowNum");
+		
+	WebElement downloadicon = 	driver.findElement(By.xpath("//table[@role=\"table\"]//tbody/tr[" + rowNum
+				+ "]/td/button/span/img[@src='assets/images/download.svg']"));
+		
+		ba.retryMechanism(driver, downloadicon);
+		Thread.sleep(2000);
+		
+		
+	}
 }
 

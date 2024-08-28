@@ -31,10 +31,9 @@ Feature: Create a campaign
     And User navigate to the Receipt Tab and click on required Checkbox
     Then Verify Receipted column status with green tick
 
-     Examples: 
+    Examples: 
       | Sheetname    | Rownum |
       | Epro_details |      1 |
-      
 
   @Scenario3
   Scenario Outline: Validate Draft and Final Invoice Generation
@@ -45,6 +44,16 @@ Feature: Create a campaign
     And Click on resepctive Invoice number (Manage Invoice)
     Then User will send Final Invoice to customer
 
+    Examples: 
+      | Sheetname    | Rownum |
+      | Epro_details |      2 |
+
+  @Scenario4
+  Scenario Outline: Validate download functionality
+    Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
+    And On Campaign Item Page verify Status as Quote Accepted and User will Send and the create PO
+    And Verify Status as PO Created after creating the PO on Campaign Item Page
+    Then Click on Donwload button under action tab
 
     Examples: 
       | Sheetname    | Rownum |

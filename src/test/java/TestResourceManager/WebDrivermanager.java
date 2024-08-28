@@ -1,5 +1,7 @@
 package TestResourceManager;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -50,6 +52,7 @@ public class WebDrivermanager {
 		throw new RuntimeException("RemoteWebDriver is not yet implemented");
 	}
 
+	@SuppressWarnings("deprecation")
 	private WebDriver createLocalDriver() {
 		switch (driverType) {	    
 		case FIREFOX : 
@@ -67,6 +70,14 @@ public class WebDrivermanager {
 			chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("--remote-allow-origins=*");
 			//            chromeOptions.addArguments("--headless");
+			String projectPath = System.getProperty("user.dir");
+			String downloadFilePath = projectPath+"\\src\\test\\resources\\Downloads";
+			 Map<String, Object> prefs = new HashMap<>();
+		        prefs.put("download.default_directory", downloadFilePath); 
+		        prefs.put("download.prompt_for_download", false); 
+		        prefs.put("safebrowsing.enabled", true); 
+
+		        chromeOptions.setExperimentalOption("prefs", prefs);
 			driver = new ChromeDriver(chromeOptions);
 			configReader.getApplicationUrl();
 			//            chromeOptions.setHeadless(true);
@@ -85,8 +96,7 @@ public class WebDrivermanager {
 
 		if(FileReaderManager.getInstance().getConfigReader().getBrowserWindowSize()) 
 			driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(FileReaderManager.getInstance()
-				.getConfigReader().getImplicitlyWait(), TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(FileReaderManager.getInstance().getConfigReader().getImplicitlyWait(), TimeUnit.SECONDS);
 		return driver;
 	}	
 
