@@ -27,11 +27,15 @@
 				<version>3.3.1</version>
 				<configuration>
 					<includes>
-						<include>TestRunner.java</include>
+						<include>**/TestRunner.java</include>
 					</includes>
+					 <parallel>methods</parallel>
+					 <useUnlimitedThreads>true</useUnlimitedThreads>
 					<testFailureIgnore>true</testFailureIgnore>
 				</configuration>
 			</plugin>
+
+
 		</plugins>
 	</build>
 

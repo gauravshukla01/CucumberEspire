@@ -21,7 +21,7 @@ import otherResources.TestContext;
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = true
-        ,tags = "@Scenario1"
+//        ,tags = "@Scenario1 and @Scenario2 and @Scenario3"
 )
 
 public class TestRunner {
@@ -37,5 +37,3 @@ public class TestRunner {
 	
 
 	}
-    //Sample comment  This comment is added in testrunner file. 
-//Sample comment  This comment is added in testrunner file. 
