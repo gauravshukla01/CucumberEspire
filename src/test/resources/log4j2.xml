@@ -10,7 +10,7 @@
         <RollingFile name="FileLogger"
                      fileName="logs/app.log"
                      filePattern="logs/app-%d{yyyy-MM-dd-HH-mm-ss}.log">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - [%M] - %m%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd-HH-mm-ss} %-5p %c{1}:%L - [%M] - %m%n"/>
             <Policies>
               <!--   <TimeBasedTriggeringPolicy interval="1" modulate="true"/>  -->
                 <OnStartupTriggeringPolicy />
