@@ -10,8 +10,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import CommmonUtils.BaseAction;
+import org.junit.Assert;
 
 public class SalesOrderPage {
 
@@ -176,7 +176,7 @@ public class SalesOrderPage {
 	}
 
 	public void createDraftInvoice(String campId) throws InterruptedException {
-
+		String status;
 		// enter PO number
 
 		wait.until(ExpectedConditions.elementToBeClickable(poNoBox)).clear();
@@ -208,6 +208,13 @@ public class SalesOrderPage {
 		// click on close in pop-up
 		wait.until(ExpectedConditions.elementToBeClickable(getcloseButton()));
 		ba.retryMechanism(driver, getcloseButton());
+		
+		// Assertion for Receipt tab
+		status = ba.handleWebTable("//*[@role='table']/tbody/tr", campId.trim(), 19, "getText");
+		Assert.assertEquals("Draft Invoice", status);
+		System.out.println("Draft Invoice-Assert Verified");
+    
+
 	}
 
 }

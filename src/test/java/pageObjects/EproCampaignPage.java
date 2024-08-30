@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.junit.Assert;
 import CommmonUtils.BaseAction;
 
 public class EproCampaignPage {
@@ -107,8 +107,19 @@ public class EproCampaignPage {
 
 		wait.until(ExpectedConditions.elementToBeClickable(getSearch())).click();
 
-		ba.handleWebTable("//*[@role='table']/tbody/tr", "Quote Accepted", 1, "clickItem");
-		   logger.info("Clicked on campaignID");
+		ba.handleWebTable("//*[@role='table']/tbody/tr", status, 1, "clickItem");
+		
+		//Assert for quote Accepted
+		String	Assertstatus=ba.handleWebTable("//*[@role='table']/tbody/tr", status, 7, "getText");
+			System.out.println(Assertstatus);
+			//Assert.assertEquals(status, "PO Approved");
+			Assert.assertEquals(status, Assertstatus);
+			System.out.println("Quote Accepted Status Validated Successfully");
+	  
+		
+		 logger.info("Clicked on campaignID");
+		
+		
 	}
 
 	public void SendAndCreatePO() throws InterruptedException {
@@ -120,12 +131,25 @@ public class EproCampaignPage {
 		ba.retryMechanism(driver, getSendForApproal(rowNum));
 
 		ba.retryMechanism(driver, getyesBtn());
+		
+		//Assert for PO Approved
+	String	status=ba.handleWebTable("//*[@role='table']/tbody/tr", "PO Approved", 7, "getText");
+		Assert.assertEquals("PO Approved", status);
+		System.out.println("PO Successfully Approved-Assert Verified");
 		// Create PO
 		logger.info("Clicked on Send PO");
+		
+		
 		ba.retryMechanism(driver, getGenerate_doc_create_po(rowNum)); 
 
 		// click on close (popup)
 		ba.retryMechanism(driver, getcloseBtn());
+		
+		//Assert for PO Created
+		status=ba.handleWebTable("//*[@role='table']/tbody/tr", "PO Created", 7, "getText");
+		Assert.assertEquals("PO Created", status);
+		System.out.println("PO Successfully Created-Assert Verified");
+
 		 logger.info("Clicked on create PO");
 
 	}
