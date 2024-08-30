@@ -2,6 +2,8 @@ package pageObjects;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -66,12 +68,14 @@ public class SalesInvoicePage {
 		PageFactory.initElements(driver, this);
 
 	}
+	
+	private static final Logger logger = LogManager.getLogger(SalesInvoicePage.class);
 
 	public String getCampIdDraftInvoiced(String status) throws InterruptedException {
 		// validating status as PO receipted
 		String campaign_ID = ba.handleWebTable("//*[@role='table']/tbody/tr", status, 2, "getText");
 		System.out.println("campaign_ID = " + campaign_ID);
-
+		logger.info("Fetched Draft invoice campaign ID");
 		return campaign_ID;
 	}
 
@@ -94,6 +98,7 @@ public class SalesInvoicePage {
 		// ePO000898-LEADGB_V3.pdf extract : ePO000898-LEADGB
 		String[] act = pdfName.split("_");
 		System.out.println("split pdf name = " + act[0]);
+		logger.info("PDF name stored");
 		return act[0];
 
 	}
@@ -107,6 +112,7 @@ public class SalesInvoicePage {
 		// clear search
 		wait.until(ExpectedConditions.elementToBeClickable(salesorderpage.getsearch())).clear();
 		wait.until(ExpectedConditions.elementToBeClickable(salesorderpage.getsearch())).click();
+		logger.info("landed on sales invoice page");
 	}
 
 	public void clickOnInvoiceNo(String pdfname) throws InterruptedException {
@@ -122,6 +128,8 @@ public class SalesInvoicePage {
 		} // end of for loop
 
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		
+		logger.info("Click on invoice Number");
 	}
 
 	public void clickOnCheckboxs(String indexId) throws InterruptedException {
@@ -146,7 +154,8 @@ public class SalesInvoicePage {
 
 		ba.retryMechanism(driver, getFirstCheckBox());
 		ba.retryMechanism(driver, getSecondCheckBox());
-
+      
+		logger.info("Click on draft invoice check boxes");
 	}
 
 }

@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -26,6 +28,9 @@ public class Hooks{
 		driver = testContext.getWebDriverManager().getDriver();
 
 	}
+	private static final Logger logger = LogManager.getLogger(Hooks.class);
+
+
 
 	@Before
 	public void BeforeSteps() {
@@ -41,17 +46,23 @@ public class Hooks{
 			if (driver != null) {
 				final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 				scenario.attach(screenshot, "image/png", "image");
+				String stepname = scenario.getName();
+				logger.info("Screenshot captured :"+ stepname);
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@After
 	public void teardown() {
 		driver.close();
+		logger.info("Scenario completed");
 	}
+
 }
+
 
 
 

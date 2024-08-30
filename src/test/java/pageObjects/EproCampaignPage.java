@@ -1,5 +1,7 @@
 package pageObjects;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -71,10 +73,14 @@ public class EproCampaignPage {
 		PageFactory.initElements(driver, this);
 	}
 
+	private static final Logger logger = LogManager.getLogger(EproCampaignPage.class);
+
+
 	public void clkAddCampaign() {
 
 		// click on add icon
 		wait.until(ExpectedConditions.elementToBeClickable(getaddIconButton())).click();
+		logger.info("Clicked on add campaign");
 	}
 
 	public void clickOnCampaignId(String num) {
@@ -89,6 +95,8 @@ public class EproCampaignPage {
 		// click on Manage campaign
 		ba.retryMechanism(driver, getManageCAmp(num));
 
+		logger.info("Clicked on campaignID");
+
 	}
 
 	public void clickOnCampID(String status) throws InterruptedException {
@@ -100,7 +108,7 @@ public class EproCampaignPage {
 		wait.until(ExpectedConditions.elementToBeClickable(getSearch())).click();
 
 		ba.handleWebTable("//*[@role='table']/tbody/tr", "Quote Accepted", 1, "clickItem");
-
+		   logger.info("Clicked on campaignID");
 	}
 
 	public void SendAndCreatePO() throws InterruptedException {
@@ -113,10 +121,12 @@ public class EproCampaignPage {
 
 		ba.retryMechanism(driver, getyesBtn());
 		// Create PO
+		logger.info("Clicked on Send PO");
 		ba.retryMechanism(driver, getGenerate_doc_create_po(rowNum)); 
-		
+
 		// click on close (popup)
 		ba.retryMechanism(driver, getcloseBtn());
+		 logger.info("Clicked on create PO");
 
 	}
 

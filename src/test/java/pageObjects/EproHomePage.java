@@ -1,5 +1,7 @@
 package pageObjects;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,6 +41,7 @@ public class EproHomePage {
 		PageFactory.initElements(driver, this);
 	}
 
+	  private static final Logger logger = LogManager.getLogger(EproHomePage.class);
 	public void ClkCampaign() throws InterruptedException {
 
 		ba.retryMechanism(driver, getworkflow());
@@ -46,6 +49,8 @@ public class EproHomePage {
 		// click on campaign icon
 
 		ba.retryMechanism(driver, getclkCampaign());
+		logger.info("Clicked on Campaign");
+
 	}
 
 }

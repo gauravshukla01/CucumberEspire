@@ -2,6 +2,8 @@ package pageObjects;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import CommmonUtils.BaseAction;
+import stepDefinitions.Hooks;
 
 public class QuoteManagementPage {
 
@@ -56,7 +59,8 @@ public class QuoteManagementPage {
 	public WebElement getfinalAccept() {
 		return finalAccept;
 	}
-
+ 
+	private static final Logger logger = LogManager.getLogger(QuoteManagementPage.class);
 	public QuoteManagementPage(WebDriver driver) {
 		this.driver = driver;
 		this.js = (JavascriptExecutor) driver;
@@ -93,6 +97,7 @@ public class QuoteManagementPage {
 		// WebElement acceptQuote
 
 		ba.retryMechanism(driver, getacceptQuote());
+		logger.info("Quote verified and selected");
 
 	}
 
@@ -100,6 +105,7 @@ public class QuoteManagementPage {
 
 		// click on final accept
 		ba.retryMechanism(driver, getfinalAccept());
+		logger.info("Quote Finally Accepted");
 
 	}
 

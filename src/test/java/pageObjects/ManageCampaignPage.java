@@ -2,6 +2,8 @@ package pageObjects;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -102,6 +104,10 @@ public class ManageCampaignPage {
 		PageFactory.initElements(driver, this);
 
 	}
+	
+	
+	 private static final Logger logger = LogManager.getLogger(ManageCampaignPage.class);
+
 
 	public void DetailsForsubmitCosting() throws InterruptedException {
 
@@ -123,6 +129,8 @@ public class ManageCampaignPage {
 
 		// WebElement saveAndClose
 		ba.retryMechanism(driver, saveAndClose);
+		
+		logger.info("Edit delivery option as NA and save and close");
 
 	}
 
@@ -135,6 +143,7 @@ public class ManageCampaignPage {
 	public void ClicksubmitCostingButton() throws InterruptedException {
 		js.executeScript("arguments[0].scrollIntoView();", getsubmitCosting(i));
 		ba.retryMechanism(driver, getsubmitCosting(i));
+		logger.info("Clicked on submit for costing");
 
 	}
 
@@ -156,6 +165,7 @@ public class ManageCampaignPage {
 		// checkBox.click();
 
 		ba.retryMechanism(driver, getmanageQuoteButton());
+		logger.info("Select manage price");
 	}
 
 	public void validateItemSelectedPopup() {
@@ -171,6 +181,7 @@ public class ManageCampaignPage {
 
 		// Generate Quote
 		ba.retryMechanism(driver, generateQuote);
+		logger.info("Quote created");
 	}
 
 	public void validateQuoteGeneratedPopup() {
@@ -184,5 +195,7 @@ public class ManageCampaignPage {
 
 		js.executeScript("arguments[0].scrollIntoView();", getSupplierPrice());
 		ba.retryMechanism(driver, getSupplierPrice());
+		logger.info("Clicked on supplier price button");
+
 	}
 }

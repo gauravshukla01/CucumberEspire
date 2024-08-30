@@ -2,6 +2,8 @@ package stepDefinitions;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import TestResourceManager.WebDrivermanager;
@@ -60,13 +62,16 @@ public class StepDef_Scenario1 {
 
 	}
 
+    
+    private static final Logger logger = LogManager.getLogger(StepDef_Scenario1.class);
+    
 	
 
     @Given("User launches Epro url and login with valid from Sheetname {string} and Rownum {int}")
     public void user_launches_epro_url_and_login_with_valid_from_Sheetname_and_Rownum(String Sheetname, Integer Rownum) throws InvalidFormatException, IOException {
      
         eprologin.launchurl("https://uat.paragon-epro.com/");
-        System.out.println("Browser launched");
+        logger.info("Browser Launched");
            this.SheetName=Sheetname;
            this.RowNumber=Rownum;
         String Username = exceldata.getUserName(RowNumber, SheetName);

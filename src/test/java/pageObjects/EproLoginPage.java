@@ -2,6 +2,8 @@ package pageObjects;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -51,12 +53,17 @@ public class EproLoginPage {
 		driver.manage().window().maximize();
 
 	}
+	
+	  private static final Logger logger = LogManager.getLogger(EproLoginPage.class);
+
 
 	public void EnterUsernameAndPassword(String Username, String Password) {
 
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		getClkUsername().sendKeys(Username);
 		getclkPassword().sendKeys(Password);
+		logger.info("User Credentials Entered");
+
 
 	}
 
@@ -72,6 +79,7 @@ public class EproLoginPage {
 	public void Clksubmit() {
 
 		ba.retryMechanism(driver, getclkSubmit());
+		logger.info("User Logged In");
 	}
 
 //sample comment

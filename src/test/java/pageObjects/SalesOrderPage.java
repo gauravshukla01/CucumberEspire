@@ -1,5 +1,7 @@
 package pageObjects;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -97,6 +99,7 @@ public class SalesOrderPage {
 		PageFactory.initElements(driver, this);
 
 	}
+	private static final Logger logger = LogManager.getLogger(SalesOrderPage.class);
 
 	public void goToCampaingPg() {
 
@@ -106,6 +109,7 @@ public class SalesOrderPage {
 		// click on campaign icon
 		wait.until(ExpectedConditions.elementToBeClickable(getcampaigns())).click();
 
+		logger.info("Landed on campaign page");
 		// clear search
 		wait.until(ExpectedConditions.elementToBeClickable(getsearch())).clear();
 		wait.until(ExpectedConditions.elementToBeClickable(getsearch())).click();
@@ -122,14 +126,17 @@ public class SalesOrderPage {
 		wait.until(ExpectedConditions.elementToBeClickable(getsearch())).click();
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='" + status + "']"))).click();
-
+       
+		logger.info("Item Searched and clicked");
 	}
 
 	public String getCampIdPOReciept(String status) throws InterruptedException {
 
 		String campaign_ID = ba.handleWebTable("//*[@role='table']/tbody/tr", status, 1, "getText");
 		System.out.println("campaign_ID = " + campaign_ID);
+		logger.info("Item Searched and clicked");
 		return campaign_ID;
+			
 	}
 
 	public void clickOnCampID(String cmpId, int td) throws InterruptedException {
@@ -142,7 +149,7 @@ public class SalesOrderPage {
 			} catch (StaleElementReferenceException e) {
 				e.printStackTrace();
 			}
-
+			logger.info("Clicked on stored Camapign Id");
 		} // end of for loop
 
 	}
@@ -151,7 +158,7 @@ public class SalesOrderPage {
 		// validating status as PO receipted
 		String indexId = ba.handleWebTable("//*[@role='table']/tbody/tr", status, 2, "getText");
 		System.out.println("campaign_Index_ID = " + indexId);
-
+		logger.info("fetched campaignId item number");
 		return indexId;
 	}
 
@@ -165,7 +172,7 @@ public class SalesOrderPage {
 		// clear search
 		wait.until(ExpectedConditions.elementToBeClickable(getsearch())).clear();
 		wait.until(ExpectedConditions.elementToBeClickable(getsearch())).click();
-
+		logger.info("landed on sales order page");
 	}
 
 	public void createDraftInvoice(String campId) throws InterruptedException {
@@ -174,7 +181,9 @@ public class SalesOrderPage {
 
 		wait.until(ExpectedConditions.elementToBeClickable(poNoBox)).clear();
 		ba.retryMechanismWithSendKeys(driver, poNoBox, "PO1010101");
-
+		
+		logger.info("entered PO number");
+       
 		// click on check box
 
 		for (int i = 0; i < 3; i++) {
@@ -191,6 +200,7 @@ public class SalesOrderPage {
 
 		ba.retryMechanism(driver, getDraftInvoiceButton());
 
+		logger.info("clicked create draft invoice");
 		// click on ok in pop-up
 		wait.until(ExpectedConditions.elementToBeClickable(getOkButton()));
 		ba.retryMechanism(driver, getOkButton());

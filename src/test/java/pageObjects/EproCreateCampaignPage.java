@@ -2,6 +2,8 @@ package pageObjects;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -123,7 +125,9 @@ public class EproCreateCampaignPage {
 		 PageFactory.initElements(driver, this);
 		
 	}
-
+	private static final Logger logger = LogManager.getLogger(EproCreateCampaignPage.class);
+	
+	
 	public void fillRequiredDetails(String Campaign_Title, String Campaign_ref_num,String VAT, String Purchase_order_num,String Purchase_order_value  ) throws InterruptedException {
 
 		// retry mechanism implementation
@@ -196,7 +200,7 @@ public class EproCreateCampaignPage {
         WebElement regionalmarketing = driver.findElement(By.xpath("//span[contains(text(),'MFE - DM – Regional Marketing')]"));
         ba.retryMechanism(driver,regionalmarketing);
 		 */
-
+		logger.info("Create Campaign details entered");
 	}
 
 	public void submitCreateCampaignDetails() throws InterruptedException {
@@ -204,6 +208,7 @@ public class EproCreateCampaignPage {
 	
 		js.executeScript("arguments[0].scrollIntoView();", getSUBMIT());
 		ba.retryMechanism(driver, getSUBMIT());
+		logger.info("Create Campaign details submitted");
 	}
 
 	public void ValidateCreateCampaignPopUp() {
@@ -226,8 +231,9 @@ public class EproCreateCampaignPage {
 		// add this to hashmap
 
 		System.out.println("Campaign number = " + campaign_Number);
-
+		logger.info("CampaignID stored");
 		return campaign_Number;
+		
 	}
 
 

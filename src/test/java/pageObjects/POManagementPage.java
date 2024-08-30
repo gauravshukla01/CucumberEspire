@@ -1,5 +1,7 @@
 package pageObjects;
  
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -104,6 +106,7 @@ public class POManagementPage {
 		ba = new BaseAction(driver);
 		PageFactory.initElements(driver, this);
 	}
+	private static final Logger logger = LogManager.getLogger(POManagementPage.class);
  
 	public void goToFinance() throws InterruptedException {
 		// click on supporting docs link
@@ -138,6 +141,7 @@ public class POManagementPage {
  
 		wait.until(ExpectedConditions.elementToBeClickable(getSearch())).click();
  
+		
 		for (int i = 0; i < 3; i++) {
 			try {
 				ba.handleWebTable("//*[@role='table']/tbody/tr", act[0], 1, "clickItem");
@@ -146,6 +150,8 @@ public class POManagementPage {
 				e.printStackTrace();
 			}
 		} // end of for loop
+		
+		logger.info("Searched and clicked on PDF PO name");
 	}
  
 	public void uploadPOD(String indexID) throws InterruptedException {
@@ -171,6 +177,8 @@ public class POManagementPage {
  
 		// click the save button
 		ba.retryMechanism(driver, getsave_btn());
+		
+		logger.info("Upload POD");
  
 	}
  
@@ -190,6 +198,8 @@ public class POManagementPage {
 		// click on Close button on the popup
 		ba.retryMechanism(driver, geclose_Btn());
  
+		logger.info("validate receipt");
+		logger.info("Scenario 2 completed");
 		// Scenario -2 completed
  
 	}
@@ -209,7 +219,7 @@ public class POManagementPage {
 		ba.retryMechanism(driver, downloadicon);
 		Thread.sleep(2000);
 		
-		
+		logger.info("Download PDF");
 	}
 }
 

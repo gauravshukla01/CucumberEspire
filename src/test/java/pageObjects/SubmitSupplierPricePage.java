@@ -1,5 +1,7 @@
 package pageObjects;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -32,7 +34,7 @@ public class SubmitSupplierPricePage {
 
 
 
-	
+	private static final Logger logger = LogManager.getLogger(SubmitSupplierPricePage.class);
 	
 	public void addSupplierPriceDetails(String Supplier,String Estimate_ref_num, String delivery,String Paper_cost, String Production_cost) throws InterruptedException {
 	
@@ -75,14 +77,14 @@ public class SubmitSupplierPricePage {
 				Thread.sleep(2000);
 				WebElement submitcostPrice = driver.findElement(By.xpath("//button[@type='submit']"));
 				
-				
+				logger.info("Supplier details entered");
 				
 				js.executeScript("arguments[0].scrollIntoView();", submitcostPrice);
 				ba.retryMechanism(driver, submitcostPrice);
 				
-			
+				logger.info("Supplier details submitted");
 
-				System.out.println("Submit button is clicked after supplier submit");
+			
 
 		
 	}
