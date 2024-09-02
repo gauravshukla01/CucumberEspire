@@ -19,7 +19,7 @@ public class DemoQATextBoxStepDefinition {
 	private WebDriver driver;
 	 private BaseAction baseaction;
 
-	public DemoQATextBoxStepDefinition(TestContext tstContext){
+	public DemoQATextBoxStepDefinition(TestContext tstContext) throws Exception{
 		testContext = tstContext;
 		dqtbp = testContext.getPageObjectManager().getDemoQaTextBoxPage();
 		this.driver = testContext.getWebDriverManager().getDriver();

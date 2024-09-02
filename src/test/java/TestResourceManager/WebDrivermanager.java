@@ -1,5 +1,6 @@
 package TestResourceManager;
 
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,6 +9,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import enums.DriverType;
 import enums.EnvironmentType;
@@ -31,12 +33,12 @@ public class WebDrivermanager {
 		configReader = FileReaderManager.getInstance().getConfigReader();
 	}
 
-	public WebDriver getDriver() {
+	public WebDriver getDriver() throws Exception {
 		if(driver == null) driver = createDriver();
 		return driver;
 	}
 
-	private WebDriver createDriver() {
+	private WebDriver createDriver() throws Exception {
 		switch (environmentType) {	    
 		case LOCAL : driver = createLocalDriver();
 		break;
@@ -50,7 +52,7 @@ public class WebDrivermanager {
 		throw new RuntimeException("RemoteWebDriver is not yet implemented");
 	}
 
-	private WebDriver createLocalDriver() {
+	private WebDriver createLocalDriver() throws Exception {
 		switch (driverType) {	    
 		case FIREFOX : 
 			//			driver = new FirefoxDriver();
@@ -62,14 +64,16 @@ public class WebDrivermanager {
 			break;
 		case CHROME : 
 			//			System.setProperty(CHROME_DRIVER_PROPERTY, FileReaderManager.getInstance().getConfigReader().getDriverPath());
-			//			driver = new ChromeDriver();
+//						driver = new ChromeDriver();
 			WebDriverManager.chromedriver().setup();
 			chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("--remote-allow-origins=*");
-			//            chromeOptions.addArguments("--headless");
+//			            chromeOptions.addArguments("--headless");
+//			            chromeOptions.setHeadless(true);
 			driver = new ChromeDriver(chromeOptions);
+//			driver = new RemoteWebDriver(new URL("http://192.168.1.4:4444"), chromeOptions);
 			configReader.getApplicationUrl();
-			//            chromeOptions.setHeadless(true);
+			
 			break;
 		case EDGE : 
 			//			System.setProperty(EDGE_DRIVER_PROPERTY, FileReaderManager.getInstance().getConfigReader().getDriverPath());

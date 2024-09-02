@@ -20,7 +20,7 @@
         <reportName>Build 1</reportName>
 
 		<!-- timestamp format -->
-		<timeStampFormat>MMM dd, yyyy HH:mm:ss</timeStampFormat>
+		<timeStampFormat>dd.MM.yyyy.HH.mm.ss</timeStampFormat>
 		
         <!-- custom javascript -->
         <scripts>

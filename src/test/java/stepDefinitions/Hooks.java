@@ -21,7 +21,7 @@ public class Hooks{
 	TestContext testContext;
 	WebDriver driver ;
 
-	public Hooks(TestContext tstContext) {
+	public Hooks(TestContext tstContext) throws Exception {
 		testContext = tstContext;
 		driver = testContext.getWebDriverManager().getDriver();
 
