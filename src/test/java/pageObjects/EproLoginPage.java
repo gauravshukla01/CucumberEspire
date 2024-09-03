@@ -35,7 +35,7 @@ public class EproLoginPage {
 		this.wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(20));
 		this.js = (JavascriptExecutor) driver;
 		ba = new BaseAction(driver);
-		 PageFactory.initElements(driver, this);
+		PageFactory.initElements(driver, this);
 	}
 
 	

@@ -66,13 +66,13 @@ public class EproHomePage {
 				Thread.sleep(3000);
 				//wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='sideNav']"))).click();
 				
-				ba.retryMechanism(driver, getsideNAV());
+				ba.retryMechanism(driver, getsideNAV()); 
 				// WebElement ele = driver.findElement(By.xpath("//*[@id='sideNav']"));
 				// action.moveToElement(ele);
 				// click on workflow icon
 				// wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Workflow ']"))).click();
 				
-				ba.retryMechanism(driver, getworkflow());
+				ba.retryMechanism(driver, getworkflow()); 
 
 			   
 				

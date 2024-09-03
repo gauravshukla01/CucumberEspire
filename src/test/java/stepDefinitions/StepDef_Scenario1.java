@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import CommmonUtils.ExcelUtil;
 import TestResourceManager.WebDrivermanager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -53,13 +54,23 @@ public class StepDef_Scenario1 {
 	
 
 	@Given("^User launches Epro url and login with valid (.*) and (.*)$")
-	public void User_launches_Epro_url_and_login_with_valid_staginguser_and_password(String Username, String Password) {
-		eprologin.launchurl("https://uat.paragon-epro.com/");
-		System.out.println("Browser launched");
+	public void User_launches_Epro_url_and_login_with_valid_staginguser_and_password(String Username, String Password) 
+	{
+		String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+		try {
+			eprologin.launchurl("https://uat.paragon-epro.com/");
+			System.out.println("Browser launched");
+			eprologin.EnterUsernameAndPassword(Username, Password);
+			System.out.println("User Credentials entered");
+			eprologin.Clksubmit();
+		}
+		catch(Exception e) {
+			System.out.println("In Catch Block");
+			e.printStackTrace();
+			ExcelUtil.logExceptionInExcel(methodName, e.toString());
+			throw e;
+		}
 		
-		eprologin.EnterUsernameAndPassword(Username, Password);
-		System.out.println("User Credentials entered");
-		eprologin.Clksubmit();
 	}
 
 	@And("user navigate to Campaign page and create campaign")
