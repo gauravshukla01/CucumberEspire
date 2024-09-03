@@ -27,31 +27,19 @@
 				<version>3.3.1</version>
 				<executions>
 					<execution>
-						<id>run-main-tests</id>
+						<id>run-tests</id>
 						<goals>
 							<goal>test</goal>
 						</goals>
 						<configuration>
-							<includes>
-								<include>**/TestRunner.java</include> 
-							</includes>
-							<testFailureIgnore>true</testFailureIgnore>
-						</configuration>
-					</execution>
-					<execution>
-						<id>run-failed-tests</id>
-						<goals>
-							<goal>test</goal>
-						</goals>
-						<configuration>
-							<includes>
-								<include>**/TestRunnerFailed.java</include>
-							</includes>
+							<suiteXmlFiles>
+								<suiteXmlFile>testng.xml</suiteXmlFile>
+							</suiteXmlFiles>
 							<testFailureIgnore>true</testFailureIgnore>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+              </plugin>
 		</plugins>
 	</build>
 

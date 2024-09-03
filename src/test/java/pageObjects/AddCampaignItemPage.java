@@ -81,7 +81,7 @@ public class AddCampaignItemPage {
 
 
 		// Click ob prefilled templates
-		Thread.sleep(2000);
+		
 		ba.retryMechanism(driver, getprefilledTemplates());
 
 
