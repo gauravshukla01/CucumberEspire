@@ -18,6 +18,7 @@ import pageObjects.SalesInvoicePage;
 import pageObjects.SalesOrderPage;
 import pageObjects.SubmitSupplierPricePage;
 import pageObjects.ZohoSignInPage;
+import pageObjects.manualInvoicePage;
 
 public class PageObjectManager {
 
@@ -38,6 +39,7 @@ public class PageObjectManager {
 	SalesInvoicePage salesInvoicePage;
 	SalesOrderPage salesOrderPage;
 	SubmitSupplierPricePage submitSupplierPricePage;
+	manualInvoicePage manualinvoicepg;
 
 
 
@@ -138,7 +140,10 @@ public class PageObjectManager {
 	 return (eprocreatecamp == null) ?  eprocreatecamp   = new EproCreateCampaignPage (driver) :  eprocreatecamp ;
  }
 
-
+public manualInvoicePage getmanualInvoicePage()
+{
+	return (manualinvoicepg == null) ? manualinvoicepg  = new manualInvoicePage(driver): manualinvoicepg;
+}
 
 
 

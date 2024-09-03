@@ -74,3 +74,14 @@ Feature: Create a campaign
       | Sheetname    | Rownum |
       | Epro_details |      1 |
   
+  
+  @Scenario6
+  Scenario Outline: Validate Manual Invoice Generation
+    Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
+    And Navigate to finance and click on create manual invoice
+    And Send Final Invoice
+    Then Post final invoice to customer
+    
+     Examples: 
+      | Sheetname    | Rownum |
+      | Epro_details |      4 |
