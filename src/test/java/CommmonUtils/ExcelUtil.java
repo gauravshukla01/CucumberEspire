@@ -18,7 +18,7 @@ public class ExcelUtil {
     public static final String REPORT_NAME = "FailedStepsReport_" + TIME_STAMP + ".xlsx";
     public static final String EXCEL_REPORTS_PATH = EXCEL_REPORTS_FOLDER + File.separator + REPORT_NAME;
 
-    public static void logExceptionInExcel(String methodName, String exceptionMessage) {
+    public synchronized static void logExceptionInExcel(String methodName, String exceptionMessage) {
         Workbook workbook = null;
         FileOutputStream outputStream = null;
         FileInputStream inputStream = null;
