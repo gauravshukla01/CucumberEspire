@@ -1,11 +1,14 @@
-@Amazon
+@Demo
+Feature: Logon to Google
 
-Feature: Logon to amazon
-@Scenario11
-  Scenario: Logon Amazon
-    Given User launches "https://www.amazon.com/"
-    When username and password are entered
-      | UserName           | Password  |
-      | test@email.com | RandomPassword |
-    And user clicks on submit button
-    Then user should get logged in
+  @Scenario11
+  Scenario: Logon Google
+    Given User launches "https://www.google.com/"
+    When User Click on Search Box
+    Then user should get land
+
+  @Scenario12
+  Scenario: Logon Facebook
+    Given User launches the facebook page "https://www.facebook.com/"
+    When User Click on email box
+    Then user should get land on create button

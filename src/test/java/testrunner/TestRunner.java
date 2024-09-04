@@ -18,12 +18,11 @@ import io.cucumber.testng.CucumberOptions;
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = true
-        ,tags = "@Scenario1"
+        ,tags = "@Demo"
 )
 
 public class TestRunner extends AbstractTestNGCucumberTests
 {
-	
 	 @Override
 	    @DataProvider(parallel = true)
 	    public Object[][] scenarios() {

@@ -43,7 +43,7 @@ public class Hooks{
 	@After
 	public void teardown() {
 		
-		driver.close();
+		driver.quit();
 	}
 	
 
