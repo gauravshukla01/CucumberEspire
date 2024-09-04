@@ -122,7 +122,7 @@ public class EproCampaignPage {
 		
 	}
 
-	public void SendAndCreatePO() throws InterruptedException {
+	public void SendPO() throws InterruptedException {
 		// click on send po button
 
 		int rowNum;
@@ -136,24 +136,44 @@ public class EproCampaignPage {
 	String	status=ba.handleWebTable("//*[@role='table']/tbody/tr", "PO Approved", 7, "getText");
 		Assert.assertEquals("PO Approved", status);
 		System.out.println("PO Successfully Approved-Assert Verified");
-		// Create PO
 		logger.info("Clicked on Send PO");
 		
 		
-		ba.retryMechanism(driver, getGenerate_doc_create_po(rowNum)); 
-
-		// click on close (popup)
-		ba.retryMechanism(driver, getcloseBtn());
-		
-		//Assert for PO Created
-		status=ba.handleWebTable("//*[@role='table']/tbody/tr", "PO Created", 7, "getText");
-		Assert.assertEquals("PO Created", status);
-		System.out.println("PO Successfully Created-Assert Verified");
-
-		 logger.info("Clicked on create PO");
+		/*
+		 * // Create PO
+		 * 
+		 * ba.retryMechanism(driver, getGenerate_doc_create_po(rowNum));
+		 * 
+		 * // click on close (popup) ba.retryMechanism(driver, getcloseBtn());
+		 * 
+		 * //Assert for PO Created
+		 * status=ba.handleWebTable("//*[@role='table']/tbody/tr", "PO Created", 7,
+		 * "getText"); Assert.assertEquals("PO Created", status);
+		 * System.out.println("PO Successfully Created-Assert Verified");
+		 * 
+		 * logger.info("Clicked on create PO");
+		 */
 
 	}
+	
+	public void CreatePO() throws InterruptedException {
+		// Create PO
+		int rowNum;
+		rowNum = ba.getMatchRowNum("//*[@role='table']/tbody/tr", "PO Approved", 2, "getRowNum");
 
+				ba.retryMechanism(driver, getGenerate_doc_create_po(rowNum)); 
+
+				// click on close (popup)
+				ba.retryMechanism(driver, getcloseBtn());
+				
+				//Assert for PO Created
+			String	status=ba.handleWebTable("//*[@role='table']/tbody/tr", "PO Created", 7, "getText");
+				Assert.assertEquals("PO Created", status);
+				System.out.println("PO Successfully Created-Assert Verified");
+
+				 logger.info("Clicked on create PO");
+	}
+	
 	public String getIndexValue() throws InterruptedException {
 		String indcampaign_ID = ba.handleWebTable("//*[@role='table']/tbody/tr", "PO Created", 2, "getText");
 		System.out.println("campaign_ID = " + indcampaign_ID);

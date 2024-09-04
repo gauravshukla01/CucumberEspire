@@ -2,6 +2,7 @@ package pageObjects;
  
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -177,6 +178,8 @@ public class POManagementPage {
  
 		// click the save button
 		ba.retryMechanism(driver, getsave_btn());
+		// Assertion upload POD-Verified
+				ba.validatePopUp("Supporting Document has been created successfully.", "POD uploaded-Assert Verified");
 		
 		logger.info("Upload POD");
  
@@ -197,6 +200,11 @@ public class POManagementPage {
 		
 		// click on Close button on the popup
 		ba.retryMechanism(driver, geclose_Btn());
+		
+		// Assertion for Receipt tab
+			String	status = ba.handleWebTable("//*[@role='table']/tbody/tr", indexID, 8, "getText");
+				Assert.assertEquals("Yes", status);
+				System.out.println("PO Receipted-Assert Verified");
  
 		logger.info("validate receipt");
 		logger.info("Scenario 2 completed");

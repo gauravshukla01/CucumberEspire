@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import pageObjects.AddCampaignItemPage;
 import pageObjects.AmazonHomePage;
+import pageObjects.Credit_InvoicePage;
 import pageObjects.DemoQATextBoxPage;
 import pageObjects.EditCampaignItemPage;
 import pageObjects.EproCampaignPage;
@@ -40,7 +41,7 @@ public class PageObjectManager {
 	SalesOrderPage salesOrderPage;
 	SubmitSupplierPricePage submitSupplierPricePage;
 	manualInvoicePage manualinvoicepg;
-
+	Credit_InvoicePage creditInvoicePg;
 
 
 	public PageObjectManager(WebDriver webDriver) {
@@ -143,6 +144,11 @@ public class PageObjectManager {
 public manualInvoicePage getmanualInvoicePage()
 {
 	return (manualinvoicepg == null) ? manualinvoicepg  = new manualInvoicePage(driver): manualinvoicepg;
+}
+
+public Credit_InvoicePage getCredit_InvoicePage() {
+	 
+	 return (creditInvoicePg == null) ?  creditInvoicePg   = new Credit_InvoicePage (driver) :  creditInvoicePg ;
 }
 
 

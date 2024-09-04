@@ -39,15 +39,15 @@ public class StepDef_Scenario2 {
 	public void On_Campaign_Item_Page_verify_Status_as_Quote_Accepted_and_user_will_send_and_the_create_po() throws InterruptedException {
 		eprohome.ClkCampaign();
 		eprocamppage.clickOnCampID("Quote Accepted");
-		eprocamppage.SendAndCreatePO();
+		eprocamppage.SendPO();
 		String indCampID = eprocamppage.getIndexValue();
 		testContext.Hmap.put("Index ID", indCampID);
  
 	}
  
 	@Then("Verify Status as PO Created after creating the PO on Campaign Item Page")
-	public void verify_status_as_po_created_after_creating_the_po_on_campaign_item_page() {
-		System.out.println("status verified as po created");  // do assertion and verify
+	public void verify_status_as_po_created_after_creating_the_po_on_campaign_item_page() throws InterruptedException {
+		eprocamppage.CreatePO();
 	}
  
 	@And("User will navigate to Finance page to create receipt")

@@ -100,3 +100,17 @@ Feature: Create a campaign
      Examples: 
       | Sheetname    | Rownum |
       | Epro_details |      4 |
+      
+      
+      @Scenario8
+  Scenario Outline: Validate user able to Credit Invoice
+    Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
+    And User go to Credit Invoice page and create a Credit Invoice
+    Then User will send the Final credit invoice
+    And User will post the credit invoice
+    Then User will download the posted credit invoice
+    
+
+    Examples: 
+      | Sheetname    | Rownum |
+      | Epro_details |      1 |
