@@ -2,21 +2,25 @@ package pageObjects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import CommmonUtils.BaseAction;
+import junit.framework.Assert;
 
 public class manualInvoicePage 
 {
 	private WebDriver driver;
 	private WebDriverWait wait;
 	EproCreateCampaignPage eprocreteCampPg;
+	JavascriptExecutor js;
 
 	private BaseAction ba;
 	
@@ -118,6 +122,67 @@ public class manualInvoicePage
 	
 	@FindBy(xpath="//button[span=' OK ']")
 	private WebElement clickOkButton;
+	
+	@FindBy (xpath="//span[contains (text(),' On-Hold Invoice')]")
+	private WebElement click_On_Hold_button; 
+	
+	@FindBy (xpath="//textarea[@id='invoicequery']")
+	private WebElement pass_text; 
+	
+	@FindBy (xpath="//span[contains (text(),' OK ')]")
+	private WebElement clickOk;
+	
+	@FindBy (xpath="//div[contains(text(),'OnHold-Manual Invoice')]")
+	private WebElement holdInvoiceTab;
+	
+	@FindBy (xpath="//span[contains (text(),' Release Invoice')]")
+	private WebElement click_release_button;
+	
+	@FindBy (xpath="//button[@style='float: right;']")
+	private WebElement ClkOKunderHoldTab;
+	
+	@FindBy (xpath="//div[contains(text(),'Posted Manual Invoices')]")
+	private WebElement Post_invoice_tab;
+	
+	@FindBy (xpath="//mat-select[@id='SalesRepresentativeId']")
+	private WebElement salesRepresentativeTextBox;
+	
+	public WebElement getsalesRepresentativeTextBox() {
+		return salesRepresentativeTextBox;
+	}
+	
+	public WebElement getPost_invoice_tab() {
+		return Post_invoice_tab;
+	}
+	
+	
+	public WebElement getholdInvoiceTab() {
+		return holdInvoiceTab;
+	}
+	
+	public WebElement getclick_release_button() {
+		return click_release_button;
+	}
+	public WebElement getClkOKunderHoldTab () {
+		return ClkOKunderHoldTab;
+	}
+	
+	public WebElement getclickOk() {
+		return clickOk;
+	}
+	 
+	public WebElement getpass_text() {
+		return pass_text;
+	}
+	
+	
+	public WebElement getclick_On_Hold_button() {
+		return click_On_Hold_button;
+	}
+	
+	
+	
+	
 	
 	public WebElement getfinance() {
 		return finance;
@@ -261,6 +326,7 @@ public WebElement getpostButton()
 		ba = new BaseAction(driver);
 		PageFactory.initElements(driver, this);
 		eprocreteCampPg = new EproCreateCampaignPage(driver);
+		js = (JavascriptExecutor) driver;
 
 	}
 	
@@ -299,7 +365,7 @@ public WebElement getpostButton()
 					ba.retryMechanism(driver, getcustomerEntities());
 					ba.retryMechanism(driver, eprocreteCampPg.getAdminClient());
 					
-					ba.retryMechanismWithSendKeys(driver, getdiscriptionBox(), "forTestDemo");	
+					ba.retryMechanismWithSendKeys(driver, getdiscriptionBox(), description);	
 
 					//wait.until(ExpectedConditions.elementToBeClickable(getdateofsupply())).click();
 					Thread.sleep(1000);
@@ -374,7 +440,7 @@ public WebElement getpostButton()
 }
 	
 	public void postFinalInvoice(String desc, int td) throws InterruptedException {
-    	JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(0, 0);");
     	 wait.until(ExpectedConditions.elementToBeClickable(getfinalManualInvoiceTab())).click();
     	 Thread.sleep(1000);
 		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).clear();
@@ -394,6 +460,103 @@ public WebElement getpostButton()
 		  
 		  wait.until(ExpectedConditions.elementToBeClickable(getclickOkButton())).click();
     }
+	
+	public void goToFinalInvoiceTab_And_DoOnHold (String desc, int td) throws InterruptedException {
+		
+	 wait.until(ExpectedConditions.elementToBeClickable(getfinalManualInvoiceTab())).click();
+   	 Thread.sleep(1000);
+		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).clear();
+		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).sendKeys(desc);
+		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).click();
+		  
+		  ba.handleWebTable("//*[@role='table']/tbody/tr", desc, td, "clickItem");
+		  ba.retryMechanism(driver, ManualInvoiceDetailArrow);
+		 
+			Thread.sleep(1000);
+		  js.executeScript("arguments[0].scrollIntoView(true);", getclick_On_Hold_button());
+		  Thread.sleep(1000);
+        ba.retryMechanism(driver, getclick_On_Hold_button());
+		  
+		
+		  Thread.sleep(1000);
+		  ba.retryMechanismWithSendKeys(driver, getpass_text(), "Not Applicable");
+		 
+		  ba.retryMechanism(driver, getclickOk());
+	}
+	
+	
+	public void gotToOnHoldInvoiceTab_And_DoRelease (String desc, int td) throws InterruptedException {
+		
+		
+		Thread.sleep(1000);
+		js.executeScript("window.scrollTo(0, 0);");
+		
+		Thread.sleep(2000);
+		 ba.retryMechanism(driver, getholdInvoiceTab());
+		 
+		 Thread.sleep(1000);
+		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).clear();
+		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).sendKeys(desc);
+		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).click();
+		  
+		  ba.handleWebTable("//*[@role='table']/tbody/tr", desc, td, "clickItem");
+		  ba.retryMechanism(driver, ManualInvoiceDetailArrow);
+		 
+			Thread.sleep(1000);
+		 
+		
+		 ba.retryMechanism(driver, getclick_release_button());
+		 
+		 Thread.sleep(2000);
+		
+		 ba.retryMechanismWithSendKeys(driver, getpass_text(), "Not Applicable");
+		 
+		
+		 ba.retryMechanism(driver, getClkOKunderHoldTab());
+		 
+		 Thread.sleep(6000);
+		
+		
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void gotToPostInvoiceTab_And_Validate_data (String desc, int td) throws InterruptedException {
+		
+		 Thread.sleep(6000);
+		 js.executeScript("window.scrollTo(0, 0);");
+		
+		
+		// js.executeScript("arguments[0].scrollIntoView();", Post_invoice_tab);
+		 ba.retryMechanism(driver, getPost_invoice_tab());
+		 
+		
+		 ba.handleWebTable("//*[@role='table']/tbody/tr", desc, td, "clickItem");
+		 
+		
+		 
+		 ba.retryMechanism(driver, ManualInvoiceDetailArrow);
+		String unitcost= getunitcost().getAttribute("value");
+		String description= gettableDescription().getAttribute("value");
+		String quantity= gettableQuantity().getAttribute("value");
+		String ponumber=(String) js.executeScript("return arguments[0].value;", getpoNumber());
+		
+		try {Assert.assertEquals(unitcost, "12.00000");
+		Assert.assertEquals(description, "For Demo");
+		Assert.assertEquals(quantity, "200");
+		Assert.assertEquals(ponumber, "PO2020202");
+		
+		System.out.println("Details are verified successfully");
+		logger.info("Details are verified successfully");
+		}
+		catch (AssertionError e) {	
+			e.printStackTrace();
+			System.out.println("Validation failed");
+			logger.info("Validation failed");
+		}
+		
+		
+	}
+	
 	
 }
 

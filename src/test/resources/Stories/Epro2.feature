@@ -85,3 +85,18 @@ Feature: Create a campaign
      Examples: 
       | Sheetname    | Rownum |
       | Epro_details |      4 |
+      
+      
+      @Scenario7
+  Scenario Outline: Validate On-Hold to Post Invoice Generation
+    Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
+    And Navigate to finance and click on create manual invoice
+    And Verify Send Final Invoice
+    And Do On-Hold Invoice under Final Invoice
+    And Do Release Invoice under On-Hold Invoice
+    And Do Post invoice under Final Invoice
+    Then Verify the details under the Post invoice Tab
+    
+     Examples: 
+      | Sheetname    | Rownum |
+      | Epro_details |      4 |
