@@ -34,7 +34,7 @@ public class AddCampaignItemPage {
 	private WebElement clickcheckbox;
 	@FindBy(xpath="//tbody/tr[2]/td[11]/button[1]/span[1]/img[1]")
 	private WebElement clickonaddsign;
-	@FindBy(xpath="//*[@class='mat-focus-indicator mat-raised-button mat-button-base mat-primary1']")//added 1
+	@FindBy(xpath="//*[@class='mat-focus-indicator mat-raised-button mat-button-base mat-primary']")
 	private WebElement clickOnYes;
 
 

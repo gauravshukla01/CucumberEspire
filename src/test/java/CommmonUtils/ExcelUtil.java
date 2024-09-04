@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class ExcelUtil {
 
-    private static final String FILE_PATH = "/FailedSteps.xlsx";
+    private static final String FILE_PATH = "./FailedSteps.xlsx";
 
     public static void logExceptionInExcel(String methodName, String exceptionMessage) {
         try (Workbook workbook = new XSSFWorkbook(); 
