@@ -9,17 +9,17 @@ import otherResources.TestContext;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-       //plugin = { "pretty", "html:target/cucumber-reports.html" },
+      
 		plugin = { "summary","pretty", "html:target/cucumber-reports.html",
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
 				"json:target/cucumber-reports"
 				},
-      // this needs to be localized
+     
 		features = "src\\test\\resources\\Stories"
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = true
-        ,tags = "@EproCampaignCreation2 and @Scenario1"
+        ,tags = "@EproCampaignCreation2 and @Scenario8"
 )
 
 public class TestRunner {

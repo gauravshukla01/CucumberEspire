@@ -394,12 +394,13 @@ public class Credit_InvoicePage {
 			  
 			  logger.info("posted Credit Invoice downloaded");
 			  
-			  //validate posted CR invoice data
-              js.executeScript("arguments[0].scrollIntoView(true);", getbottom()); 
-			  Thread.sleep(500);
+			  //validate posted CR invoice data	
 			  
 			  ba.handleWebTable("//*[@role='table']/tbody/tr", crInvoice, 1, "clickItem");
 			  
+			  Thread.sleep(500);
+              js.executeScript("arguments[0].scrollIntoView(true);", getbottom()); 
+              
 			  String unitcost= getunitcost().getAttribute("value");
 				String description= gettableDescription().getAttribute("value");
 				String quantity= gettableQuantity().getAttribute("value");

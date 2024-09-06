@@ -55,11 +55,10 @@ public class Hooks{
 		}
 	}
 
-	@After
-	public void teardown() {
-		driver.close();
-		logger.info("Scenario completed");
-	}
+	/*
+	 * @After public void teardown() { driver.close();
+	 * logger.info("Scenario completed"); }
+	 */
 
 }
 
