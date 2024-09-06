@@ -11,9 +11,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import CommmonUtils.BaseAction;
-import junit.framework.Assert;
+
 
 public class manualInvoicePage 
 {
@@ -147,8 +148,17 @@ public class manualInvoicePage
 	@FindBy (xpath="//mat-select[@id='SalesRepresentativeId']")
 	private WebElement salesRepresentativeTextBox;
 	
+	@FindBy(xpath = "//bread-crumb//li[3]/span")
+	private WebElement manualInvoiceNo;
+	
+	
+	
 	public WebElement getsalesRepresentativeTextBox() {
 		return salesRepresentativeTextBox;
+	}
+	
+	public WebElement getmanualInvoiceNo() {
+		return manualInvoiceNo;
 	}
 	
 	public WebElement getPost_invoice_tab() {
@@ -347,12 +357,10 @@ public WebElement getpostButton()
 
 	}
 	
-	public String manualInvoiceDetailsandClickAddLine() throws Throwable {
+	public void manualInvoiceDetailsandClickAddLine() throws Throwable {
 		// click on create icon
-		//String invoiceNum=ba.handleWebTable("//*[@role='table']/tbody/tr", desc, 1, "getText");
+			
 		
-		String description = "forTestDemo";
-				//  wait.until(ExpectedConditions.elementToBeClickable(getcreateIcon())).click();
 				  ba.retryMechanism(driver, getcreateIcon());
 				  
 				
@@ -365,7 +373,7 @@ public WebElement getpostButton()
 					ba.retryMechanism(driver, getcustomerEntities());
 					ba.retryMechanism(driver, eprocreteCampPg.getAdminClient());
 					
-					ba.retryMechanismWithSendKeys(driver, getdiscriptionBox(), description);	
+					ba.retryMechanismWithSendKeys(driver, getdiscriptionBox(), "for Demo test");	
 
 					//wait.until(ExpectedConditions.elementToBeClickable(getdateofsupply())).click();
 					Thread.sleep(1000);
@@ -378,16 +386,18 @@ public WebElement getpostButton()
 				    js.executeScript("arguments[0].scrollIntoView(true);", getbottom());
 					
 					ba.retryMechanism(driver, getaddLineTab());
-					return description;
 					
+					 logger.info("Final manual Invoice details added");
 					
 				
 			}
 	
-	public void createManualInvoice()
+	public String createManualInvoice() throws Throwable
 	{
+		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", getbottom());
+		Thread.sleep(1000);
 		wait.until(ExpectedConditions.elementToBeClickable(gettableDescription())).sendKeys("For Demo");
 		wait.until(ExpectedConditions.elementToBeClickable(gettableDescription())).click();
 		//ba.retryMechanism(driver,getdateofsupply());
@@ -414,16 +424,25 @@ public WebElement getpostButton()
 		
 		wait.until(ExpectedConditions.elementToBeClickable(getclsbutton())).click();
 		
+		String manualInvoiceNo = wait.until(ExpectedConditions.elementToBeClickable(getmanualInvoiceNo())).getText();
+		
+		 logger.info("Final manual Invoice created");
+		
+		return manualInvoiceNo;
+		
+			
 	}
-	public void sendFinalInvoice(String desc, int td) throws InterruptedException {
+	
+	
+	public void sendFinalInvoice(String manualInvoiceNo, int td) throws InterruptedException {
     	// search for invoice no which has same description
     	JavascriptExecutor js = (JavascriptExecutor) driver;
 		Thread.sleep(1000);
 		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).clear();
-		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).sendKeys(desc);
+		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).sendKeys(manualInvoiceNo);
 		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).click();
 		  
-		  ba.handleWebTable("//*[@role='table']/tbody/tr", desc, td, "clickItem");
+		  ba.handleWebTable("//*[@role='table']/tbody/tr", manualInvoiceNo, td, "clickItem");
 		  ba.retryMechanism(driver, ManualInvoiceDetailArrow);
 		  Thread.sleep(1000);
 		  js.executeScript("arguments[0].scrollIntoView(true);", getsendFinalInvoice());
@@ -433,21 +452,20 @@ public WebElement getpostButton()
 		
 		  js.executeScript("arguments[0].scrollIntoView(true);", getclickSend());
 		  wait.until(ExpectedConditions.elementToBeClickable(getclickSend())).click();
-		  //Thread.sleep(1000);
-		 // wait.until(ExpectedConditions.elementToBeClickable(getcheckBxEmail())).click();
-		 // wait.until(ExpectedConditions.elementToBeClickable(getsendinPopup())).click();
+		 
+		  logger.info("Final manual Invoice send");
 
 }
 	
-	public void postFinalInvoice(String desc, int td) throws InterruptedException {
+	public void postFinalInvoice(String manualInvoiceNo, int td) throws InterruptedException {
 		js.executeScript("window.scrollTo(0, 0);");
     	 wait.until(ExpectedConditions.elementToBeClickable(getfinalManualInvoiceTab())).click();
     	 Thread.sleep(1000);
 		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).clear();
-		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).sendKeys(desc);
+		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).sendKeys(manualInvoiceNo);
 		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).click();
 		  
-		  ba.handleWebTable("//*[@role='table']/tbody/tr", desc, td, "clickItem");
+		  ba.handleWebTable("//*[@role='table']/tbody/tr", manualInvoiceNo, td, "clickItem");
 		  ba.retryMechanism(driver, ManualInvoiceDetailArrow);
 		 
 			Thread.sleep(1000);
@@ -459,17 +477,19 @@ public WebElement getpostButton()
 		  Thread.sleep(1000);
 		  
 		  wait.until(ExpectedConditions.elementToBeClickable(getclickOkButton())).click();
+		  
+		  logger.info("Final manual Invoice Posted");
     }
 	
-	public void goToFinalInvoiceTab_And_DoOnHold (String desc, int td) throws InterruptedException {
+	public void goToFinalInvoiceTab_And_DoOnHold (String manualInvoiceNo, int td) throws InterruptedException {
 		
 	 wait.until(ExpectedConditions.elementToBeClickable(getfinalManualInvoiceTab())).click();
    	 Thread.sleep(1000);
 		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).clear();
-		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).sendKeys(desc);
+		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).sendKeys(manualInvoiceNo);
 		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).click();
 		  
-		  ba.handleWebTable("//*[@role='table']/tbody/tr", desc, td, "clickItem");
+		  ba.handleWebTable("//*[@role='table']/tbody/tr", manualInvoiceNo, td, "clickItem");
 		  ba.retryMechanism(driver, ManualInvoiceDetailArrow);
 		 
 			Thread.sleep(1000);
@@ -482,10 +502,12 @@ public WebElement getpostButton()
 		  ba.retryMechanismWithSendKeys(driver, getpass_text(), "Not Applicable");
 		 
 		  ba.retryMechanism(driver, getclickOk());
+		  
+		  logger.info("Final manual Invoice on-hold");
 	}
 	
 	
-	public void gotToOnHoldInvoiceTab_And_DoRelease (String desc, int td) throws InterruptedException {
+	public void gotToOnHoldInvoiceTab_And_DoRelease (String manualInvoiceNo, int td) throws InterruptedException {
 		
 		
 		Thread.sleep(1000);
@@ -496,10 +518,10 @@ public WebElement getpostButton()
 		 
 		 Thread.sleep(1000);
 		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).clear();
-		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).sendKeys(desc);
+		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).sendKeys(manualInvoiceNo);
 		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).click();
 		  
-		  ba.handleWebTable("//*[@role='table']/tbody/tr", desc, td, "clickItem");
+		  ba.handleWebTable("//*[@role='table']/tbody/tr", manualInvoiceNo, td, "clickItem");
 		  ba.retryMechanism(driver, ManualInvoiceDetailArrow);
 		 
 			Thread.sleep(1000);
@@ -514,15 +536,17 @@ public WebElement getpostButton()
 		
 		 ba.retryMechanism(driver, getClkOKunderHoldTab());
 		 
-		 Thread.sleep(6000);
+		 Thread.sleep(3000);
+		 
+		 logger.info("Final manual Invoice Released");
 		
 		
 	}
 	
 	@SuppressWarnings("deprecation")
-	public void gotToPostInvoiceTab_And_Validate_data (String desc, int td) throws InterruptedException {
+	public void gotToPostInvoiceTab_And_Validate_data (String manualInvoiceNo, int td) throws InterruptedException {
 		
-		 Thread.sleep(6000);
+		 Thread.sleep(3000);
 		 js.executeScript("window.scrollTo(0, 0);");
 		
 		
@@ -530,7 +554,7 @@ public WebElement getpostButton()
 		 ba.retryMechanism(driver, getPost_invoice_tab());
 		 
 		
-		 ba.handleWebTable("//*[@role='table']/tbody/tr", desc, td, "clickItem");
+		 ba.handleWebTable("//*[@role='table']/tbody/tr", manualInvoiceNo, td, "clickItem");
 		 
 		
 		 

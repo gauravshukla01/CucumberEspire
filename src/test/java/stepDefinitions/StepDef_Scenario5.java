@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import CommmonUtils.ExcelUtil;
 import TestResourceManager.WebDrivermanager;
 import io.cucumber.java.en.And;
 import otherResources.TestContext;
@@ -28,11 +29,23 @@ public class StepDef_Scenario5 {
 	
 	@And("On Campaign Item Page and search for Camp Number and User will Send and the create PO")
 	public void On_Campaign_Item_Page_and_search_for_Camp_Number_and_user_will_send_and_the_create_po() throws InterruptedException {
-		eprohome.ClkCampaign();
-		eprocamppage.clickOnCampID("123test");
-		eprocamppage.SendPO();
-		String indCampID = eprocamppage.getIndexValue();
-		testContext.Hmap.put("Index ID", indCampID);
+		
+		String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+		try {
+			eprohome.ClkCampaign();
+			eprocamppage.clickOnCampID("123test");
+			eprocamppage.SendPO();
+			String indCampID = eprocamppage.getIndexValue();
+			testContext.Hmap.put("Index ID", indCampID);
+		}
+		catch(Exception e) {
+			System.out.println("In Catch Block");
+			e.printStackTrace();
+			ExcelUtil.logExceptionInExcel(methodName, e.toString());
+			throw e;
+		}
+		
+		
  
 	}
 }

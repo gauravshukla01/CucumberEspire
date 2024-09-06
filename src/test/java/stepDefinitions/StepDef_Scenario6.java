@@ -31,10 +31,9 @@ public class StepDef_Scenario6
 	@Given("Navigate to finance and click on create manual invoice")
 	public void navigate_to_finance_and_click_on_create_manual_invoice() throws Throwable {
 	   manualinvoicepg.goToManualInvoicePage();
-	   String desc= manualinvoicepg.manualInvoiceDetailsandClickAddLine();
-	   testContext.Hmap.put("description", desc);
-		  manualinvoicepg.createManualInvoice();
-	   
+	    manualinvoicepg.manualInvoiceDetailsandClickAddLine();
+		String manualInvoiceNo =  manualinvoicepg.createManualInvoice();
+		  testContext.Hmap.put("InvoiceNo", manualInvoiceNo);
 	   
 	}
 
@@ -42,7 +41,7 @@ public class StepDef_Scenario6
 	public void send_final_invoice() throws InterruptedException 
 	{
 		 manualinvoicepg.goToManualInvoicePage();
-		 manualinvoicepg.sendFinalInvoice(testContext.Hmap.get("description"), 1);
+		 manualinvoicepg.sendFinalInvoice(testContext.Hmap.get("InvoiceNo"), 1);
 	   
 	}
 
@@ -50,7 +49,7 @@ public class StepDef_Scenario6
 	public void post_final_invoice_to_customer() throws InterruptedException 
 	{
 		manualinvoicepg.goToManualInvoicePage();
-		 manualinvoicepg.postFinalInvoice(testContext.Hmap.get("description"), 1);
+		 manualinvoicepg.postFinalInvoice(testContext.Hmap.get("InvoiceNo"), 1);
 	    
 	}
 

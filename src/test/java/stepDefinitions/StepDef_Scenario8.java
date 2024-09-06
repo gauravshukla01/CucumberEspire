@@ -18,6 +18,7 @@ public class StepDef_Scenario8 {
 	Credit_InvoicePage creditInvoicePg;
  
 	public StepDef_Scenario8(TestContext tstContext) {
+		
 		testContext = tstContext;
 		webdrivermanager = testContext.getWebDriverManager();
 		creditInvoicePg = testContext.getPageObjectManager().getCredit_InvoicePage();

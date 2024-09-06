@@ -1,13 +1,11 @@
 package testrunner;
 
-import org.junit.runner.RunWith;
-
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
 import otherResources.TestContext;
 
 
-@RunWith(Cucumber.class)
+
 @CucumberOptions(
       
 		plugin = { "summary","pretty", "html:target/cucumber-reports.html",
@@ -19,10 +17,10 @@ import otherResources.TestContext;
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = true
-        ,tags = "@EproCampaignCreation2 and @Scenario8"
+        ,tags = "@EproCampaignCreation2 and @Scenario6"
 )
 
-public class TestRunner {
+public class TestRunner extends AbstractTestNGCucumberTests {
 	
 	TestContext testcontext;
 	

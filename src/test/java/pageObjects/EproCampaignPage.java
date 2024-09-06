@@ -10,7 +10,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.junit.Assert;
+import org.testng.Assert;
+import org.testng.AssertJUnit;
 import CommmonUtils.BaseAction;
 
 public class EproCampaignPage {
@@ -168,7 +169,7 @@ public class EproCampaignPage {
 				
 				//Assert for PO Created
 			String	status=ba.handleWebTable("//*[@role='table']/tbody/tr", "PO Created", 7, "getText");
-				Assert.assertEquals("PO Created", status);
+				AssertJUnit.assertEquals("PO Created", status);
 				System.out.println("PO Successfully Created-Assert Verified");
 
 				 logger.info("Clicked on create PO");

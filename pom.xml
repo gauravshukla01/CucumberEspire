@@ -42,7 +42,8 @@
 							<!-- Points to the execution data file -->
 							<dataFile>${project.build.directory}/jacoco.exec</dataFile>
 							<!-- Output directory for the report -->
-							<outputDirectory>${project.build.directory}/my-reports</outputDirectory>
+							<outputDirectory>
+								${project.build.directory}/my-reports</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
@@ -68,28 +69,32 @@
 		</plugins>
 	</build>
 	<dependencies>
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-junit</artifactId>
-			<version>${cucumber.version}</version>
-			<scope>test</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
 			<version>${cucumber.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-picocontainer</artifactId>
 			<version>${cucumber.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.2</version>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>7.10.2</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-testng</artifactId>
+			<version>7.18.1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
@@ -144,6 +149,6 @@
 			<artifactId>log4j-api</artifactId>
 			<version>2.20.0</version>
 		</dependency>
-	
+
 	</dependencies>
 </project>
