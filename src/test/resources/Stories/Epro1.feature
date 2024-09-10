@@ -11,8 +11,7 @@ Feature: Create a campaign
     And Verify Has POD column status with green tick
     And User navigate to the Receipt Tab and click on required Checkbox
     Then Verify Receipted column status with green tick
- 
-    Examples:
-      | UserName      | Password        |
-      | Staginguser_2 | Password@123456   |
- 
+
+    Examples: 
+      | UserName      | Password     |
+      | Staginguser_5 | Paragon@2024 |

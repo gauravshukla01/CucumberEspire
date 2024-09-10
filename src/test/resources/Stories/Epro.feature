@@ -16,5 +16,4 @@ Feature: Create a campaign
 
     Examples: 
       | UserName      | Password     |
-      | Staginguser_2 | Password@123456 |
-
+      | Staginguser_5 | Paragon@2024 |

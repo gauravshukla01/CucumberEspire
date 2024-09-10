@@ -21,7 +21,7 @@ public class EproLoginPage {
 	public JavascriptExecutor js;
 	public BaseAction ba;
 
-	@FindBy(xpath = "//input[@id='userName']")
+	@FindBy(xpath = "//*[@id='userName']")
 	private WebElement clkUsername;
 	@FindBy(xpath = "//input[@id='password']")
 	private WebElement clkPassword;

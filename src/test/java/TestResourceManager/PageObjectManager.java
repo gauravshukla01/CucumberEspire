@@ -29,7 +29,7 @@ public class PageObjectManager {
 	EproHomePage eprohome;
 	EproCampaignPage eprocamp;
 	EproCreateCampaignPage eprocreatecamp;
-    AddCampaignItemPage addCampItemPAge;
+	AddCampaignItemPage addCampItemPAge;
 	EditCampaignItemPage editCampPage;
 	ManageCampaignPage manageCampPage;
 	ManagePricePage managePricePage;
@@ -133,10 +133,10 @@ public class PageObjectManager {
 
 	} 
 
- public EproCreateCampaignPage getEproCreateCampaignPage() {
-	 
-	 return (eprocreatecamp == null) ?  eprocreatecamp   = new EproCreateCampaignPage (driver) :  eprocreatecamp ;
- }
+	public EproCreateCampaignPage getEproCreateCampaignPage() {
+
+		return (eprocreatecamp == null) ?  eprocreatecamp   = new EproCreateCampaignPage (driver) :  eprocreatecamp ;
+	}
 
 
 
