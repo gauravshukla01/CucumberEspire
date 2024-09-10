@@ -17,7 +17,6 @@ Feature: Create a campaign
     Examples: 
       | Sheetname    | Rownum |
       | Epro_details |      0 |
-      
 
   @Scenario2
   Scenario Outline: Validate PO Generation and Receipt Creation
@@ -45,7 +44,7 @@ Feature: Create a campaign
 
     Examples: 
       | Sheetname    | Rownum |
-      | Epro_details |      2 |
+      | Epro_details |      1 |
 
   @Scenario4
   Scenario Outline: Validate download functionality
@@ -57,9 +56,8 @@ Feature: Create a campaign
     Examples: 
       | Sheetname    | Rownum |
       | Epro_details |      1 |
-      
-  
-    @Scenario5
+
+  @Scenario5
   Scenario Outline: Validate PO Generation and Receipt Creation
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And On Campaign Item Page and search for Camp Number and User will Send and the create PO
@@ -73,22 +71,20 @@ Feature: Create a campaign
     Examples: 
       | Sheetname    | Rownum |
       | Epro_details |      1 |
-  
-  
+
   @Scenario6
   Scenario Outline: Validate Manual Invoice Generation
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And Navigate to finance and click on create manual invoice
     And Send Final Invoice
     Then Post final invoice to customer
-    
-     Examples: 
+
+    Examples: 
       | Sheetname    | Rownum |
       | Epro_details |      4 |
-      
-      
-      @Scenario7
-  Scenario Outline: Validate On-Hold to Post Invoice Generation
+
+  @Scenario7
+  Scenario Outline: Validate Manual Inv On-Hold to Post
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And Navigate to finance and click on create manual invoice
     And Verify Send Final Invoice
@@ -96,20 +92,70 @@ Feature: Create a campaign
     And Do Release Invoice under On-Hold Invoice
     And Do Post invoice under Final Invoice
     Then Verify the details under the Post invoice Tab
-    
-     Examples: 
+
+    Examples: 
       | Sheetname    | Rownum |
       | Epro_details |      4 |
-      
-      
-      @Scenario8
+
+  @Scenario8
   Scenario Outline: Validate user able to Credit Invoice
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And User go to Credit Invoice page and create a Credit Invoice
     Then User will send the Final credit invoice
     And User will post the credit invoice
     Then User will download the posted credit invoice
-    
+
+    Examples: 
+      | Sheetname    | Rownum |
+      | Epro_details |      1 |
+
+  @Scenario9
+  Scenario Outline: Validate credit Inv On-Hold to Post
+    Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
+    And User go to Credit Invoice page and create a Credit Invoice
+    Then User will send the Final credit invoice
+    And Do On-Hold Invoice under Final Invoice for credit invoice
+    And Do Release Invoice under On-Hold Invoice for credit invoice
+    And Do Post invoice under Final Invoice for credit invoice
+    Then Verify the details under the Post invoice Tab for credit invoice
+
+    Examples: 
+      | Sheetname    | Rownum |
+      | Epro_details |      4 |
+
+  @Scenario10
+  Scenario Outline: Validate OnHold to Post Invoice
+    Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
+    And User get the Campaign id for PO Receipted and navigate to Sales Order page
+    Then User will Create Draft Invoice
+    And Click on Finance and navigate to Sales Invoice
+    And Click on resepctive Invoice number (Manage Invoice)
+    Then User will send Final Invoice to customer
+    And User will do On-Hold Invoice under Final Invoice
+    And User will Release Invoice under On-Hold Invoice
+    And User will do Post invoice under Final Invoice
+    Then User Verify the details under the Post invoice Tab
+
+    Examples: 
+      | Sheetname    | Rownum |
+      | Epro_details |      1 |
+
+  @Scenario11
+  Scenario Outline: Validate PO Generation and Receipt Creation
+    Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
+    And On Campaign Item Page verify Status as Quote Accepted and User will Send and the create PO
+    And Verify Status as PO Created after creating the PO on Campaign Item Page
+    And User will navigate to Finance page to create receipt
+    And User will upload POD document
+    And Verify Has POD column status with green tick
+    And User navigate to the Receipt Tab and click on required Checkbox for scenario11
+    And Verify Receipted column status with green tick
+    And Navigate to finance sales order page
+    And User click on Campaign number
+    And Select Campaign item number Checkbox and Click on Cancel Sales Order Lines
+    And Select the Cancellation Reason and Fill the Reason
+    And Click on Confirm
+    Then Verify the sales order cancellation Popup
 
     Examples: 
       | Sheetname    | Rownum |
