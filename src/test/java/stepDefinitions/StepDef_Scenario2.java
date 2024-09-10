@@ -39,8 +39,8 @@ public class StepDef_Scenario2 {
 	public void On_Campaign_Item_Page_verify_Status_as_Quote_Accepted_and_user_will_send_and_the_create_po() throws InterruptedException {
 		eprohome.ClkCampaign();
 		eprocamppage.clickOnCampID("Quote Accepted");
-		eprocamppage.SendPO();
 		String indCampID = eprocamppage.getIndexValue();
+		eprocamppage.SendPO();
 		testContext.Hmap.put("Index ID", indCampID);
  
 	}

@@ -176,7 +176,7 @@ public class EproCampaignPage {
 	}
 	
 	public String getIndexValue() throws InterruptedException {
-		String indcampaign_ID = ba.handleWebTable("//*[@role='table']/tbody/tr", "PO Created", 2, "getText");
+		String indcampaign_ID = ba.handleWebTable("//*[@role='table']/tbody/tr", "Quote Accepted", 2, "getText");
 		System.out.println("campaign_ID = " + indcampaign_ID);
 
 		return indcampaign_ID;
