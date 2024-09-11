@@ -51,7 +51,44 @@ public class SalesOrderPage {
 	private WebElement closeButton;
 
 	@FindBy(xpath = "//*[@role='table']/tbody/tr//div/input")
-	WebElement poNoBox;
+	private WebElement poNoBox;
+
+	@FindBy(xpath = "//mat-tab-body/div[1]/div[1]/app-sales-order-line-management[1]/div[1]/div[1]/button[2]/span[1]/img[1]")
+	private WebElement CancelSOLinesButton;
+
+	@FindBy(xpath = "//*[@id='SoCancelReason']")
+	private WebElement reasonForCancel;
+
+	@FindBy(xpath = "//*[contains(text(),' Cancel Sales Order not invoiced to Client')]")
+	private WebElement SelectreasonForCancel;
+
+	@FindBy(xpath = "//*[@id='cancelReasonText']")
+	private WebElement reasonCancelText;
+
+	@FindBy(xpath = "//*[text()=' Confirm ']")
+	private WebElement reasonCancelConfirmButton;
+
+
+
+	public WebElement getCancelSOLinesButton() {
+		return CancelSOLinesButton;
+	}
+
+	public WebElement getreasonForCancel() {
+		return reasonForCancel;
+	}
+
+	public WebElement getSelectreasonForCancel() {
+		return SelectreasonForCancel;
+	}
+
+	public WebElement getreasonCancelText() {
+		return reasonCancelText;
+	}
+
+	public WebElement getreasonCancelConfirmButton() {
+		return reasonCancelConfirmButton;
+	}
 
 	public WebElement getfinance() {
 		return finance;
@@ -128,7 +165,7 @@ public class SalesOrderPage {
 		wait.until(ExpectedConditions.elementToBeClickable(getsearch())).click();
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='" + status + "']"))).click();
-       
+
 		logger.info("Item Searched and clicked");
 	}
 
@@ -138,7 +175,7 @@ public class SalesOrderPage {
 		System.out.println("campaign_ID = " + campaign_ID);
 		logger.info("Item Searched and clicked");
 		return campaign_ID;
-			
+
 	}
 
 	public void clickOnCampID(String cmpId, int td) throws InterruptedException {
@@ -183,9 +220,9 @@ public class SalesOrderPage {
 
 		wait.until(ExpectedConditions.elementToBeClickable(poNoBox)).clear();
 		ba.retryMechanismWithSendKeys(driver, poNoBox, "PO1010101");
-		
+
 		logger.info("entered PO number");
-       
+
 		// click on check box
 
 		for (int i = 0; i < 3; i++) {
@@ -210,13 +247,62 @@ public class SalesOrderPage {
 		// click on close in pop-up
 		wait.until(ExpectedConditions.elementToBeClickable(getcloseButton()));
 		ba.retryMechanism(driver, getcloseButton());
-		
+
 		// Assertion for Receipt tab
 		status = ba.handleWebTable("//*[@role='table']/tbody/tr", campId.trim(), 19, "getText");
 		Assert.assertEquals("Draft Invoice", status);
 		System.out.println("Draft Invoice-Assert Verified");
-    
+
 
 	}
 
+	public void clickOnReceiptedCampaign (String UTno) throws InterruptedException {
+
+		wait.until(ExpectedConditions.elementToBeClickable(getsearch())).clear();
+		wait.until(ExpectedConditions.elementToBeClickable(getsearch())).click();
+		ba.retryMechanismWithSendKeys(driver, getsearch(), UTno);
+
+
+		ba.handleWebTable("//*[@role='table']/tbody/tr", "LEAD", 2, "clickItem");
+		Thread.sleep(2000);
+	}
+
+	public void clickOnCheckBoxToCancelSOLines (String utr) throws InterruptedException {
+
+		ba.handleWebTable("//*[@role='table']/tbody/tr", utr, 2, "clickItem");
+
+
+	}
+
+	public void SaleslineCancellationReason () {
+
+		ba.retryMechanism(driver, getCancelSOLinesButton());
+
+		ba.retryMechanism(driver, getreasonForCancel());
+
+		ba.retryMechanism(driver, getSelectreasonForCancel());
+
+		ba.retryMechanismWithSendKeys(driver, getreasonCancelText(), "Not Applicable");
+
+
+
+	}
+	public void SaleslineCancellationReasonConfirmation () {
+		ba.retryMechanism(driver, getreasonCancelConfirmButton());
+
+	}
+
+
+	public void VerifySOLineStatus (String UTnumber) throws InterruptedException {
+
+		try {
+		String soLineStatus = ba.handleWebTable("//*[@role='table']/tbody/tr", UTnumber, 19, "getText");
+		Assert.assertEquals(soLineStatus, "Cancelled Sales Order");
+		
+		System.out.println("SO Line successful cancellation validated successfully");
+		}
+		catch(Exception e) {
+		System.out.println("Validation fail");
+		}
+	}
 }

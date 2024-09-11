@@ -162,7 +162,7 @@ public class POManagementPage {
         
         //get the required row no
 		int rowNum1 = ba.getMatchRowNum("//*[@role='table']/tbody/tr", indexID, 2, "getRowNum");
-		
+		System.out.println("roenum ="+rowNum1 );
 		//click to upload the file
 		wait.until(ExpectedConditions.elementToBeClickable(getattach_user_guide(rowNum1))).click();
 		
@@ -210,8 +210,42 @@ public class POManagementPage {
 		logger.info("validate receipt");
 		logger.info("Scenario 2 completed");
 		// Scenario -2 completed
- 
+  
 	}
+	
+	
+	public String validateRecieptForCancelSOLine(String indexID) throws InterruptedException {
+		// click on Receipt tab
+		ba.retryMechanism(driver, getReceipt_Tab());
+ 
+		// select the checkbox on receipt tab
+		ba.handleWebTable("//*[@role='table']/tbody/tr", indexID, 2, "clickItem"); // hard coded value
+ 
+		// click the receipt action
+		
+		int rowNum = ba.getMatchRowNum("//*[@role='table']/tbody/tr", indexID, 2, "getRowNum");
+		
+		ba.retryMechanism(driver, getreceipt_Btn(rowNum));
+		 String UTNumber =ba.handleWebTable("//*[@role='table']/tbody/tr", "Yes", 3, "getText");
+		
+		// click on Close button on the popup
+		ba.retryMechanism(driver, geclose_Btn());
+		
+		// Assertion for Receipt tab
+			String	status = ba.handleWebTable("//*[@role='table']/tbody/tr", indexID, 8, "getText");
+				Assert.assertEquals("Yes", status);
+				System.out.println("PO Receipted-Assert Verified");
+ 
+		logger.info("validate receipt");
+		logger.info("Scenario 2 completed");
+		// Scenario -2 completed
+  return UTNumber;
+	}
+	
+	
+	
+	
+	
 	
 	public void downloadPDF(String status) throws InterruptedException {
 		
