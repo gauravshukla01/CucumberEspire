@@ -75,8 +75,10 @@ public class StepDef_Scenario3 {
 	}
 
 	@Then("User will send Final Invoice to customer")
-	public void user_will_send_final_invoice_to_customer() {
-		System.out.println("Scenario_3_completed");
+	public void user_will_send_final_invoice_to_customer() throws Throwable {
+		
+		salesInvoicePg.SendFinalInvoice();
+		//System.out.println("Scenario_3_completed");
 	}
 
 }
