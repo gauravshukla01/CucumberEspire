@@ -72,13 +72,13 @@ public class SalesInvoicePage {
 	@FindBy (xpath="//div[contains(text(),'Invoices Posted')]")
 	private WebElement invoicePostedTab;
 	
-	@FindBy (xpath="//*[@role='table']/tbody/tr/td[@class='mat-cell cdk-cell cdk-column-UnitCost mat-column-UnitCost ng-tns-c342-343 ng-star-inserted']/input")
+	@FindBy (xpath="//*[@role='table']/tbody/tr/td/input[contains(@name, 'unitval')]")
 	private WebElement unitCost;
 	
-	@FindBy (xpath="//*[@role='table']/tbody/tr/td[@class='mat-cell cdk-cell cdk-column-Quantity mat-column-Quantity ng-tns-c342-343 ng-star-inserted']/input")
+	@FindBy (xpath="//*[@role='table']/tbody/tr/td/input[contains(@name, 'quantityVal')]")
 	private WebElement tableQnty;
 	
-	@FindBy (xpath="//*[@role='table']/tbody/tr/td[@class='mat-cell cdk-cell cdk-column-PONumber mat-column-PONumber ng-tns-c342-343 ng-star-inserted']/div/div/input")
+	@FindBy (xpath="//*[@role='table']/tbody/tr/td/div/div/input[contains(@name, 'poNum')]")
 	private WebElement tablePONumber;
 	
 
@@ -292,12 +292,13 @@ public class SalesInvoicePage {
 			wait.until(ExpectedConditions.elementToBeClickable(salesorderpage.getsearch())).clear();
 			wait.until(ExpectedConditions.elementToBeClickable(salesorderpage.getsearch())).sendKeys(invoiceNo);
 		//	wait.until(ExpectedConditions.elementToBeClickable(salesorderpage.getsearch())).click();
+			Thread.sleep(500);
 		 ba.handleWebTable("//*[@role='table']/tbody/tr", invoiceNo, 2, "clickItem");
 		
 	}
 	
 	public void clickOn_OnHoldInvoice() throws Throwable {
-		Thread.sleep(1000);
+		
 		  js.executeScript("arguments[0].scrollIntoView(true);", manualinvoicePg.getclick_On_Hold_button());
 		  Thread.sleep(1000);
       ba.retryMechanism(driver, manualinvoicePg.getclick_On_Hold_button());
@@ -347,6 +348,7 @@ public void gotToOnHoldInvoiceTab_And_Release (String manualInvoiceNo, int td) t
 
 public void postFinalInvoice(String manualInvoiceNo, int td) throws InterruptedException {
 	js.executeScript("window.scrollTo(0, 0);");
+	 Thread.sleep(500);
 	 wait.until(ExpectedConditions.elementToBeClickable(getfinalInvoiceTab())).click();
 	 Thread.sleep(1000);
 	  wait.until(ExpectedConditions.elementToBeClickable(manualinvoicePg.getsearch())).clear();
@@ -355,7 +357,7 @@ public void postFinalInvoice(String manualInvoiceNo, int td) throws InterruptedE
 	  Thread.sleep(500);
 	  ba.handleWebTable("//*[@role='table']/tbody/tr", manualInvoiceNo, td, "clickItem");
 	 
-	  Thread.sleep(500);
+	  Thread.sleep(1000);
 	
 	  js.executeScript("arguments[0].scrollIntoView(true);", creditInvoicePg.getbottom());
 	  Thread.sleep(500);
@@ -383,12 +385,12 @@ public void gotToPostInvoiceTab_And_Validate_data (String manualInvoiceNo, int t
 
 
 	String unitcost= getunitCost().getAttribute("value");
-//	String description= manualinvoicePg.gettableDescription().getAttribute("value");
+
 	String quantity= gettableQnty().getAttribute("value");
 	String ponumber=(String) js.executeScript("return arguments[0].value;", gettablePONumber());
 	
 	try {Assert.assertEquals(unitcost, "12.00000");
-//	Assert.assertEquals(description, "For Demo");
+
 	Assert.assertEquals(quantity, "200");
 	Assert.assertEquals(ponumber, "PO2020202");
 	
