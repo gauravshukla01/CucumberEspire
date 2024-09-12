@@ -424,7 +424,9 @@ public WebElement getpostButton()
 		
 		wait.until(ExpectedConditions.elementToBeClickable(getclsbutton())).click();
 		
+		Thread.sleep(2000);
 		String manualInvoiceNo = wait.until(ExpectedConditions.elementToBeClickable(getmanualInvoiceNo())).getText();
+		System.out.println("Manual invoice number from create invoice page ="+manualInvoiceNo);
 		
 		 logger.info("Final manual Invoice created");
 		
@@ -439,6 +441,9 @@ public WebElement getpostButton()
     	JavascriptExecutor js = (JavascriptExecutor) driver;
 		Thread.sleep(1000);
 		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).clear();
+		  
+		  System.out.println("ManualInvoiceNumber  ="+manualInvoiceNo);
+		  
 		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).sendKeys(manualInvoiceNo);
 		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).click();
 		  

@@ -333,7 +333,8 @@ public class Credit_InvoicePage
 		// clear search
 		
 		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).clear();
-		  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).click();
+		//  wait.until(ExpectedConditions.elementToBeClickable(getsearch())).click();
+		  ba.retryMechanism(driver, getsearch());
 		 
 	}
 	

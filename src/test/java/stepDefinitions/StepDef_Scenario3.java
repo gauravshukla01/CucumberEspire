@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import CommmonUtils.ExcelUtil;
 import TestResourceManager.WebDrivermanager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -25,6 +26,7 @@ public class StepDef_Scenario3 {
 	WebDrivermanager webdrivermanager;
 	SalesOrderPage salesOrderPg;
 	SalesInvoicePage salesInvoicePg;
+	String methodName;
 
 	public StepDef_Scenario3(TestContext tstContext) {
 		testContext = tstContext;
@@ -36,6 +38,10 @@ public class StepDef_Scenario3 {
 	@Then("User get the Campaign id for PO Receipted and navigate to Sales Order page")
 	public void User_get_the_Campaign_id_for_PO_Receipted_and_navigate_to_Sales_Order_page()
 			throws InterruptedException {
+		
+		methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+		
+		try {
 		salesOrderPg.goToCampaingPg();
 		salesOrderPg.searchItem("PO Receipted");
 		String campId = salesOrderPg.getCampIdPOReciept("PO Receipted");
@@ -46,38 +52,76 @@ public class StepDef_Scenario3 {
 		salesOrderPg.goToSaleOrderPg();
 		salesOrderPg.searchItem(campId);
 		salesOrderPg.clickOnCampID(campId, 2);
-
+		}catch(Exception e) {
+			System.out.println("In Catch Block");
+			e.printStackTrace();
+			ExcelUtil.logExceptionInExcel(methodName, e.toString());
+			throw e;
+		}
 	}
 
 	@Then("User will Create Draft Invoice")
 	public void user_will_create_draft_invoice() throws InterruptedException {
 
-		salesOrderPg.createDraftInvoice(testContext.Hmap.get("index_campId"));
+		methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+		try {
+			salesOrderPg.createDraftInvoice(testContext.Hmap.get("index_campId"));
+		}catch(Exception e) {
+			System.out.println("In Catch Block");
+			e.printStackTrace();
+			ExcelUtil.logExceptionInExcel(methodName, e.toString());
+			throw e;
+		}
 	}
 
 	@And("Click on Finance and navigate to Sales Invoice")
 	public void click_on_finance_and_navigate_to_sales_invoice() throws InterruptedException {
-		salesOrderPg.goToCampaingPg();
+		
+		methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+		try { 
+			salesOrderPg.goToCampaingPg();
 		salesOrderPg.searchItem(testContext.Hmap.get("Camp_Id"));
 		salesOrderPg.clickOnCampID(testContext.Hmap.get("Camp_Id"), 1);
 		// salesInvoicePg.getCampIdDraftInvoiced("Draft Invoiced");
 		String pdfName = salesInvoicePg.getPDFPOname();
 		testContext.Hmap.put("PDF_Name", pdfName);
 		salesInvoicePg.goToSaleInvoicePg();
-
+		}catch(Exception e) {
+			System.out.println("In Catch Block");
+			e.printStackTrace();
+			ExcelUtil.logExceptionInExcel(methodName, e.toString());
+			throw e;
+		}
 	}
 
 	@And("Click on resepctive Invoice number \\(Manage Invoice)")
 	public void click_on_resepctive_invoice_number_manage_invoice() throws InterruptedException {
-		salesOrderPg.clickOnCampID(testContext.Hmap.get("Camp_Id"), 2);
+	
+		methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+		try{ 
+			salesOrderPg.clickOnCampID(testContext.Hmap.get("Camp_Id"), 2);
 		salesInvoicePg.clickOnInvoiceNo(testContext.Hmap.get("PDF_Name"));
 		salesInvoicePg.clickOnCheckboxs(testContext.Hmap.get("index_campId"));
+		}catch(Exception e) {
+			System.out.println("In Catch Block");
+			e.printStackTrace();
+			ExcelUtil.logExceptionInExcel(methodName, e.toString());
+			throw e;
+		}
 	}
 
 	@Then("User will send Final Invoice to customer")
 	public void user_will_send_final_invoice_to_customer() throws Throwable {
 		
-		salesInvoicePg.SendFinalInvoice();
+		methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+		try {
+			salesInvoicePg.SendFinalInvoice();
+		}catch(Exception e) {
+			System.out.println("In Catch Block");
+			e.printStackTrace();
+			ExcelUtil.logExceptionInExcel(methodName, e.toString());
+			throw e;
+		}
 		//System.out.println("Scenario_3_completed");
 	}
 

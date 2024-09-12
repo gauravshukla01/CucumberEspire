@@ -17,6 +17,7 @@ public class StepDef_Scenario5 {
 	QuoteManagementPage quoteManage;
 	WebDrivermanager webdrivermanager;
 	POManagementPage poManagementPage;
+	String methodName;
  
 	public StepDef_Scenario5(TestContext tstContext) {
 		testContext = tstContext;
@@ -30,7 +31,8 @@ public class StepDef_Scenario5 {
 	@And("On Campaign Item Page and search for Camp Number and User will Send and the create PO")
 	public void On_Campaign_Item_Page_and_search_for_Camp_Number_and_user_will_send_and_the_create_po() throws InterruptedException {
 		
-		String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+		
+	      methodName = new Object(){}.getClass().getEnclosingMethod().getName();
 		try {
 			eprohome.ClkCampaign();
 			eprocamppage.clickOnCampID("123test");

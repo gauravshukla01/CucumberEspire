@@ -1,8 +1,8 @@
 @EproCampaignCreation2
-Feature: Create a campaign
+Feature: Epro Functional Flow
 
   @Scenario1
-  Scenario Outline: Validate Create Campaign and Assign Supplier
+  Scenario Outline: Scenario 1: Validate Create Campaign and Assign Supplier
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And user navigate to Campaign page and create campaign
     And User add new Item in the Campaign using Create New Item button
@@ -17,9 +17,12 @@ Feature: Create a campaign
     Examples: 
       | Sheetname    | Rownum |
       | Epro_details |      0 |
+      | Epro_details |      0 |
+      | Epro_details |      0 |
+      
 
   @Scenario2
-  Scenario Outline: Validate PO Generation and Receipt Creation
+  Scenario Outline: Scenario 2: Validate PO Generation and Receipt Creation
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And On Campaign Item Page verify Status as Quote Accepted and User will Send and the create PO
     Then Verify Status as PO Created after creating the PO on Campaign Item Page
@@ -32,9 +35,10 @@ Feature: Create a campaign
     Examples: 
       | Sheetname    | Rownum |
       | Epro_details |      1 |
+      
 
   @Scenario3
-  Scenario Outline: Validate Draft and Final Invoice Generation
+  Scenario Outline: Scenario 3: Validate Draft and Final Invoice Generation
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And User get the Campaign id for PO Receipted and navigate to Sales Order page
     Then User will Create Draft Invoice
@@ -44,10 +48,10 @@ Feature: Create a campaign
 
     Examples: 
       | Sheetname    | Rownum |
-      | Epro_details |      1 |
+      | Epro_details |      2 |
 
   @Scenario4
-  Scenario Outline: Validate download functionality
+  Scenario Outline: Scenario 4: Validate download functionality
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And On Campaign Item Page verify Status as Quote Accepted and User will Send and the create PO
     And Verify Status as PO Created after creating the PO on Campaign Item Page
@@ -55,10 +59,10 @@ Feature: Create a campaign
 
     Examples: 
       | Sheetname    | Rownum |
-      | Epro_details |      1 |
+      | Epro_details |      3 |
 
   @Scenario5
-  Scenario Outline: Validate PO Generation and Receipt Creation
+  Scenario Outline: Scenario 5: Validate assertion to be failed
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And On Campaign Item Page and search for Camp Number and User will Send and the create PO
     Then Verify Status as PO Created after creating the PO on Campaign Item Page
@@ -70,10 +74,10 @@ Feature: Create a campaign
 
     Examples: 
       | Sheetname    | Rownum |
-      | Epro_details |      1 |
+      | Epro_details |      4 |
 
   @Scenario6
-  Scenario Outline: Validate Manual Invoice Generation
+  Scenario Outline: Scenario 6: Validate Manual Invoice Generation
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And Navigate to finance and click on create manual invoice
     And Send Final Invoice
@@ -81,10 +85,10 @@ Feature: Create a campaign
 
     Examples: 
       | Sheetname    | Rownum |
-      | Epro_details |      4 |
+      | Epro_details |      5 |
 
   @Scenario7
-  Scenario Outline: Validate Manual Inv On-Hold to Post
+  Scenario Outline: Scenario 7: Validate Manual Inv On-Hold to Post
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And Navigate to finance and click on create manual invoice
     And Verify Send Final Invoice
@@ -95,10 +99,10 @@ Feature: Create a campaign
 
     Examples: 
       | Sheetname    | Rownum |
-      | Epro_details |      4 |
+      | Epro_details |      6 |
 
   @Scenario8
-  Scenario Outline: Validate user able to Credit Invoice
+  Scenario Outline: Scenario 8: Validate user able to Credit Invoice
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And User go to Credit Invoice page and create a Credit Invoice
     Then User will send the Final credit invoice
@@ -107,10 +111,10 @@ Feature: Create a campaign
 
     Examples: 
       | Sheetname    | Rownum |
-      | Epro_details |      1 |
+      | Epro_details |      7 |
 
   @Scenario9
-  Scenario Outline: Validate credit Inv On-Hold to Post
+  Scenario Outline: Scenario 9: Validate credit Inv On-Hold to Post
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And User go to Credit Invoice page and create a Credit Invoice
     Then User will send the Final credit invoice
@@ -121,10 +125,10 @@ Feature: Create a campaign
 
     Examples: 
       | Sheetname    | Rownum |
-      | Epro_details |      4 |
+      | Epro_details |      8 |
 
   @Scenario10
-  Scenario Outline: Validate OnHold to Post Invoice
+  Scenario Outline: Scenario 10: Validate OnHold to Post Invoice
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And User get the Campaign id for PO Receipted and navigate to Sales Order page
     Then User will Create Draft Invoice
@@ -138,10 +142,10 @@ Feature: Create a campaign
 
     Examples: 
       | Sheetname    | Rownum |
-      | Epro_details |      1 |
+      | Epro_details |      9 |
 
   @Scenario11
-  Scenario Outline: Validate PO Generation and Receipt Creation
+  Scenario Outline: Scenario 11: SO Line Cancellation
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And On Campaign Item Page verify Status as Quote Accepted and User will Send and the create PO
     And Verify Status as PO Created after creating the PO on Campaign Item Page
@@ -159,4 +163,4 @@ Feature: Create a campaign
 
     Examples: 
       | Sheetname    | Rownum |
-      | Epro_details |      1 |
+      | Epro_details |     10 |

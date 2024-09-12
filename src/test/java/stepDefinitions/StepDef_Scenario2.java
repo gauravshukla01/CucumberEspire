@@ -1,5 +1,6 @@
 package stepDefinitions;
  
+import CommmonUtils.ExcelUtil;
 import TestResourceManager.WebDrivermanager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -24,6 +25,7 @@ public class StepDef_Scenario2 {
 	QuoteManagementPage quoteManage;
 	WebDrivermanager webdrivermanager;
 	POManagementPage poManagementPage;
+	String methodName;
  
 	public StepDef_Scenario2(TestContext tstContext) {
 		testContext = tstContext;
@@ -37,39 +39,87 @@ public class StepDef_Scenario2 {
  
 	@And("On Campaign Item Page verify Status as Quote Accepted and User will Send and the create PO")
 	public void On_Campaign_Item_Page_verify_Status_as_Quote_Accepted_and_user_will_send_and_the_create_po() throws InterruptedException {
+		
+		methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+		try {
 		eprohome.ClkCampaign();
 		eprocamppage.clickOnCampID("Quote Accepted");
 		String indCampID = eprocamppage.getIndexValue();
 		eprocamppage.SendPO();
 		testContext.Hmap.put("Index ID", indCampID);
- 
+		}
+		catch(Exception e) {
+			System.out.println("In Catch Block");
+			e.printStackTrace();
+			ExcelUtil.logExceptionInExcel(methodName, e.toString());
+			throw e;
+		}
 	}
  
 	@Then("Verify Status as PO Created after creating the PO on Campaign Item Page")
 	public void verify_status_as_po_created_after_creating_the_po_on_campaign_item_page() throws InterruptedException {
-		eprocamppage.CreatePO();
+		try {
+			eprocamppage.CreatePO(); }
+		catch(Exception e) {
+			System.out.println("In Catch Block");
+			e.printStackTrace();
+			ExcelUtil.logExceptionInExcel(methodName, e.toString());
+			throw e;
+		}
 	}
  
 	@And("User will navigate to Finance page to create receipt")
 	public void user_will_navigate_to_finance_page_to_create_receipt() throws InterruptedException {
-		poManagementPage.goToFinance();
+		try { 
+			poManagementPage.goToFinance(); }
+		catch(Exception e) {
+			System.out.println("In Catch Block");
+			e.printStackTrace();
+			ExcelUtil.logExceptionInExcel(methodName, e.toString());
+			throw e;
+		}
 	}
  
 	@Then("User will upload POD document")
 	public void user_will_upload_pod_document() throws InterruptedException {
  
-		poManagementPage.uploadPOD(testContext.Hmap.get("Index ID"));   //add underscore
+		try {
+			poManagementPage.uploadPOD(testContext.Hmap.get("Index ID")); }
+		catch(Exception e) {
+			System.out.println("In Catch Block");
+			e.printStackTrace();
+			ExcelUtil.logExceptionInExcel(methodName, e.toString());
+			throw e;
+		}//add underscore
+		}
 		//poManagementPage.download();
-	}
+	
  
 	@And("Verify Has POD column status with green tick")
 	public void verify_has_pod_column_status_with_green_tick() {
-		System.out.println("pod status verified, green tick enabled");  // need assertion
+		try { 
+			System.out.println("pod status verified, green tick enabled");  // need assertion
+		}catch(Exception e) {
+			System.out.println("In Catch Block");
+			e.printStackTrace();
+			ExcelUtil.logExceptionInExcel(methodName, e.toString());
+			throw e;
+		}
 	}
  
 	@And("User navigate to the Receipt Tab and click on required Checkbox")
 	public void user_navigate_to_the_receipt_tab_and_click_on_required_checkbox() throws InterruptedException {
-		poManagementPage.validateReciept(testContext.Hmap.get("Index ID"));
+		
+		try { 
+			poManagementPage.validateReciept(testContext.Hmap.get("Index ID"));
+		}catch(Exception e) {
+			System.out.println("In Catch Block");
+			e.printStackTrace();
+			ExcelUtil.logExceptionInExcel(methodName, e.toString());
+			throw e;
+		}
+           
+		
 	}
  
 	@Then("Verify Receipted column status with green tick")
