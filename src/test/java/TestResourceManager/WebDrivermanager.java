@@ -1,6 +1,5 @@
 package TestResourceManager;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
@@ -75,13 +74,13 @@ public class WebDrivermanager {
 		case CHROME : 
 			//			System.setProperty(CHROME_DRIVER_PROPERTY, FileReaderManager.getInstance().getConfigReader().getDriverPath());
 //						driver = new ChromeDriver();
-//			WebDriverManager.chromedriver().setup();
+			WebDriverManager.chromedriver().setup();
 			chromeOptions = new ChromeOptions();
-//			chromeOptions.addArguments("--remote-allow-origins=*");
+			chromeOptions.addArguments("--remote-allow-origins=*");
 //			            chromeOptions.addArguments("--headless");
 //			            chromeOptions.setHeadless(true);
-			driver = new ChromeDriver(chromeOptions);
-			driver = new RemoteWebDriver(new URL("http://192.168.1.4:4444"), chromeOptions);
+//			driver = new ChromeDriver(chromeOptions);
+//			driver = new RemoteWebDriver(new URL("http://192.168.1.4:4444"), chromeOptions);
 			configReader.getApplicationUrl();
 			
 			break;

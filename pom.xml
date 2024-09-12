@@ -32,6 +32,7 @@
 							<goal>test</goal>
 						</goals>
 						<configuration>
+							<argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
 							<includes>
 								<include>**/TestRunner.java</include>
 							</includes>
@@ -163,6 +164,13 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.17.2</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.10.1</version> 
+		</dependency>
+
 
 	</dependencies>
 </project>

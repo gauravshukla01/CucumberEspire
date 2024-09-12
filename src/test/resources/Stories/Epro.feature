@@ -1,7 +1,7 @@
 @EproCampaignCreation
 Feature: Create a campaign
 
-  @Scenario1
+  @Scenario1-EPA-1
   Scenario Outline: Validate Create Campaign and Assign Supplier
     Given User launches Epro url and login with valid <UserName> and <Password>
     And user navigate to Campaign page and create campaign

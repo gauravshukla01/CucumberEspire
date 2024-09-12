@@ -1,7 +1,7 @@
 @EproCampaignCreation
 Feature: Create a campaign
 
-  @Scenario2
+  @Scenario2-EPA-2
   Scenario Outline: Validate PO Generation and Receipt Creation
     Given User launches Epro url and login with valid <UserName> and <Password>
     And On Campaign Item Page verify Status as Quote Accepted and User will Send and the create PO

@@ -1,8 +1,12 @@
 package stepDefinitions;
 
+import java.util.Optional;
+
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
+import CommmonUtils.JiraClient;
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
@@ -40,18 +44,45 @@ public class Hooks{
 		}
 	}
 	
+
 	@After
-	public void teardown() {
+	public void teardown(Scenario scenario) {
 		
-		driver.quit();
+	    Optional<String> jiraIssueKey = scenario.getSourceTagNames()
+	            .stream()
+	            .filter(tag -> tag.matches(".*-EPA-\\d+"))  
+	            .map(tag -> tag.substring(tag.indexOf("EPA-"))) 
+	            .findFirst();
+
+	    if (jiraIssueKey.isPresent()) {
+	        String issueKey = jiraIssueKey.get();
+
+	        System.out.println("Extracted Issue Key: " + issueKey);
+
+	        if (scenario.isFailed()) {
+	           
+	            System.out.println("Scenario failed, updating Jira issue " + issueKey + " to In Progress (21).");
+	            
+	            JiraClient.updateJiraIssueStatus(issueKey, "21");
+	        } else {
+	           
+	            System.out.println("Scenario passed, updating Jira issue " + issueKey + " to Done (41).");
+	            
+	            JiraClient.updateJiraIssueStatus(issueKey, "41");
+	        }
+	    } else {
+	        System.out.println("No Jira issue key found for this scenario.");
+	    }
+	    
+	    driver.quit();
+	}
+
+
+
 	}
 	
 
-	
-}
 
 
-//  testContext.getWebDriverManager().closeDriver(); }
-//Sample comment
 
 
