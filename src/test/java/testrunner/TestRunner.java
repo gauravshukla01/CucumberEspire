@@ -1,5 +1,7 @@
 package testrunner;
 
+import org.testng.annotations.DataProvider;
+
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import otherResources.TestContext;
@@ -17,21 +19,19 @@ import otherResources.TestContext;
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = true
-        ,tags = "@EproCampaignCreation2 and @Scenario6"
+        ,tags = "@EproCampaignCreation2 and @Scenario1"
 )
 
-public class TestRunner extends AbstractTestNGCucumberTests {
+public class TestRunner extends AbstractTestNGCucumberTests
+{
 	
-	TestContext testcontext;
-	
-	public TestRunner() {
-			
-	}
-	
-
-
-	
+	 @Override
+	    @DataProvider(parallel = true)
+	    public Object[][] scenarios() {
+	        return super.scenarios();
 
 	}
+}
     //Sample comment  This comment is added in testrunner file. 
 //Sample comment  This comment is added in testrunner file. 
+	 
