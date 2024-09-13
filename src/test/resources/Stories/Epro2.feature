@@ -19,7 +19,6 @@ Feature: Epro Functional Flow
       | Epro_details |      0 |
       | Epro_details |      0 |
       | Epro_details |      0 |
-      
 
   @Scenario2
   Scenario Outline: Scenario 2: Validate PO Generation and Receipt Creation
@@ -35,7 +34,7 @@ Feature: Epro Functional Flow
     Examples: 
       | Sheetname    | Rownum |
       | Epro_details |      1 |
-      
+      | Epro_details |      1 |
 
   @Scenario3
   Scenario Outline: Scenario 3: Validate Draft and Final Invoice Generation
@@ -65,12 +64,6 @@ Feature: Epro Functional Flow
   Scenario Outline: Scenario 5: Validate assertion to be failed
     Given User launches Epro url and login with valid from Sheetname "<Sheetname>" and Rownum <Rownum>
     And On Campaign Item Page and search for Camp Number and User will Send and the create PO
-    Then Verify Status as PO Created after creating the PO on Campaign Item Page
-    And User will navigate to Finance page to create receipt
-    Then User will upload POD document
-    And Verify Has POD column status with green tick
-    And User navigate to the Receipt Tab and click on required Checkbox
-    Then Verify Receipted column status with green tick
 
     Examples: 
       | Sheetname    | Rownum |

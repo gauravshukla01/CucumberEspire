@@ -19,18 +19,18 @@ import otherResources.TestContext;
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = true
-        ,tags = "@EproCampaignCreation2 and @Scenario1"
+        ,tags = "@EproCampaignCreation2"
 )
 
 public class TestRunner extends AbstractTestNGCucumberTests
 {
-	
+	/*
 	 @Override
 	    @DataProvider(parallel = true)
 	    public Object[][] scenarios() {
 	        return super.scenarios();
 
-	}
+	}*/
 }
     //Sample comment  This comment is added in testrunner file. 
 //Sample comment  This comment is added in testrunner file. 

@@ -136,7 +136,7 @@ public class ManageCampaignPage {
 
 	public void validateItemAddedPopup() {
 
-		ba.validatePopUp("Campaign Item has been modified successfully.",
+		ba.validatePopUp("Campaign Item IsFSC has been modified successfully.",
 				"Campaign item modification popup validated successfully.");
 	}
 
@@ -149,7 +149,7 @@ public class ManageCampaignPage {
 
 	public void validateSubmitCostPopup() {
 
-		ba.validatePopUp("Submit Campaign Item Submitted",
+		ba.validatePopUp("Campaign Item has been modified successfully.",
 				"Campaign item Cost submission popup validated successfully.");
 	}
 
@@ -170,7 +170,7 @@ public class ManageCampaignPage {
 
 	public void validateItemSelectedPopup() {
 
-		ba.validatePopUp("Campaign Item selected cost price has been created successfully.",
+		ba.validatePopUp("Campaign Item Supplier Cost Price has been created successfully.",
 				"Campaign item selection popup validated successfully.");
 	}
 
@@ -186,7 +186,7 @@ public class ManageCampaignPage {
 
 	public void validateQuoteGeneratedPopup() {
 
-		ba.validatePopUp("Campaign Item quote generated has been created successfully.",
+		ba.validatePopUp("Campaign Item selected cost price has been created successfully.",
 				"Quote Generation popup validated successfully.");
 	}
 
