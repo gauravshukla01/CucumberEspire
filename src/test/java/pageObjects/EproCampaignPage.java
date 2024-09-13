@@ -80,7 +80,8 @@ public class EproCampaignPage {
 	public void clkAddCampaign() {
 
 		// click on add icon
-		wait.until(ExpectedConditions.elementToBeClickable(getaddIconButton())).click();
+	//	wait.until(ExpectedConditions.elementToBeClickable(getaddIconButton())).click();
+		ba.retryMechanism(driver, getaddIconButton());
 		logger.info("Clicked on add campaign");
 	}
 
@@ -92,7 +93,8 @@ public class EproCampaignPage {
 
 		wait.until(ExpectedConditions.elementToBeClickable(getSearch())).sendKeys(num);
 
-		wait.until(ExpectedConditions.elementToBeClickable(getSearch())).click();
+	//	wait.until(ExpectedConditions.elementToBeClickable(getSearch())).click();
+		ba.retryMechanism(driver, getSearch());
 		// click on Manage campaign
 		ba.retryMechanism(driver, getManageCAmp(num));
 
@@ -114,7 +116,7 @@ public class EproCampaignPage {
 		String	Assertstatus=ba.handleWebTable("//*[@role='table']/tbody/tr", status, 7, "getText");
 			System.out.println(Assertstatus);
 			//Assert.assertEquals(status, "PO Approved");
-			Assert.assertEquals(status, Assertstatus);
+			Assert.assertEquals(Assertstatus, status );
 			System.out.println("Quote Accepted Status Validated Successfully");
 	  
 		
