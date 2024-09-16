@@ -11,7 +11,7 @@ public class JiraClient {
 
     private static final String JIRA_URL = "https://nitinmore931.atlassian.net/rest/api/3/issue/";
     private static final String JIRA_USERNAME = "nitinmore931@gmail.com"; 
-    private static final String TOKEN = "need to add api token";
+    private static final String TOKEN = "ATATT3xFfGF0cDoHBtxh07q7BVk6Eg-CBMQHBJA5tbqXSPvNXGcl0Br9PvAwNBmnq2qJ_iZyivqUicDgtW1OzOBML7n8aFppC2z_EWHayNsECoR9eXDpsGMVUqJOC9ZbPNJifIzHJrQBaKdnfY33RtpZPJFm21uIrrPmULbPnPe5t4_OGbcnlrA=3A925583";
     private static final String AUTH = "Basic " + Base64.getEncoder().encodeToString((JIRA_USERNAME + ":" + TOKEN).getBytes());
 
     public synchronized static void updateJiraIssueStatus(String issueId, String newStatus) {
