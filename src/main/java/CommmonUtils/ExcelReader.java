@@ -1,4 +1,4 @@
-package otherResources;
+package CommmonUtils;
 
 import java.io.File;
 import java.io.IOException;

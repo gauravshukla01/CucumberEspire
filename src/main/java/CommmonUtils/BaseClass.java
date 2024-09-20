@@ -1,5 +1,6 @@
 package CommmonUtils;
 
+
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,16 +18,29 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-public class BaseAction {
+import TestResourceManager.WebDrivermanager;
 
-	private WebDriver driver;
-   public WebDriverWait wait;
-	public BaseAction(WebDriver driver) {
-		this.driver = driver;
-		// sample comment
-		this.wait = new WebDriverWait(driver,java.time.Duration.ofSeconds(20));
+
+
+public class BaseClass {
+
+    public static WebDriver driver;
+    private WebDriverWait wait;
+	
+    public BaseClass() {
+    
+		this.wait = new WebDriverWait(driver,java.time.Duration.ofSeconds(30));
 
 	}
+	
+    public void launchBrowser() throws Exception {
+    	
+    	driver= new WebDrivermanager().getDriver();
+    }
+    
+    public WebDriver getDriver() {
+    	return driver;
+    }
 
 	public boolean safeClick(By by, long timeout, long pollingInterval) {
 		try {
@@ -55,6 +69,7 @@ public class BaseAction {
 	}
 
 	public static void uploadFile(WebDriver driver, WebElement fileInputElement, String filePath) {
+		
 		if (fileInputElement != null && fileInputElement.isDisplayed() && fileInputElement.isEnabled()) {
 			fileInputElement.sendKeys(filePath);
 		} else {
@@ -63,77 +78,46 @@ public class BaseAction {
 
 	}
 
-	public void retryMechanism(WebDriver driver, WebElement ele) {
+	public void clickOnElement(WebDriver driver, WebElement ele) {
 
-		int maxAttempts = 4; // Maximum number of times you want to retry
-
-		int attempt = 1;
-		boolean elementClickable = false;
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		while (attempt <= maxAttempts) {
 			try {
-				WebElement element = wait.until(ExpectedConditions.elementToBeClickable(ele));
-				element.click(); // Click the element once it becomes clickable
-
-				elementClickable = true; // Set the flag to indicate it was clicked
-
-				break; // Break the loop since the action was successful
+				
+				wait.until(ExpectedConditions.visibilityOf(ele));
+				wait.until(ExpectedConditions.elementToBeClickable(ele));
+				ele.click();
 
 			} catch (Exception e) {
-				// Not clickable, maybe retry?
 
-				System.out.println("RETRY done " + attempt);
-				attempt++; // Increment the attempt count
 				e.printStackTrace();
 
 			}
 		}
 
-	}
+	public void sendKeys(WebDriver driver, WebElement ele, String keys) {
 
-	public void retryMechanismWithSendKeys(WebDriver driver, WebElement ele, String Key) {
+		try {
+			
+			wait.until(ExpectedConditions.visibilityOf(ele));
+			wait.until(ExpectedConditions.elementToBeClickable(ele));
+			ele.clear();
+			ele.sendKeys(keys);
 
-		int maxAttempts = 3; // Maximum number of times you want to retry
+		} catch (Exception e) {
 
-		int attempt = 1;
-		boolean elementClickable = false;
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		while (attempt <= maxAttempts) {
-			try {
-				WebElement element = wait.until(ExpectedConditions.elementToBeClickable(ele));
-				element.sendKeys(Key); // Click the element once it becomes clickable
+			e.printStackTrace();
 
-				elementClickable = true; // Set the flag to indicate it was clicked
-
-				break; // Break the loop since the action was successful
-
-			} catch (Exception e) {
-				// Not clickable, maybe retry?
-
-				System.out.println("RETRY done " + attempt);
-				attempt++; // Increment the attempt count
-
-			}
 		}
-
 	}
 
-	// method for table navigations amd text extraction
-	// input to this method is the xpath of the table till the tbody part
 	public String getTextFrmTableBody(String baseXpath, String searchItem, int colIndex) throws InterruptedException {
 		String finalText = null;
 
-		// two loops.. first one iterates the total number of rows and second iterates
-		// the cols within a specific row
 		List<WebElement> listEle = driver.findElements(By.xpath(baseXpath));
 
-		// get the number of cols
-		Thread.sleep(3000);
 		List<WebElement> listCols = driver.findElements(By.xpath("//*[@role='table']/thead/tr/th"));
 
-		// iterate the rows of the table
 
-		for (int i = 0; i < listEle.size(); i++) { // iterate the cols of the table
+		for (int i = 0; i < listEle.size(); i++) { 
 			for (int j = 1; j <= listCols.size(); j++) {
 				int k = i + 1;
 				WebElement test = listEle.get(i).findElement(By.xpath(baseXpath + "[" + k + "]" + "/td[" + j + "]"));
@@ -142,27 +126,26 @@ public class BaseAction {
 					WebElement targeEle = listEle.get(i)
 							.findElement(By.xpath(baseXpath + "[" + k + "]" + "/td[" + colIndex + "]"));
 					finalText = targeEle.getText();
-				} // end of if
+				} 
 
-			} // end of j loop
+			} 
 
-		} // end of for loop
+		} 
 
 		return finalText;
 	}
 
 	public String handleWebTable(String baseXpath, String searchItem, int colIndex, String actionRequired)
 			throws InterruptedException {
+		
 		String finalText = null;
 		WebElement test;
-		// two loops.. first one iterates the total number of rows and second iterates
-		// the cols within a specific row
+
 		List<WebElement> listEle = driver.findElements(By.xpath(baseXpath));
-		// get the number of cols
-		Thread.sleep(3000);
+
 		List<WebElement> listCols = driver.findElements(By.xpath("//*[@role='table']/thead/tr/th"));
-		// iterate the rows of the table
-		for (int i = 0; i < listEle.size(); i++) { // iterate the cols of the table
+
+		for (int i = 0; i < listEle.size(); i++) { 
 			for (int j = 1; j <= listCols.size(); j++) {
 				int k = i + 1;
 				try {
@@ -171,8 +154,6 @@ public class BaseAction {
 					e.printStackTrace();
 					break;
 				}
-				// WebElement test =
-				// listEle.get(i).findElement(By.xpath(baseXpath+"["+k+"]"+"/td["+j+"]"));
 
 				if (searchItem.equalsIgnoreCase(test.getText())) {
 					WebElement targeEle = listEle.get(i)
@@ -189,16 +170,17 @@ public class BaseAction {
 						return finalText;
 					}
 
-				} // end of if
-			} // end of j loop
+				} 
+			} 
 
-		} // end of for loop
+		} 
 
 		return finalText;
 	}
 
 	public int getMatchRowNum(String baseXpath, String searchItem, int colIndex, String actionRequired)
 			throws InterruptedException {
+		
 		int rowNum = 0;
 		WebElement test;
 		int retryCount = 0;
@@ -207,10 +189,8 @@ public class BaseAction {
 		while (retryCount < 3 && !elementFound) {
 			try {
 				List<WebElement> listEle = driver.findElements(By.xpath(baseXpath));
-				Thread.sleep(3000); // Consider replacing this with WebDriverWait for better synchronization
 				List<WebElement> listCols = driver.findElements(By.xpath("//*[@role='table']/thead/tr/th"));
 
-				// Iterate over rows
 				for (int i = 0; i < listEle.size(); i++) {
 					for (int j = 1; j <= listCols.size(); j++) {
 						int k = i + 1;
@@ -222,7 +202,7 @@ public class BaseAction {
 						}
 
 						if (searchItem.equalsIgnoreCase(test.getText().trim())) {
-							WebElement targetEle = listEle.get(i)
+							 listEle.get(i)
 									.findElement(By.xpath(baseXpath + "[" + k + "]/td[" + colIndex + "]"));
 
 							if (actionRequired.equalsIgnoreCase("getRowNum")) {
@@ -230,11 +210,11 @@ public class BaseAction {
 								elementFound = true;
 								return rowNum;
 							}
-						} // end of if
-					} // end of inner loop
-				} // end of outer loop
+						} 
+					} 
+				} 
 
-				elementFound = true; // Exit loop if no exceptions and iterations complete
+				elementFound = true;
 
 			} catch (StaleElementReferenceException e) {
 				retryCount++;
@@ -250,23 +230,19 @@ public class BaseAction {
 		return rowNum;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void validatePopUp (String PopUpText,String ValidationMessage) {
 
 		WebElement popup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".snackbar-text")));
 		String popupText = popup.getText();
-	//	System.out.println("Pop up text is = "+popupText);
 		try {
-			// this code needs to be fixed
 			Assert.assertEquals(PopUpText, popupText);       
 			System.out.println(ValidationMessage);
-		} catch (AssertionError e) {	
+		} 
+		catch (AssertionError e) {	
 			e.printStackTrace();
-			//System.out.println("validation fail");
 		}
 	
 
 }
-
 
 }

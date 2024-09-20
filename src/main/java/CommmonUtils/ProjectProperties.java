@@ -1,4 +1,4 @@
-package otherResources;
+package CommmonUtils;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

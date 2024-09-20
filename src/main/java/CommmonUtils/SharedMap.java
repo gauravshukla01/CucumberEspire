@@ -1,4 +1,4 @@
-package otherResources;
+package CommmonUtils;
 
 public class SharedMap {
 

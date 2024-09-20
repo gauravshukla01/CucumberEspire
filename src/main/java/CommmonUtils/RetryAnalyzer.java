@@ -1,4 +1,4 @@
-package otherResources;
+package CommmonUtils;
 
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
