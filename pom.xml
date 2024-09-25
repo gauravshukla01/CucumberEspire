@@ -56,15 +56,24 @@
 			</plugin>
 			<!-- Surefire Plugin -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.3.1</version>
-				<configuration>
-					<includes>
-						<include>TestRunner.java</include>
-					</includes>
-					<testFailureIgnore>true</testFailureIgnore>
-				</configuration>
+				 <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.3.1</version>
+            
+            <configuration>
+                <testFailureIgnore>true</testFailureIgnore>
+
+                <!-- Configure TestNG parallelism -->
+                <systemPropertyVariables>
+                    <dataproviderthreadcount>2</dataproviderthreadcount>
+                </systemPropertyVariables>
+
+                
+                <includes>
+                    <include>**/TestRunner</include>
+                </includes>
+               
+            </configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -82,12 +91,12 @@
 			<version>${cucumber.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>7.10.2</version>
-			<scope>test</scope>
-		</dependency>
+		 <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>7.7.0</version>
+        <scope>test</scope>
+    </dependency>
 		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
 		<dependency>
 			<groupId>io.cucumber</groupId>

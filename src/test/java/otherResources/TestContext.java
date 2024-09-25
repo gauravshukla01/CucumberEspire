@@ -1,5 +1,6 @@
 package otherResources;
 
+import java.net.MalformedURLException;
 import java.util.HashMap;
 
 import org.openqa.selenium.WebDriver;
@@ -18,7 +19,7 @@ public class TestContext {
 	WebDriver driver;
 	public HashMap<String,String> Hmap;
 
-	public TestContext(){
+	public TestContext() throws MalformedURLException{
 		webdrivermanager = new WebDrivermanager();
 		//driver = new ChromeDriver();
 		Hmap = new HashMap<String,String>();

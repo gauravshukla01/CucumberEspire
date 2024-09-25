@@ -1,5 +1,7 @@
 package stepDefinitions;
 
+import java.net.MalformedURLException;
+
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +21,7 @@ public class DemoQATextBoxStepDefinition {
 	private WebDriver driver;
 	 private BaseAction baseaction;
 
-	public DemoQATextBoxStepDefinition(TestContext tstContext){
+	public DemoQATextBoxStepDefinition(TestContext tstContext) throws MalformedURLException{
 		testContext = tstContext;
 		dqtbp = testContext.getPageObjectManager().getDemoQaTextBoxPage();
 		this.driver = testContext.getWebDriverManager().getDriver();

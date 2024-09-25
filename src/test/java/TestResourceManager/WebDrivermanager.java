@@ -1,5 +1,7 @@
 package TestResourceManager;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -10,6 +12,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import enums.DriverType;
 import enums.EnvironmentType;
@@ -33,12 +36,12 @@ public class WebDrivermanager {
 		configReader = FileReaderManager.getInstance().getConfigReader();
 	}
 
-	public WebDriver getDriver() {
+	public WebDriver getDriver() throws MalformedURLException {
 		if(driver == null) driver = createDriver();
 		return driver;
 	}
 
-	private WebDriver createDriver() {
+	private WebDriver createDriver() throws MalformedURLException {
 		switch (environmentType) {	    
 		case LOCAL : driver = createLocalDriver();
 		break;
@@ -48,8 +51,19 @@ public class WebDrivermanager {
 		return driver;
 	}
 
-	private WebDriver createRemoteDriver() {
-		throw new RuntimeException("RemoteWebDriver is not yet implemented");
+	private WebDriver createRemoteDriver() throws MalformedURLException {
+		  ChromeOptions options = new ChromeOptions();
+		    
+		    // Optional: Add arguments if needed
+		     options.addArguments("--headless"); // Uncomment if you need headless mode
+
+		    // Define the URL of the Selenium Grid hub
+		    URL hubUrl = new URL("http://localhost:4444/wd/hub");
+
+		    // Create a RemoteWebDriver instance pointing to the hub with ChromeOptions
+		    WebDriver driver = new RemoteWebDriver(hubUrl, options);
+
+		    return driver;
 	}
 
 	@SuppressWarnings("deprecation")

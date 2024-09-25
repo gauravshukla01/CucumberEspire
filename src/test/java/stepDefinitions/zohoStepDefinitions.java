@@ -1,5 +1,7 @@
 package stepDefinitions;
 
+import org.testng.Assert;
+
 import io.cucumber.java.en.*;
 import otherResources.TestContext;
 import pageObjects.ZohoSignInPage;
@@ -50,9 +52,10 @@ public class zohoStepDefinitions {
 	}
 
 	@When("User click on Sign in")
-	public void user_click_on_sign_in() {
+	public void user_click_on_sign_in() throws InterruptedException {
 	
 	  zsp.clickSignInButton();
+	  
 	  
 	  System.out.println("Clicking on Sign In Button");
 	}

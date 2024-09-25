@@ -2,6 +2,7 @@ package stepDefinitions;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -23,7 +24,7 @@ public class Hooks{
 	TestContext testContext;
 	WebDriver driver ;
 
-	public Hooks(TestContext tstContext) {
+	public Hooks(TestContext tstContext) throws MalformedURLException {
 		testContext = tstContext;
 		driver = testContext.getWebDriverManager().getDriver();
 
@@ -55,10 +56,10 @@ public class Hooks{
 		}
 	}
 
-	/*
-	 * @After public void teardown() { driver.close();
-	 * logger.info("Scenario completed"); }
-	 */
+	
+	  @After public void teardown() { driver.close();
+	  logger.info("Scenario completed"); }
+	 
 
 }
 
