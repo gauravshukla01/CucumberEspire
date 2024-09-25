@@ -1,74 +1,56 @@
 package pageObjects;
 
-import java.util.concurrent.TimeUnit;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import CommmonUtils.BaseClass;
 
-import CommmonUtils.BaseAction;
-import dev.failsafe.internal.util.Durations;
-import io.cucumber.messages.types.Duration;
+public class EproLoginPage extends BaseClass {
 
-public class EproLoginPage {
-
-	public WebDriver driver;
+	private WebDriver driver;
 	public WebDriverWait wait;
 	public JavascriptExecutor js;
-	public BaseAction ba;
+	private static final Logger logger = LogManager.getLogger(EproLoginPage.class);
 
-	private final By clkUsername = By.xpath("//input[@id='userName']");
-	private final By clkPassword = By.xpath("//input[@id='password']");
-	private final By clkSubmit = By.xpath("//button[@type='submit']");
+	@FindBy(xpath = "//input[@id='userName']")
+	private WebElement textBoxUserName;
+	@FindBy(xpath = "//input[@id='password']")
+	private WebElement textBoxPassword;
+	@FindBy(xpath = "//button[@type='submit']")
+	private WebElement buttonSubmit;
 
-	public EproLoginPage(WebDriver driver) {
-		this.driver = driver;
-		 this.wait = new WebDriverWait(driver,java.time.Duration.ofSeconds(20));
+	public EproLoginPage(WebDriver webdriver) {
+		this.driver=webdriver;
+		this.wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(20));
 		this.js = (JavascriptExecutor) driver;
-		ba = new BaseAction(driver);
-	}
-	
- 
-
-	public void launchurl(String url) {
-
-		driver.get(url);
-		driver.manage().window().maximize();
-
+		AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(driver, 10);
+		PageFactory.initElements(factory, this);
 	}
 
-	public void EnterUsernameAndPassword(String Username, String Password) {
-         
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		driver.findElement(clkUsername).sendKeys(Username);
-		driver.findElement(clkPassword).sendKeys(Password);
+	public void LoginIntoApplication(String Username, String Password) throws InterruptedException {
+
+		wait.until(ExpectedConditions.visibilityOf(textBoxUserName));
+		textBoxUserName.sendKeys(Username);
+		textBoxPassword.sendKeys(Password);
+		Thread.sleep(3000);
+		//clickOnElement(driver,buttonSubmit);
 
 	}
 
 	public void HandleCaptcha() throws InterruptedException {
 
-		Thread.sleep(3000);
 		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='reCAPTCHA']")));
 		driver.findElement(By.cssSelector(".recaptcha-checkbox-border")).click();
-
-		Thread.sleep(5000);
 		driver.switchTo().defaultContent();
-		Thread.sleep(2000);
 
 	}
-
-	@SuppressWarnings("deprecation")
-	public void Clksubmit() {
-	WebElement submit = driver.findElement(By.xpath("//button[@type='submit']"));
-	  ba.retryMechanism(driver, submit);
-	}
-
-
 
 }

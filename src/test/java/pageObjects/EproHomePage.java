@@ -1,56 +1,56 @@
-package pageObjects;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-public class EproHomePage {
-
-	public WebDriver driver;
-	public WebDriverWait wait;
-	public JavascriptExecutor js;
-
-	private final By element4 = By
-			.xpath("//*[@class='sideNavDropDown ng-star-inserted']//a[normalize-space()='Campaigns'][1]");
-
-	public EproHomePage(WebDriver driver) {
-		this.driver = driver;
-		this.js = (JavascriptExecutor) driver;
-		 this.wait = new WebDriverWait(driver,java.time.Duration.ofSeconds(20));
-	}
-
-	public void ClkCampaign() throws InterruptedException {
-
-		// step to click on campaign icon
-				// *[text()=' Campaigns']
-				// action class and move to element
-				Actions action = new Actions(driver);
-				
-				
-				
-				
-				// webelement for side nav
-				Thread.sleep(3000);
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='sideNav']"))).click();
-				// WebElement ele = driver.findElement(By.xpath("//*[@id='sideNav']"));
-				// action.moveToElement(ele);
-				// click on workflow icon
-				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Workflow ']"))).click();
-
-				WebElement campRetry = driver.findElement(By.xpath("//a[normalize-space()='Campaigns']"));
-				
-				while(campRetry.isDisplayed() != true) {
-					
-					wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()=' Workflow ']"))).click();
-				}
-			
-			   // click on campaign icon
-			   wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[normalize-space()='Campaigns']"))).click();
-
-	}
-
-}
+//package pageObjects;
+//
+//import org.apache.logging.log4j.LogManager;
+//import org.apache.logging.log4j.Logger;
+//import org.openqa.selenium.JavascriptExecutor;
+//import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.WebElement;
+//import org.openqa.selenium.support.FindBy;
+//import org.openqa.selenium.support.PageFactory;
+//import org.openqa.selenium.support.ui.WebDriverWait;
+//
+//import CommmonUtils.BaseClass;
+//
+//public class EproHomePage {
+//
+//	public WebDriver driver;
+//	public WebDriverWait wait;
+//	public JavascriptExecutor js;
+//	public BaseClass ba;
+//
+//	
+//	@FindBy(xpath = "//li/a/img[@src='assets/images/workflow.svg']")
+//	private WebElement workflow;
+//	@FindBy(xpath = "//a[normalize-space()='Campaigns']")
+//	private WebElement clkCampaign;
+//
+//	
+//	public WebElement getworkflow() {
+//		return workflow;
+//	}
+//
+//	public WebElement getclkCampaign() {
+//		return clkCampaign;
+//	}
+//
+//	public EproHomePage(WebDriver driver) {
+//		this.driver = driver;
+//		this.js = (JavascriptExecutor) driver;
+//		this.wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(20));
+//		ba = new BaseClass(driver);
+//		PageFactory.initElements(driver, this);
+//	}
+//
+//	  private static final Logger logger = LogManager.getLogger(EproHomePage.class);
+//	public void ClkCampaign() throws InterruptedException {
+//
+//		ba.retryMechanism(driver, getworkflow());
+//
+//		// click on campaign icon
+//
+//		ba.retryMechanism(driver, getclkCampaign());
+//		logger.info("Clicked on Campaign");
+//
+//	}
+//
+//}

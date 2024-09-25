@@ -1,25 +1,49 @@
 package testrunner;
 
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
-import org.junit.runner.RunWith;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+
+import CommmonUtils.BaseClass;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
 
 
-@RunWith(Cucumber.class)
+
 @CucumberOptions(
-       //plugin = { "pretty", "html:target/cucumber-reports.html" },
-		plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-      // this needs to be localized
-		features = "C:\\Users\\rahul\\Workspace3\\CucumberEspire\\src\\test\\resources\\Stories\\Epro.feature"
+      
+		plugin = { "summary","pretty", "html:target/cucumber-reports.html",
+				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
+				"json:target/cucumber-reports"
+				},
+     
+		features = "src\\test\\java\\features"
         ,glue={"stepDefinitions"}
         ,dryRun = false
-        ,monochrome = false
-        ,tags = "@Scenario2"
+        ,monochrome = true
+        ,tags = "@EproCampaignCreation2"
 )
 
-public class TestRunner {
+public class TestRunner extends AbstractTestNGCucumberTests
+{	
 	
-	// after giving a tag @Before we can add any logic that we wish to execute before test case execution// same as @After
+	@BeforeClass
+	public void launchBrowser() throws Exception {
+		
+		new BaseClass().launchBrowser();
+	}
+	
+	@AfterClass
+	public void closeBrowser() {
+		
+		BaseClass.driver.close();
+	}
+	/*
+	 @Override
+	    @DataProvider(parallel = true)
+	    public Object[][] scenarios() {
+	        return super.scenarios();
 
+	}*/
 }
-    //Sample comment  This comment is added in testrunner file. 
+
+	 
