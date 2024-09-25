@@ -10,6 +10,10 @@ sleep 10  # Replace with proper health checks if needed
 # Run the TestNG tests via Maven or Gradle
 # You can adjust these commands depending on your build tool
 # Maven
+echo "Clean solution..."
+mvn clean install -DskipTests
+echo "Build solution..."
+mvn package -DskipTests
 echo "Running tests with Maven..."
 mvn test -DsuiteXmlFile=CucumberEspire/testng.xml
 
