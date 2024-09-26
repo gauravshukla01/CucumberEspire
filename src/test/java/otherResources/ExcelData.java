@@ -24,7 +24,7 @@ public class ExcelData {
 
 		
 		  projectPath = System.getProperty("user.dir");
-		   filePath = projectPath + "\\src\\test\\resources\\Excel_Data\\Epro.xlsx";
+		   filePath = projectPath + "//src//test//resources//Excel_Data//Epro.xlsx";
 		    
 		List<Map<String,String>> testData = 
 				reader.getData(filePath,Sheetname);

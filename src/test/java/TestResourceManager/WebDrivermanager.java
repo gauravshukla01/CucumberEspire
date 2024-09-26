@@ -55,10 +55,11 @@ public class WebDrivermanager {
 		  ChromeOptions options = new ChromeOptions();
 		    
 		    // Optional: Add arguments if needed
-		     options.addArguments("--headless"); // Uncomment if you need headless mode
+		    // options.addArguments("--headless"); // Uncomment if you need headless mode
 
 		    // Define the URL of the Selenium Grid hub
 		    URL hubUrl = new URL("http://localhost:4444/wd/hub");
+		  //  URL hubUrl = new URL("http://selenium-hub:4444/wd/hub");  when running the test CI/CD
 
 		    // Create a RemoteWebDriver instance pointing to the hub with ChromeOptions
 		    WebDriver driver = new RemoteWebDriver(hubUrl, options);
@@ -85,7 +86,7 @@ public class WebDrivermanager {
 			chromeOptions.addArguments("--remote-allow-origins=*");
 			//            chromeOptions.addArguments("--headless");
 			String projectPath = System.getProperty("user.dir");
-			String downloadFilePath = projectPath+"\\src\\test\\resources\\Downloads";
+			String downloadFilePath = projectPath+"//src//test//resources//Downloads";
 			 Map<String, Object> prefs = new HashMap<>();
 		        prefs.put("download.default_directory", downloadFilePath); 
 		        prefs.put("download.prompt_for_download", false); 

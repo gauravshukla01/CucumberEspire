@@ -15,7 +15,7 @@ import otherResources.TestContext;
 				"json:target/cucumber-reports"
 		},
 
-		features = "src\\test\\resources\\Stories"
+		features = "src//test//resources//Stories"
 		,glue={"stepDefinitions"}
 		,dryRun = false
 				,monochrome = true

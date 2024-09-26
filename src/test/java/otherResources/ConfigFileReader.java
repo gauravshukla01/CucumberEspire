@@ -13,7 +13,7 @@ public class ConfigFileReader {
 
 	private Properties properties;
 	private final String propertyFilePath= System.getProperty("user.dir")+ System.getProperty("file.separator")
-	+"src\\test\\resources\\Configuration\\config.properties";
+	+"src//test//resources//Configuration//config.properties";
 	public ConfigFileReader(){
 		BufferedReader reader;
 		try {
