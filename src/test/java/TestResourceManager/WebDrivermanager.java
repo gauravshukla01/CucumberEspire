@@ -71,7 +71,7 @@ public class WebDrivermanager {
 			chromeOptions.addArguments("--remote-allow-origins=*");
 			//            chromeOptions.addArguments("--headless");
 			String projectPath = System.getProperty("user.dir");
-			String downloadFilePath = projectPath+"\\src\\test\\resources\\Downloads";
+			String downloadFilePath = projectPath+"//src//test//resources//Downloads";
 			 Map<String, Object> prefs = new HashMap<>();
 		        prefs.put("download.default_directory", downloadFilePath); 
 		        prefs.put("download.prompt_for_download", false); 
