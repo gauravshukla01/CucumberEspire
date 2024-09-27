@@ -69,7 +69,9 @@ public class WebDrivermanager {
 			WebDriverManager.chromedriver().setup();
 			chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("--remote-allow-origins=*");
-			//            chromeOptions.addArguments("--headless");
+			          chromeOptions.addArguments("--headless");
+				  chromeOptions.addArguments("--no-sandbox");
+	                          chromeOptions.addArguments("--disable-dev-shm-usage");
 			String projectPath = System.getProperty("user.dir");
 			String downloadFilePath = projectPath+"//src//test//resources//Downloads";
 			 Map<String, Object> prefs = new HashMap<>();
