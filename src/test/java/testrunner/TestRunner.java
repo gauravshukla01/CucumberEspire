@@ -19,7 +19,7 @@ import otherResources.TestContext;
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = true
-        ,tags = "@EproCampaignCreation2"
+        ,tags = "@EproCampaignCreation2 and @Scenario1"
         // work from local branch
 )
 
