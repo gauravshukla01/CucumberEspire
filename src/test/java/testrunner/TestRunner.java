@@ -20,6 +20,7 @@ import otherResources.TestContext;
         ,dryRun = false
         ,monochrome = true
         ,tags = "@EproCampaignCreation2"
+        // work from local branch
 )
 
 public class TestRunner extends AbstractTestNGCucumberTests
