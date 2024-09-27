@@ -55,7 +55,9 @@ public class WebDrivermanager {
 		  ChromeOptions options = new ChromeOptions();
 		    
 		    // Optional: Add arguments if needed
-		    // options.addArguments("--headless"); // Uncomment if you need headless mode
+		    options.addArguments("--headless"); // Uncomment if you need headless mode		
+	        options.addArguments("--no-sandbox");
+	        options.addArguments("--disable-dev-shm-usage");
 
 		    // Define the URL of the Selenium Grid hub
 		    URL hubUrl = new URL("http://localhost:4444/wd/hub");
