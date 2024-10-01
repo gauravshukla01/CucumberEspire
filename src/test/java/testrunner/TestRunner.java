@@ -20,7 +20,7 @@ import otherResources.TestContext;
         ,dryRun = false
         ,monochrome = true
         ,tags = "@EproCampaignCreation2 and @Scenario345"  // changes made 
-        // work from local branch
+        ,tags = "@EproCampaignCreation2"
 )
 
 public class TestRunner extends AbstractTestNGCucumberTests
