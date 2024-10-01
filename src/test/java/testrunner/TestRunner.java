@@ -19,8 +19,7 @@ import otherResources.TestContext;
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = true
-        ,tags = "@EproCampaignCreation2" //changes made in the tag name only
-        // work from local branch
+        ,tags = "@EproCampaignCreation2"
 )
 
 public class TestRunner extends AbstractTestNGCucumberTests
