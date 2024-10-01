@@ -19,7 +19,6 @@ import otherResources.TestContext;
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = true
-        ,tags = "@EproCampaignCreation2 and @Scenario345"  // changes made 
         ,tags = "@EproCampaignCreation2"
 )
 
