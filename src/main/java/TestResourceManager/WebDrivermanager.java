@@ -47,7 +47,7 @@ public class WebDrivermanager {
 						.addPreference("geo.prompt.testing", false)
 						.addPreference("geo.prompt.testing.allow", false);
 				
-				driver = new FirefoxDriver(firefoxOptions);
+				driver=new FirefoxDriver(firefoxOptions);
 				break;
 				
 			case CHROME : 
@@ -78,10 +78,8 @@ public class WebDrivermanager {
 				break;
 			}
 			
-			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-			driver.manage().window().maximize();		
-			//driver.get(appUrl);
-			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			((WebDriver) driver).manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+			((WebDriver) driver).manage().window().maximize();		
 			return driver;
 		}
 		return driver;

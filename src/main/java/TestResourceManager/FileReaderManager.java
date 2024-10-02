@@ -1,6 +1,6 @@
 package TestResourceManager;
 
-import CommmonUtils.ConfigFileReader;
+import commonUtils.ConfigFileReader;
 
 public class FileReaderManager {
 	
