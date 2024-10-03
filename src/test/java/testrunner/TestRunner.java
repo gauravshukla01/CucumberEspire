@@ -22,7 +22,7 @@ import io.cucumber.testng.CucumberOptions;
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = true
-        ,tags = "@Login"
+        ,tags = "@Login and @PositiveScanario"
 )
 
 public class TestRunner extends AbstractTestNGCucumberTests

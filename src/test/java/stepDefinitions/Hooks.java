@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeClass;
 
 import commonUtils.AzureClient;
 import commonUtils.BaseClass;
+import commonUtils.CsvReport;
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
@@ -46,6 +47,16 @@ public class Hooks{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@After
+	public void afterScenario(Scenario scenario) {
+	    // Get the test name and status
+	    String testName = scenario.getName();
+	    String status = scenario.isFailed() ? "FAIL" : "PASS";
+
+	    // Log to CSV Report
+	    CsvReport.logToCsv(testName, status);
 	}
 
 }
