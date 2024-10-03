@@ -12,7 +12,7 @@ public class zohoStepDefinitions {
 	
 	//Constructor
 
-	//Comments added
+
 
 	public zohoStepDefinitions(TestContext tstContext){
 		testContext = tstContext;
@@ -20,7 +20,7 @@ public class zohoStepDefinitions {
 	}
 
 	
-	// Browser Launch
+	
 
 	//Comments added
 
@@ -35,7 +35,7 @@ public class zohoStepDefinitions {
 
 	//user email id
 
-	//Comments added
+	
 
 	@When("User enter email {string}")
 	public void user_enter_email(String email) {
@@ -47,7 +47,7 @@ public class zohoStepDefinitions {
 	}
 
 
-	//Click on Next button
+	
 
 	//Comments added
 
@@ -63,7 +63,7 @@ public class zohoStepDefinitions {
 
 	//user Password
 
-	//Comments added
+
 
 	@When("User enter password {string}")
 	public void user_enter_password(String password) {
@@ -83,7 +83,7 @@ public class zohoStepDefinitions {
 	  System.out.println("Clicking on Sign In Button");
 	}
 
-	//Home Page
+	
 	@Then("User on Home Page")
 	public void user_on_home_page() {
 	
