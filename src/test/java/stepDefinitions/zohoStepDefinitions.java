@@ -9,11 +9,13 @@ public class zohoStepDefinitions {
 	TestContext testContext;
 	ZohoSignInPage zsp;
 	
+	//Constructor
 	public zohoStepDefinitions(TestContext tstContext){
 		testContext = tstContext;
 		zsp = testContext.getPageObjectManager().getZohoSignInPage();
 	}
 	
+	//Launch Browser
 	@Given("User launches url {string}")
 	public void user_launches(String url) throws InterruptedException {
 
@@ -22,6 +24,7 @@ public class zohoStepDefinitions {
 		System.out.println("Launch Zoho Sign in Page");
 
 	}
+	//Enter email id
 	@When("User enter email {string}")
 	public void user_enter_email(String email) {
 
@@ -31,6 +34,7 @@ public class zohoStepDefinitions {
 
 	}
 
+	//Click on Next
 	@When("User click on Next")
 	public void user_click_on_next() {
 	 
@@ -40,6 +44,7 @@ public class zohoStepDefinitions {
 	   
 	}
 
+	//Enter Password
 	@When("User enter password {string}")
 	public void user_enter_password(String password) {
 	    
@@ -49,6 +54,7 @@ public class zohoStepDefinitions {
 	    
 	}
 
+	//Click on Sign in
 	@When("User click on Sign in")
 	public void user_click_on_sign_in() {
 	
