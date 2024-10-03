@@ -84,19 +84,19 @@ public class ConfigFileReader {
 	}
 	
 	public String getAzurePeronalToken() {
-		String azurePersonalAccessToken = properties.getProperty("azureEndPointToCreateTask");
+		String azurePersonalAccessToken = properties.getProperty("azurePersonalAccessToken");
 		if(azurePersonalAccessToken != null) return azurePersonalAccessToken;
 		else throw new RuntimeException("Azure personal token not specified in the Configuration.properties file for the Key:azurePersonalAccessToken");	
 	}
 	
 	public String getAzureOrganizationName() {
-		String azureOrganozationName = properties.getProperty("azureEndPointToCreateTask");
+		String azureOrganozationName = properties.getProperty("azureOrganozationName");
 		if(azureOrganozationName != null) return azureOrganozationName;
 		else throw new RuntimeException("Azure organization name not specified in the Configuration.properties file for the Key:azureOrganozationName");	
 	}
 	
 	public String getAzureProjectName() {
-		String azureProjectName = properties.getProperty("azureEndPointToCreateTask");
+		String azureProjectName = properties.getProperty("azureProjectName");
 		if(azureProjectName != null) return azureProjectName;
 		else throw new RuntimeException("Azure project name not specified in the Configuration.properties file for the Key:azureProjectName");	
 	}
@@ -106,5 +106,12 @@ public class ConfigFileReader {
 		if(azureTestDefectsEpicId != null)
            return Long.parseLong(azureTestDefectsEpicId);
 	       throw new RuntimeException("Not able to parse value : " + azureTestDefectsEpicId + " in to Long");
+			}
+	
+	public String getAzureProjectId() {
+		String azureProjectId = properties.getProperty("azureProjectID");
+		if(azureProjectId != null)
+           return azureProjectId;
+	       throw new RuntimeException("Azure project ID not specified in the Configuration.properties file for the Key:azureProjectID");
 			}
 }

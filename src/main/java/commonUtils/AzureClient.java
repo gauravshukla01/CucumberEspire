@@ -33,7 +33,8 @@ public class AzureClient {
 	private static final String AZURE_PERSONAL_ACCESS_TOKEN = FileReaderManager.getInstance().getConfigReader().getAzurePeronalToken();
 	private static final String AZURE_ORGANIZATION_NAME = FileReaderManager.getInstance().getConfigReader().getAzureOrganizationName();
 	private static final String AZURE_PROJECT_NAME = FileReaderManager.getInstance().getConfigReader().getAzureProjectName();
-	private static final long AZURE_TEST_DEFECTS_EPIC_ID = FileReaderManager.getInstance().getConfigReader().getAzureTestDefectsEpicId();	
+	private static final long AZURE_TEST_DEFECTS_EPIC_ID = FileReaderManager.getInstance().getConfigReader().getAzureTestDefectsEpicId();
+	private static final String AZURE_PROJECT_ID = FileReaderManager.getInstance().getConfigReader().getAzureProjectId();	
 	private static final String BASE_URL = "https://dev.azure.com/"+AZURE_ORGANIZATION_NAME+"/"+AZURE_PROJECT_NAME+""; 
 	
 
@@ -54,7 +55,7 @@ public class AzureClient {
 	        String issueTitle = "Failed Scenario - " + scenario.getName();
 	        String dynamicDescription = "<div>Description- " + description + "<br></div>";
 
-	        String updatePackage = "[{\"id\":0,\"rev\":0,\"projectId\":\"512f25d3-07a7-4c2c-a8d9-19239c08f111\",\"isDirty\":true,\"tempId\":-3,\"fields\":{\"1\":\"" 
+	        String updatePackage = "[{\"id\":0,\"rev\":0,\"projectId\":\"e6c3f77c-7f48-4071-9b75-a3a33122027c\",\"isDirty\":true,\"tempId\":-3,\"fields\":{\"1\":\"" 
 	            + issueTitle + "\",\"2\":\"To Do\",\"9\":\"Rahul <rahul@espire.com>\",\"22\":\"Added to backlog\",\"25\":\"Issue\",\"33\":\"Rahul <rahul@espire.com>\",\"52\":\"" 
 	            + dynamicDescription + "\",\"49538556\":{\"type\":1},\"49538564\":2,\"-2\":2,\"-104\":2}}]";
 
@@ -75,7 +76,7 @@ public class AzureClient {
 
 	        JSONObject context = new JSONObject();
 	        context.put("properties", properties);
-	        context.put("project", new JSONObject().put("id", "512f25d3-07a7-4c2c-a8d9-19239c08f111").put("name", AZURE_PROJECT_NAME));
+	        context.put("project", new JSONObject().put("id", AZURE_PROJECT_ID).put("name", AZURE_PROJECT_NAME));
 
 	        JSONObject jsonBody = new JSONObject();
 	        jsonBody.put("contributionIds", new JSONArray().put("ms.vss-work-web.update-work-items-data-provider"));
