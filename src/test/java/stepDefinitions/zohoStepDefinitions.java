@@ -15,7 +15,7 @@ public class zohoStepDefinitions {
 		zsp = testContext.getPageObjectManager().getZohoSignInPage();
 	}
 	
-	//Launch Browser
+	// Browser Launch
 	@Given("User launches url {string}")
 	public void user_launches(String url) throws InterruptedException {
 
@@ -24,7 +24,7 @@ public class zohoStepDefinitions {
 		System.out.println("Launch Zoho Sign in Page");
 
 	}
-	//Enter email id
+	//user email id
 	@When("User enter email {string}")
 	public void user_enter_email(String email) {
 
@@ -34,7 +34,7 @@ public class zohoStepDefinitions {
 
 	}
 
-	//Click on Next
+	//Click on Next button
 	@When("User click on Next")
 	public void user_click_on_next() {
 	 
@@ -44,7 +44,7 @@ public class zohoStepDefinitions {
 	   
 	}
 
-	//Enter Password
+	//user Password
 	@When("User enter password {string}")
 	public void user_enter_password(String password) {
 	    
@@ -54,7 +54,7 @@ public class zohoStepDefinitions {
 	    
 	}
 
-	//Click on Sign in
+	//Click on Sign in button
 	@When("User click on Sign in")
 	public void user_click_on_sign_in() {
 	
@@ -63,6 +63,7 @@ public class zohoStepDefinitions {
 	  System.out.println("Clicking on Sign In Button");
 	}
 
+	//Home Page
 	@Then("User on Home Page")
 	public void user_on_home_page() {
 	
