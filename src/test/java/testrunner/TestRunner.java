@@ -19,8 +19,14 @@ import otherResources.TestContext;
         ,glue={"stepDefinitions"}
         ,dryRun = false
         ,monochrome = true
-        ,tags = "@EproCampaignCreation2 and @Scenario12" //changes made in the tag name only
+
+        ,tags = "@EproCampaignCreation2 and @Scenario1 and @Scenario3" //changes made in the tag name only
+
+       // ,tags = "@EproCampaignCreation2 and @Scenario12" //changes made in the tag name only
+
         // work from local branch
+        //Scenario 3 added
+       // comments are added for testing purpose
 )
 
 public class TestRunner extends AbstractTestNGCucumberTests
