@@ -3,17 +3,17 @@ package stepDefinitions;
 import io.cucumber.java.en.*;
 import otherResources.TestContext;
 import pageObjects.ZohoSignInPage;
-//Comments added
+
 public class zohoStepDefinitions {
 
 	TestContext testContext;
 	ZohoSignInPage zsp;
-	
+	//Comments added
 	public zohoStepDefinitions(TestContext tstContext){
 		testContext = tstContext;
 		zsp = testContext.getPageObjectManager().getZohoSignInPage();
 	}
-	
+	//Comments added
 	@Given("User launches url {string}")
 	public void user_launches(String url) throws InterruptedException {
 
@@ -22,6 +22,7 @@ public class zohoStepDefinitions {
 		System.out.println("Launch Zoho Sign in Page");
 
 	}
+	//Comments added
 	@When("User enter email {string}")
 	public void user_enter_email(String email) {
 
@@ -30,7 +31,7 @@ public class zohoStepDefinitions {
 		System.out.println("Entering the Email in Email Field");
 
 	}
-
+	//Comments added
 	@When("User click on Next")
 	public void user_click_on_next() {
 	 
@@ -40,6 +41,7 @@ public class zohoStepDefinitions {
 	   
 	}
 
+	//Comments added
 	@When("User enter password {string}")
 	public void user_enter_password(String password) {
 	    
