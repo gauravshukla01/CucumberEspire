@@ -24,7 +24,7 @@ import io.cucumber.testng.CucumberOptions;
 					"json:target1/cucumber-reports"
 					},
 			features = "@target/failed.txt"
-	        ,glue={"stepDefinitions"}
+	        ,glue={"stepDefinitions","commonUtils"}
 	        ,dryRun = false
 	        ,monochrome = true
 	)
@@ -60,15 +60,5 @@ public class TestRunnerFailed extends AbstractTestNGCucumberTests {
 //	    public Object[][] scenarios() {
 //	        return super.scenarios();
 	
-//	@AfterTest
-//	public void createDefectWhenTestFail(Scenario scenario) throws IOException {
-//		
-//		if(scenario.isFailed()) {
-//			
-//			BaseClass.saveScreenshotToFile(scenario);
-//			AzureClient.createDefectInAzureDevOps("Test case failed",scenario);
-//			
-//		}
-//	}
 
 }

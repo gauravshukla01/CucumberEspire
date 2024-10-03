@@ -54,8 +54,6 @@ public class LoginToFreeCRMApplication {
 		
 		System.out.println(driver);
 		
-		System.out.println("Driver before navigating to application:" + driver);
-		
 		driver.get(appUrl);
 		
 		logger.info("Launched application");
@@ -64,9 +62,7 @@ public class LoginToFreeCRMApplication {
 	
 	@When("^title of login page is Free CRM$")
 	public void title_of_login_page_is_free_CRM()
-	{
-		System.out.println("Driver before checking application title:" + driver);
-		
+	{		
 		String title=loginPage.getPageTitle();
 
 		Assert.assertEquals(title,"Cogmento CRM","Application page title is not correct");
@@ -96,32 +92,32 @@ public class LoginToFreeCRMApplication {
 		Assert.assertTrue(loginPage.isUserNameTextBoxDisplayed(),"Application not logged out");
 	}
 	
-	@AfterStep 
-	public void takeScreenshot(Scenario scenario) {
-		
-		try {
-			if (driver != null) {
-				final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-				scenario.attach(screenshot, "image/png", "image");
-				String stepname = scenario.getName();
-				logger.info("Screenshot captured :"+ stepname);
-
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@AfterStep
-	public void createDefectWhenTestFail(Scenario scenario) throws IOException {
-		
-		if(scenario.isFailed()) {
-			
-			BaseClass.saveScreenshotToFile(scenario);
-			AzureClient.createDefectInAzureDevOps("Test case failed",scenario);
-			
-		}
-	}
+//	@AfterStep 
+//	public void takeScreenshot(Scenario scenario) {
+//		
+//		try {
+//			if (driver != null) {
+//				final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//				scenario.attach(screenshot, "image/png", "image");
+//				String stepname = scenario.getName();
+//				logger.info("Screenshot captured :"+ stepname);
+//
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	@AfterStep
+//	public void createDefectWhenTestFail(Scenario scenario) throws IOException {
+//		
+//		if(scenario.isFailed()) {
+//			
+//			BaseClass.saveScreenshotToFile(scenario);
+//			AzureClient.createDefectInAzureDevOps("Test case failed",scenario);
+//			
+//		}
+//	}
 
 
 

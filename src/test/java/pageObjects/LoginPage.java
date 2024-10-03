@@ -31,13 +31,9 @@ public class LoginPage extends BaseClass {
 	}
 	
 	public String getPageTitle() {
-		
-		System.out.println("Driver after navigating to application:" + driver);
-		
+				
 		waitInSec(2);
-		System.out.println("Failure first step");
 		String pageTitle=driver.getTitle();
-		System.out.println("Pass first step");
 		return pageTitle;
 	}
 	
