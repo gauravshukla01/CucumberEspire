@@ -24,17 +24,25 @@ import org.apache.http.HttpHeaders;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.azure.identity.DefaultAzureCredentialBuilder;
+import com.azure.security.keyvault.secrets.SecretClient;
+import com.azure.security.keyvault.secrets.SecretClientBuilder;
+
 import TestResourceManager.FileReaderManager;
 import io.cucumber.java.Scenario;
 
 public class AzureClient {
 	
 	private static final String AZURE_API_ENDPOINT_TO_CREATE_TASK = FileReaderManager.getInstance().getConfigReader().getAzureEndPointToCreateTask();
-	private static final String AZURE_PERSONAL_ACCESS_TOKEN = FileReaderManager.getInstance().getConfigReader().getAzurePeronalToken();
+	private static final String AZURE_KEY_VAULT_URL = FileReaderManager.getInstance().getConfigReader().getAzureKeyVaultUrl();
+	private static final String AZURE_KEY_NAME = FileReaderManager.getInstance().getConfigReader().getAzureKeyName();
+	private static final String AZURE_PERSONAL_ACCESS_TOKEN = getAzurePAT(AZURE_KEY_VAULT_URL,AZURE_KEY_NAME);
+	//private static final String AZURE_PERSONAL_ACCESS_TOKEN = FileReaderManager.getInstance().getConfigReader().getAzurePeronalToken();
 	private static final String AZURE_ORGANIZATION_NAME = FileReaderManager.getInstance().getConfigReader().getAzureOrganizationName();
 	private static final String AZURE_PROJECT_NAME = FileReaderManager.getInstance().getConfigReader().getAzureProjectName();
 	private static final long AZURE_TEST_DEFECTS_EPIC_ID = FileReaderManager.getInstance().getConfigReader().getAzureTestDefectsEpicId();
-	private static final String AZURE_PROJECT_ID = FileReaderManager.getInstance().getConfigReader().getAzureProjectId();	
+	private static final String AZURE_PROJECT_ID = FileReaderManager.getInstance().getConfigReader().getAzureProjectId();
+	private static final String AZURE_SESSION_ID = FileReaderManager.getInstance().getConfigReader().getAzureSessionId();
 	private static final String BASE_URL = "https://dev.azure.com/"+AZURE_ORGANIZATION_NAME+"/"+AZURE_PROJECT_NAME+""; 
 	
 
@@ -55,9 +63,16 @@ public class AzureClient {
 	        String issueTitle = "Failed Scenario - " + scenario.getName();
 	        String dynamicDescription = "<div>Description- " + description + "<br></div>";
 
-	        String updatePackage = "[{\"id\":0,\"rev\":0,\"projectId\":\"e6c3f77c-7f48-4071-9b75-a3a33122027c\",\"isDirty\":true,\"tempId\":-3,\"fields\":{\"1\":\"" 
-	            + issueTitle + "\",\"2\":\"To Do\",\"9\":\"Rahul <rahul@espire.com>\",\"22\":\"Added to backlog\",\"25\":\"Issue\",\"33\":\"Rahul <rahul@espire.com>\",\"52\":\"" 
-	            + dynamicDescription + "\",\"49538556\":{\"type\":1},\"49538564\":2,\"-2\":2,\"-104\":2}}]";
+//	        String updatePackage = "[{\"id\":0,\"rev\":0,\"projectId\":\"e6c3f77c-7f48-4071-9b75-a3a33122027c\",\"isDirty\":true,\"tempId\":-3,\"fields\":{\"1\":\"" 
+//	            + issueTitle + "\",\"2\":\"To Do\",\"9\":\"TS <rahul@espire.com>\",\"22\":\"Added to backlog\",\"25\":\"Issue\",\"33\":\"Rahul <rahul@espire.com>\",\"52\":\"" 
+//	            + dynamicDescription + "\",\"49538556\":{\"type\":1},\"49538564\":2,\"-2\":2,\"-104\":2}}]";
+	        
+	        String updatePackage = "[{\"id\":0,\"rev\":0,\"projectId\":\""
+	        		+ AZURE_PROJECT_ID+"\",\"isDirty\":true,\"tempId\":-1,\"fields\":{\"1\":\""
+	        		+ issueTitle +"\",\"2\":\"To Do\",\"9\":\"TS Avinash <Avinash.TS@espire.com>\",\"22\":\"Added to backlog\",\"25\":\"Issue\",\"33\":\"TS Avinash <Avinash.TS@espire.com>\",\"52\":\""
+	        		+ dynamicDescription+"\",\"49559537\":{\"type\":1},\"49559545\":2,\"-2\":2,\"-104\":2}}]";
+
+
 
 	        // Construct JSON request body
 	        JSONObject properties = new JSONObject();
@@ -66,8 +81,9 @@ public class AzureClient {
 	        // Add other JSON properties (page source, navigation, etc.)
 	        JSONObject pageSource = new JSONObject();
 	        pageSource.put("contributionPaths", new JSONArray().put("VSS").put("VSS/Resources"));
-	        pageSource.put("diagnostics", new JSONObject().put("sessionId", "fe9562a4-0343-47e8-acfe-439f6d9f12d2").put("activityId", "fe9562a4-0343-47e8-acfe-439f6d9f12d2"));
-
+	        //pageSource.put("diagnostics", new JSONObject().put("sessionId", "fe9562a4-0343-47e8-acfe-439f6d9f12d2").put("activityId", "fe9562a4-0343-47e8-acfe-439f6d9f12d2"));
+	        pageSource.put("diagnostics", new JSONObject().put("sessionId", AZURE_SESSION_ID).put("activityId", AZURE_SESSION_ID));
+	        
 	        JSONObject routeValues = new JSONObject();
 	        routeValues.put("project", AZURE_PROJECT_NAME).put("parameters", "Issue").put("controller", "Apps").put("action", "ContributedHub");
 
@@ -297,6 +313,19 @@ public class AzureClient {
 	            e.printStackTrace();
 	            return null;
 	        }
+	    }
+
+	    private static String getAzurePAT(String azureKeyVaultUrl,String secreteName) {
+	    	
+	    	SecretClient secretClient = new SecretClientBuilder()
+	                .vaultUrl(azureKeyVaultUrl)
+	                .credential(new DefaultAzureCredentialBuilder().build())
+	                .buildClient();
+	    	
+	    	String secretValue = secretClient.getSecret(secreteName).getValue();
+	    	
+	    	return secretValue;
+	    	
 	    }
 }
 	      

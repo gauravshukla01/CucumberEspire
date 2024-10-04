@@ -27,7 +27,7 @@ public class ConfigFileReader {
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			throw new RuntimeException("Configuration.properties not found at " + propertyFilePath);
+			throw new RuntimeException("Configuration.properties file not found at " + propertyFilePath);
 		}		
 	}
 
@@ -51,9 +51,9 @@ public class ConfigFileReader {
 	}
 
 	public String getApplicationUrl() {
-		String url = properties.getProperty("url");
-		if(url != null) return url;
-		else throw new RuntimeException("Application Url not specified in the Configuration.properties file for the Key:url");
+		String applicationUrl = properties.getProperty("applicationUrl");
+		if(applicationUrl != null) return applicationUrl;
+		else throw new RuntimeException("Application Url not specified in the Configuration.properties file for the Key: applicationUrl");
 	}
 
 	public DriverType getBrowser() {
@@ -114,4 +114,82 @@ public class ConfigFileReader {
            return azureProjectId;
 	       throw new RuntimeException("Azure project ID not specified in the Configuration.properties file for the Key:azureProjectID");
 			}
+	
+	public String getAzureSessionId() {
+		String azureSessionID = properties.getProperty("azureSessionID");
+		if(azureSessionID != null)
+           return azureSessionID;
+	       throw new RuntimeException("Azure session ID not specified in the Configuration.properties file for the Key:azureSessionID");
+			}
+	
+	public String getAzureKeyVaultUrl() {
+		String azureKeyVaultURL = properties.getProperty("azureKeyVaultURL");
+		if(azureKeyVaultURL != null)
+           return azureKeyVaultURL;
+	       throw new RuntimeException("Azure key vault Url not specified in the Configuration.properties file for the Key:azureKeyVaultURL");
+			}
+	
+	public String getAzureKeyName() {
+		String azureKeyName = properties.getProperty("azureKeyName");
+		if(azureKeyName != null)
+           return azureKeyName;
+	       throw new RuntimeException("Azure key name not specified in the Configuration.properties file for the Key:azureKeyName");
+		}
+	
+	public String getEmailableReportPath() {
+		String reportPath = properties.getProperty("reportPath");
+		if(reportPath != null)
+           return reportPath;
+	       throw new RuntimeException("Azure key name not specified in the Configuration.properties file for the Key:reportPath");
+		}
+	
+	public String getEmailRecieverAddress() {
+		String recieverEmailAddress = properties.getProperty("recieverEmailAddress");
+		if(recieverEmailAddress != null)
+           return recieverEmailAddress;
+	       throw new RuntimeException("Azure key name not specified in the Configuration.properties file for the Key:recieverEmailAddress");
+		}
+	
+	public String getEmailSenderAddress() {
+		String senderEmailAddress = properties.getProperty("senderEmailAddress");
+		if(senderEmailAddress != null)
+           return senderEmailAddress;
+	       throw new RuntimeException("Azure key name not specified in the Configuration.properties file for the Key:senderEmailAddress");
+		}
+	
+	public String getEmailSenderPassword() {
+		String senderEmailPassword = properties.getProperty("senderEmailPassword");
+		if(senderEmailPassword != null)
+           return senderEmailPassword;
+	       throw new RuntimeException("Azure key name not specified in the Configuration.properties file for the Key:senderEmailPassword");
+		}
+	
+	public String getEmailHostAddress() {
+		String host = properties.getProperty("host");
+		if(host != null)
+           return host;
+	       throw new RuntimeException("Azure key name not specified in the Configuration.properties file for the Key:host");
+		}
+	
+	public String getEmailHostPortNumber() {
+		String portNumber = properties.getProperty("portNumber");
+		if(portNumber != null)
+           return portNumber;
+	       throw new RuntimeException("Azure key name not specified in the Configuration.properties file for the Key:portNumber");
+		}
+	
+	public String getEmailSubject() {
+		String emailSubject = properties.getProperty("emailSubject");
+		if(emailSubject != null)
+           return emailSubject;
+	       throw new RuntimeException("Azure key name not specified in the Configuration.properties file for the Key:reportPath");
+		}
+	
+	public String getEmailBody() {
+		String emailBody = properties.getProperty("emailBody");
+		if(emailBody != null)
+           return emailBody;
+	       throw new RuntimeException("Azure key name not specified in the Configuration.properties file for the Key:emailBody");
+		}
+	
 }

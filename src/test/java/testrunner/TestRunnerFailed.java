@@ -1,19 +1,14 @@
 package testrunner;
 
-import java.io.IOException;
+
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
-
-import commonUtils.AzureClient;
+import TestResourceManager.FileReaderManager;
 import commonUtils.BaseClass;
-import commonUtils.CucumberRetryListener;
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.Scenario;
+import commonUtils.EmailClient;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
@@ -60,5 +55,21 @@ public class TestRunnerFailed extends AbstractTestNGCucumberTests {
 //	    public Object[][] scenarios() {
 //	        return super.scenarios();
 	
+	    @AfterSuite
+	    public void sendReport() {
+	    	
+			
+			 String reportPath = FileReaderManager.getInstance().getConfigReader().getEmailableReportPath();
+			 String senderEmailAddress =FileReaderManager.getInstance().getConfigReader().getEmailSenderAddress();
+			 String senderEmailPassword = FileReaderManager.getInstance().getConfigReader().getEmailSenderPassword();
+			 String recieverEmailAddress = FileReaderManager.getInstance().getConfigReader().getEmailSenderPassword();
+			 String hostAddress = FileReaderManager.getInstance().getConfigReader().getEmailHostAddress();
+			 String portNumber = FileReaderManager.getInstance().getConfigReader().getEmailHostPortNumber();
+			 String emailSubject =  FileReaderManager.getInstance().getConfigReader().getEmailSubject();
+			 String emailBody = FileReaderManager.getInstance().getConfigReader().getEmailBody();
+			 
+			 EmailClient.sendEmailWithReport(reportPath, senderEmailAddress, senderEmailPassword,recieverEmailAddress, hostAddress, portNumber,emailSubject,emailBody);
+			 
+	    }
 
 }
