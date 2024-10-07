@@ -23,15 +23,15 @@ public class CustomizedHooks {
 	}
 	private static final Logger logger = LogManager.getLogger(CustomizedHooks.class);
 	
-	@AfterStep
-	public void createDefectWhenTestFail(Scenario scenario) throws IOException {
-		
-		if(scenario.isFailed()) {
-			
-			BaseClass.saveScreenshotToFile(scenario);
-			AzureClient.createDefectInAzureDevOps("Test case failed",scenario);
-			
-		}
-	}
+//	@AfterStep
+//	public void createDefectWhenTestFail(Scenario scenario) throws IOException {
+//		
+//		if(scenario.isFailed()) {
+//			
+//			BaseClass.saveScreenshotToFile(scenario);
+//			AzureClient.createDefectInAzureDevOps("Test case failed",scenario);
+//			
+//		}
+//	}
 
 }
