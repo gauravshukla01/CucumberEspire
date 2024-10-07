@@ -43,7 +43,7 @@ public class EmailClient {
             messageBodyPart = new MimeBodyPart();
             DataSource extentsource = new FileDataSource(reportPath);
             messageBodyPart.setDataHandler(new DataHandler(extentsource));
-            messageBodyPart.setFileName("extent.html");
+            messageBodyPart.setFileName("ExtentCsvReport.csv");
             multipart.addBodyPart(messageBodyPart);
             
             // Send the complete message parts

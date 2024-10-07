@@ -3,6 +3,7 @@ package testrunner;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 
 import commonUtils.BaseClass;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
@@ -50,13 +51,14 @@ public class TestRunner extends AbstractTestNGCucumberTests
 		driver=null;
 		}
 	}
-	/*
+	
+	
 	 @Override
 	    @DataProvider(parallel = true)
 	    public Object[][] scenarios() {
 	        return super.scenarios();
 
-	}*/
+	}
 }
 
 	 

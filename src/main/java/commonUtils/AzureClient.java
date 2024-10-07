@@ -14,6 +14,7 @@ import java.util.Base64;
 import java.util.Comparator;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -34,10 +35,11 @@ import io.cucumber.java.Scenario;
 public class AzureClient {
 	
 	private static final String AZURE_API_ENDPOINT_TO_CREATE_TASK = FileReaderManager.getInstance().getConfigReader().getAzureEndPointToCreateTask();
-	private static final String AZURE_KEY_VAULT_URL = FileReaderManager.getInstance().getConfigReader().getAzureKeyVaultUrl();
-	private static final String AZURE_KEY_NAME = FileReaderManager.getInstance().getConfigReader().getAzureKeyName();
-	private static final String AZURE_PERSONAL_ACCESS_TOKEN = getAzurePAT(AZURE_KEY_VAULT_URL,AZURE_KEY_NAME);
-	//private static final String AZURE_PERSONAL_ACCESS_TOKEN = FileReaderManager.getInstance().getConfigReader().getAzurePeronalToken();
+	private static final String AZURE_API_ENDPOINT_TO_UPDATE_TASK_STATUS = "https://dev.azure.com/{organization}/{project}/_apis/wit/workitems/{testCaseId}?api-version=6.0";
+	//private static final String AZURE_KEY_VAULT_URL = FileReaderManager.getInstance().getConfigReader().getAzureKeyVaultUrl();
+	//private static final String AZURE_KEY_NAME = FileReaderManager.getInstance().getConfigReader().getAzureKeyName();
+	//private static final String AZURE_PERSONAL_ACCESS_TOKEN = getAzurePAT(AZURE_KEY_VAULT_URL,AZURE_KEY_NAME);
+	private static final String AZURE_PERSONAL_ACCESS_TOKEN = FileReaderManager.getInstance().getConfigReader().getAzurePeronalToken();
 	private static final String AZURE_ORGANIZATION_NAME = FileReaderManager.getInstance().getConfigReader().getAzureOrganizationName();
 	private static final String AZURE_PROJECT_NAME = FileReaderManager.getInstance().getConfigReader().getAzureProjectName();
 	private static final long AZURE_TEST_DEFECTS_EPIC_ID = FileReaderManager.getInstance().getConfigReader().getAzureTestDefectsEpicId();
@@ -166,6 +168,36 @@ public class AzureClient {
 	    }
 	}
    	  
+
+	    public static void updateTestCase(int testCaseId, String field, String newValue) {
+	        String url = AZURE_API_ENDPOINT_TO_UPDATE_TASK_STATUS
+	                .replace("{organization}", "your_organization")
+	                .replace("{project}", "your_project")
+	                .replace("{testCaseId}", String.valueOf(testCaseId));
+
+	        try (CloseableHttpClient client = HttpClients.createDefault()) {
+	            HttpPatch httpPatch = new HttpPatch(url);
+	            String base64Credentials = Base64.getEncoder().encodeToString((":" + AZURE_PERSONAL_ACCESS_TOKEN).getBytes());
+	            httpPatch.setHeader("Authorization", "Basic " + base64Credentials);
+	            httpPatch.setHeader("Content-Type", "application/json-patch+json");
+
+	            // Create the JSON patch document
+	            String jsonPatch = "[{\"op\": \"add\", \"path\": \"/fields/" + field + "\", \"value\": \"" + newValue + "\"}]";
+	            StringEntity entity = new StringEntity(jsonPatch);
+	            httpPatch.setEntity(entity);
+
+	            try (CloseableHttpResponse response = client.execute(httpPatch)) {
+	                String responseBody = EntityUtils.toString(response.getEntity());
+	                
+	                if(response.getStatusLine().getStatusCode()==200) {
+	                	System.out.println("Test case status updated successfully");
+	                }
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
 	    private static void attachEpicToDefect(int defectId, long epicId) throws IOException {        
 	    	    
 	    	String url = BASE_URL+"/_apis/wit/workitems/"+defectId+"?api-version=7.2-preview.3";
@@ -326,6 +358,30 @@ public class AzureClient {
 	    	
 	    	return secretValue;
 	    	
+	    }
+	    
+	    private static void getTestRuns(String organizationName,String projectName) {
+	        String url = "https://dev.azure.com/{organization}/{project}/_apis/test/runs?api-version=6.0"
+	                .replace("{organization}", organizationName)
+	                .replace("{project}", projectName);
+
+	        try (CloseableHttpClient client = HttpClients.createDefault()) {
+	            HttpGet httpGet = new HttpGet(url);
+	            String base64Credentials = Base64.getEncoder().encodeToString((":" + AZURE_PERSONAL_ACCESS_TOKEN).getBytes());
+	            httpGet.setHeader("Authorization", "Basic " + base64Credentials);
+	            httpGet.setHeader("Content-Type", "application/json");
+
+	            try (CloseableHttpResponse response = client.execute(httpGet)) {
+	                String responseBody = EntityUtils.toString(response.getEntity());
+	                System.out.println("Response Code: " + response.getStatusLine().getStatusCode());
+	                System.out.println("Response Body: " + responseBody);
+
+	                // Parse the response JSON to extract run IDs and result IDs
+	                // You'll need a JSON library like org.json or Gson to parse the response
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
 	    }
 }
 	      

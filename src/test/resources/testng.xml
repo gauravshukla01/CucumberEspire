@@ -2,7 +2,7 @@
     <test name="App test on Chrome">
         <classes>
             <class name="testrunner.TestRunner" />
-            <class name="testrunner.TestRunnerFailed" />
+            <class name="testrunner.TestRunnerFailed"/>
         </classes>
     </test>
 </suite>

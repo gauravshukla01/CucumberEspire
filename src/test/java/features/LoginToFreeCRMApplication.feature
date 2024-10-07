@@ -14,7 +14,7 @@ Examples:
         | LoginCredentials   | 0 |
         
 @NegativeScanario      
-Scenario Outline: Login_into_FreeCRM_Application
+Scenario Outline: Login_into_FreeCRM_Application_With_Invalid_Credentials
          Given user navigate to FreeCRM application login page
          When title of login page is Free CRM
          Then user get login credentials from "<sheetName>" and <rowNum> and proceed with login

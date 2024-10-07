@@ -192,4 +192,12 @@ public class ConfigFileReader {
 	       throw new RuntimeException("Azure key name not specified in the Configuration.properties file for the Key:emailBody");
 		}
 	
+
+	public String getApplicationEnvironment() {
+		String applicationEnvironment = properties.getProperty("applicationEnvironment");
+		if(applicationEnvironment != null)
+           return applicationEnvironment;
+	       throw new RuntimeException("Application Envinorment not specified in the Configuration.properties file for the Key:applicationEnvironment");
+		}
+	
 }
