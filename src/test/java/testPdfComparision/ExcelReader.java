@@ -78,7 +78,7 @@ public class ExcelReader {
                     String file2 = innerEntry.getKey();
                     String ignoreFile = innerEntry.getValue();
 
-                    String resultPdf = System.getProperty("user.dir")+ System.getProperty("file.separator")+"\\src\\test\\resources\\PdfListFolder\\result" + counter + ".pdf";
+                    String resultPdf = System.getProperty("user.dir")+ System.getProperty("file.separator")+"\\src\\test\\resources\\PdfListFolder\\result\\result" + counter + ".pdf";
                     counter++;
                     String result = "result" + count + ".pdf";
                     count++;
