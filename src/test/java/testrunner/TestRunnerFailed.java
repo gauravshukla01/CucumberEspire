@@ -25,11 +25,11 @@ import io.cucumber.testng.CucumberOptions;
 
 public class TestRunnerFailed extends AbstractTestNGCucumberTests {
 		
-	 @Override
-	    @DataProvider(parallel = true)
-	    public Object[][] scenarios() {
-	        return super.scenarios();
-	 }
+//	 @Override
+//	    @DataProvider(parallel = true)
+//	    public Object[][] scenarios() {
+//	        return super.scenarios();
+//	 }
 	    @AfterSuite
 	    public void createReportAndSend() {
 	    	
