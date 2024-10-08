@@ -96,4 +96,35 @@ public class CsvReport {
             System.err.println("Error writing to CSV: " + e.getMessage()); // Debug message
         }
     }
+    
+    public static Map<String,Integer> returnResultStatistics() {
+    	
+    	HashMap<String,Integer> resultMap = new HashMap<String,Integer>();
+    	
+    	int totalNumberOfTestCases=hm.size();
+    	int totalNumberOfPassedTestCases=0;
+    	int totalNumberOfFailedTestCases=0;
+    	int totalNumberOfSkippedTestCases=0;
+    	for(Map.Entry<String, String> entry : hm.entrySet()) {
+    		if(entry.getValue().equalsIgnoreCase("PASS")) {
+    			totalNumberOfPassedTestCases++;	
+    		}
+    		
+    		else if(entry.getValue().equalsIgnoreCase("FAIL")){
+    			totalNumberOfFailedTestCases++;	
+    		}
+    		
+    		else {
+    			totalNumberOfSkippedTestCases++;
+    		}
+    	}
+    	
+    	resultMap.put("TOTAL", totalNumberOfTestCases);
+    	resultMap.put("PASS", totalNumberOfPassedTestCases);
+    	resultMap.put("FAIL", totalNumberOfFailedTestCases);
+    	resultMap.put("SKIPPED", totalNumberOfSkippedTestCases);
+    	
+    	return resultMap;
+    	
+    }
 }

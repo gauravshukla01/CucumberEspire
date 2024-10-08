@@ -10,7 +10,8 @@ import javax.mail.internet.*;
 public class EmailClient {
 
     public static void sendEmailWithReport(String reportPath, String senderAddress, String senderEmailPassword,
-    		String recieverEmailAddress,String hostAddress, String portNumber, String emailSubject,String emailBody) 
+    		String recieverEmailAddress,String hostAddress, String portNumber, String emailSubject,int totalTestCases,
+    		int totalTestCasesPassed,int totalTestCasesFailed,int totalTestCasesSkipped) 
     {
         Properties properties = new Properties();
         properties.setProperty("mail.smtp.host", hostAddress);
@@ -20,7 +21,7 @@ public class EmailClient {
 
         Session session = Session.getInstance(properties, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(senderAddress, "Consultant@0659");
+                return new PasswordAuthentication(senderAddress, senderEmailPassword);
                 
             }
         });
@@ -32,9 +33,17 @@ public class EmailClient {
             message.setSubject(emailSubject);
 
             // Create the message part
+            StringBuilder messageContent = new StringBuilder();
+            messageContent.append("<html><body>")
+            .append("Please find the attached test execution report<br>")
+            .append("Total Number Of Testcases Executed: ").append(totalTestCases).append("<br>")
+            .append("Total Number Of Testcases Passed: ").append(totalTestCasesPassed).append("<br>")
+            .append("Total Number Of Testcases Failed: ").append(totalTestCasesFailed).append("<br>")
+            .append("Total Number Of Testcases Skipped: ").append(totalTestCasesSkipped)
+            .append("</body></html>");
             BodyPart messageBodyPart = new MimeBodyPart();
-            messageBodyPart.setText(emailBody);
-
+            messageBodyPart.setContent(messageContent.toString(),"text/html");
+            
             // Create a multipart message
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(messageBodyPart);
