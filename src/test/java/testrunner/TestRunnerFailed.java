@@ -5,11 +5,11 @@ package testrunner;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.DataProvider;
 
-import TestResourceManager.FileReaderManager;
 import commonUtils.EmailClient;
 import commonUtils.JsonReportExtractor;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
+import testResourceManager.FileReaderManager;
 
 @CucumberOptions(
 

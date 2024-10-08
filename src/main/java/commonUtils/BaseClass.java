@@ -28,8 +28,8 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import TestResourceManager.WebDrivermanager;
 import io.cucumber.java.Scenario;
+import testResourceManager.WebDrivermanager;
 
 
 public class BaseClass {

@@ -137,10 +137,8 @@ public class ConfigFileReader {
 		}
 	
 	public String getEmailableReportPath() {
-		String reportPath = properties.getProperty("reportPath");
-		if(reportPath != null)
-           return reportPath;
-	       throw new RuntimeException("Azure key name not specified in the Configuration.properties file for the Key:reportPath");
+		String reportPath = System.getProperty("user.dir")+ System.getProperty("file.separator")+properties.getProperty("reportPath");
+		return reportPath;
 		}
 	
 	public String getEmailRecieverAddress() {

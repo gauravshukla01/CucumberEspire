@@ -29,8 +29,8 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.azure.security.keyvault.secrets.SecretClient;
 import com.azure.security.keyvault.secrets.SecretClientBuilder;
 
-import TestResourceManager.FileReaderManager;
 import io.cucumber.java.Scenario;
+import testResourceManager.FileReaderManager;
 
 public class AzureClient {
 	

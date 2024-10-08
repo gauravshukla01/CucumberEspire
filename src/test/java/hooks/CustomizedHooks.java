@@ -6,11 +6,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
-import TestContext.TestContext;
 import commonUtils.AzureClient;
 import commonUtils.BaseClass;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Scenario;
+import testContext.TestContext;
 
 
 public class CustomizedHooks {

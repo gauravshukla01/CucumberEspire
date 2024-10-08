@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import TestResourceManager.FileReaderManager;
+import testResourceManager.FileReaderManager;
 
 public class CsvReport {
 
