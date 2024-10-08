@@ -204,7 +204,7 @@ public class AzureClient {
 	    	CloseableHttpClient client = HttpClients.createDefault();   
 	    	HttpPatch patch = new HttpPatch(url);      
 	
-	        String jsonBody = "[{\"op\":\"add\",\"path\":\"/relations/-\",\"value\":{\"rel\":\"System.LinkTypes.Dependency-forward\",\"url\":\"https://dev.azure.com/rahul0171/Espire/_apis/wit/workItems/33\",\"attributes\":{\"comment\":\"Making a new link for the dependency\"}}}]";
+	        String jsonBody = "[{\"op\":\"add\",\"path\":\"/relations/-\",\"value\":{\"rel\":\"System.LinkTypes.Dependency-forward\",\"url\":\"https://dev.azure.com/EspireAvinash/ParagonUIAutomation/_apis/wit/workItems/1\",\"attributes\":{\"comment\":\"Making a new link for the dependency\"}}}]";
 	    	
 	    	StringEntity entity = new StringEntity(jsonBody);    
 	    	patch.setEntity(entity); 

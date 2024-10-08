@@ -15,12 +15,11 @@ import io.cucumber.java.Scenario;
 
 public class CustomizedHooks {
 	
-	public BaseClass baseclass;
-	public WebDriver driver;
+	BaseClass baseClass;
 
 	public CustomizedHooks(TestContext testContext) {
 		
-      this.driver=testContext.getWebDriver();
+      baseClass=testContext.getBaseClass();
       
 	}
 	private static final Logger logger = LogManager.getLogger(CustomizedHooks.class);
@@ -30,7 +29,7 @@ public class CustomizedHooks {
 		
 		if(scenario.isFailed()) {
 			
-			BaseClass.saveScreenshotToFile(scenario);
+			baseClass.saveScreenshotToFile(scenario);
 			AzureClient.createDefectInAzureDevOps("Test case failed",scenario);
 			
 		}

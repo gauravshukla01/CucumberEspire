@@ -34,7 +34,6 @@ import io.cucumber.java.Scenario;
 
 public class BaseClass {
 
-	//private WebDrivermanager webdrivermanager;
     private static WebDriver driver;
     public WebDriverWait wait;
     public static final Logger logger = LogManager.getLogger(BaseClass.class);
@@ -44,19 +43,9 @@ public class BaseClass {
     	this.driver=driver;
     
 		this.wait = new WebDriverWait(driver,java.time.Duration.ofSeconds(5));
-//		webdrivermanager = new WebDrivermanager();
-//		driver= webdrivermanager.getDriver();
 
 	}
-	
-//    public void launchBrowser() throws Exception {
-//    	
-//    	driver= new WebDrivermanager().getDriver();
-//    }
-    
-//    public static  WebDriver getDriver() {
-//    	return driver;
-//    }
+   
 
 	public boolean safeClick(By by, long timeout, long pollingInterval) {
 		try {
