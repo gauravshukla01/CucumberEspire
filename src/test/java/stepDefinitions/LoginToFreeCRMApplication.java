@@ -6,17 +6,13 @@ import java.util.HashMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import TestContext.TestContext;
 import TestResourceManager.FileReaderManager;
-import commonUtils.AzureClient;
 import commonUtils.BaseClass;
 import commonUtils.ExcelData;
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.*;
 import pageObjects.HomePage;
 import pageObjects.LoginPage;
@@ -27,9 +23,10 @@ public class LoginToFreeCRMApplication {
 	
 	String methodName;
 	HashMap<String,String> Hmap;
-	public BaseClass baseclass;
-	public static WebDriver driver;
+	BaseClass baseclass;
+	public WebDriver driver;
 	PageObjectManager pageObjectManager;
+	TestContext testContext;
 	
 	private static final Logger logger = LogManager.getLogger(LoginToFreeCRMApplication.class);
 	String appUrl = FileReaderManager.getInstance().getConfigReader().getApplicationUrl();
@@ -38,13 +35,11 @@ public class LoginToFreeCRMApplication {
 	LoginPage loginPage;
 	HomePage homePage;
 
-	public LoginToFreeCRMApplication (BaseClass baseclass){
+	public LoginToFreeCRMApplication (TestContext testContext) throws Exception{
 		
-		this.baseclass=baseclass;
-		LoginToFreeCRMApplication.driver = BaseClass.getDriver();
-		pageObjectManager = new PageObjectManager(driver);
-		loginPage=pageObjectManager.getFreeCRMLoginPage();
-		homePage=pageObjectManager.getFreeCRMHomePage();
+		this.testContext=testContext;
+		loginPage=testContext.getPageObjectManager().getFreeCRMLoginPage();
+		homePage=testContext.getPageObjectManager().getFreeCRMHomePage();
 	}
 	
 	@Given("^user navigate to FreeCRM application login page$")	
@@ -54,7 +49,7 @@ public class LoginToFreeCRMApplication {
 		
 		System.out.println(driver);
 		
-		driver.get(appUrl);
+		loginPage.navigateToApplication(appUrl);
 		
 		logger.info("Launched application");
 		
@@ -91,34 +86,5 @@ public class LoginToFreeCRMApplication {
 		homePage.logOutFromApplication();
 		Assert.assertTrue(loginPage.isUserNameTextBoxDisplayed(),"Application not logged out");
 	}
-	
-//	@AfterStep 
-//	public void takeScreenshot(Scenario scenario) {
-//		
-//		try {
-//			if (driver != null) {
-//				final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-//				scenario.attach(screenshot, "image/png", "image");
-//				String stepname = scenario.getName();
-//				logger.info("Screenshot captured :"+ stepname);
-//
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//	@AfterStep
-//	public void createDefectWhenTestFail(Scenario scenario) throws IOException {
-//		
-//		if(scenario.isFailed()) {
-//			
-//			BaseClass.saveScreenshotToFile(scenario);
-//			AzureClient.createDefectInAzureDevOps("Test case failed",scenario);
-//			
-//		}
-//	}
-
-
 
 }

@@ -7,13 +7,17 @@ import org.openqa.selenium.support.PageFactory;
 
 import commonUtils.BaseClass;
 
-public class HomePage extends BaseClass {
+public class HomePage {
 	
-	public static WebDriver driver;
+	public WebDriver driver;
+	
+	BaseClass baseClass;
 	
 	public HomePage(WebDriver webdriver)
 	{
-        HomePage.driver = webdriver;
+        this.driver = webdriver;
+        
+        baseClass = new BaseClass(driver);
 		
 		PageFactory.initElements(driver, this);
 	}
@@ -29,17 +33,17 @@ public class HomePage extends BaseClass {
 	
 	public String getUserName() {
 		
-		waitVisibilityOfElement(textUserName);
+		baseClass.waitVisibilityOfElement(textUserName);
 		String userName = textUserName.getText().trim();
 		return userName;
 		
 	}
 	
 	public void logOutFromApplication() {
-		clickOnElement(driver, iconSetting);
-		waitInSec(1);
-		clickOnElement(driver, iconLogOut);
-		waitInSec(2);
+		baseClass.clickOnElement(driver, iconSetting);
+		baseClass.waitInSec(1);
+		baseClass.clickOnElement(driver, iconLogOut);
+		baseClass.waitInSec(2);
 	}
 
 }

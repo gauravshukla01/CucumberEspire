@@ -18,7 +18,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class WebDrivermanager {
 
-	private WebDriver driver;
+	WebDriver driver;
 	private static DriverType driverType;
 	private static EnvironmentType environmentType;
 	
@@ -55,7 +55,7 @@ public class WebDrivermanager {
 				WebDriverManager.chromedriver().setup();
 				ChromeOptions chromeOptions = new ChromeOptions();
 				chromeOptions.addArguments("--remote-allow-origins=*");
-				chromeOptions.addArguments("--test-type--");
+				chromeOptions.addArguments("--test-type");
 				chromeOptions.addArguments("--disable-extensions");
 				chromeOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
 				String projectPath = System.getProperty("user.dir");

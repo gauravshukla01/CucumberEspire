@@ -4,10 +4,10 @@ import org.openqa.selenium.WebDriver;
 
 public class PageObjectManager {
 
-   private static WebDriver driver;
+   WebDriver driver;
 
-   public LoginPage loginPage;
-   public HomePage homePage;
+   LoginPage loginPage;
+   HomePage homePage;
    
    public PageObjectManager(WebDriver webDriver) {
 	   

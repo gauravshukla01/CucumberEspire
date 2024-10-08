@@ -9,9 +9,11 @@ import org.openqa.selenium.support.PageFactory;
 
 import commonUtils.BaseClass;
 
-public class LoginPage extends BaseClass {
+public class LoginPage {
 
-	public static WebDriver driver;
+	public WebDriver driver;
+	
+	BaseClass baseClass;
 
 
     @FindBy(xpath="//input[@placeholder='Email']")
@@ -25,34 +27,40 @@ public class LoginPage extends BaseClass {
 
 	public LoginPage(WebDriver webdriver)
 	{
-		LoginPage.driver = webdriver;
+		this.driver = webdriver;
+		
+		baseClass = new BaseClass(driver);
 		
 		PageFactory.initElements(driver, this);
 	}
 	
+	public void navigateToApplication(String appUrl) {
+		driver.get(appUrl);
+	}
+	
 	public String getPageTitle() {
 				
-		waitInSec(2);
+		baseClass.waitInSec(2);
 		String pageTitle=driver.getTitle();
 		return pageTitle;
 	}
 	
 	public void enterCredentialsAndLoginIntoApplication(String userName,String password) {
 
-		sendKeys(driver, textBoxUserName, userName);
-		waitInSec(1);
-		sendKeys(driver, textBoxPassword, password);
-		waitInSec(1);
-		clickOnElement(driver, buttonLogin);
-		waitInSec(2);
+		baseClass.sendKeys(driver, textBoxUserName, userName);
+		baseClass.waitInSec(1);
+		baseClass.sendKeys(driver, textBoxPassword, password);
+		baseClass.waitInSec(1);
+		baseClass.clickOnElement(driver, buttonLogin);
+		baseClass.waitInSec(2);
 		
 	}
 	
 	public boolean isUserNameTextBoxDisplayed() {
 		
-		waitVisibilityOfElement(textBoxUserName);
+		baseClass.waitVisibilityOfElement(textBoxUserName);
 		
-		return isElementPresent(textBoxUserName);
+		return baseClass.isElementPresent(textBoxUserName);
 	}
 
 }

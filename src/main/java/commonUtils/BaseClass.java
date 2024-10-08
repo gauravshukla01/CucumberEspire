@@ -1,12 +1,9 @@
 package commonUtils;
-
-
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.File;
-import java.nio.file.Files;
-
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -34,26 +31,32 @@ import org.testng.Assert;
 import TestResourceManager.WebDrivermanager;
 import io.cucumber.java.Scenario;
 
+
 public class BaseClass {
 
-    public static WebDriver driver;
-    private WebDriverWait wait;
-    private static final Logger logger = LogManager.getLogger(BaseClass.class);
+	//private WebDrivermanager webdrivermanager;
+    private static WebDriver driver;
+    public WebDriverWait wait;
+    public static final Logger logger = LogManager.getLogger(BaseClass.class);
 	
-    public BaseClass() {
+    public BaseClass(WebDriver driver) {
+    	
+    	this.driver=driver;
     
 		this.wait = new WebDriverWait(driver,java.time.Duration.ofSeconds(5));
+//		webdrivermanager = new WebDrivermanager();
+//		driver= webdrivermanager.getDriver();
 
 	}
 	
-    public void launchBrowser() throws Exception {
-    	
-    	driver= new WebDrivermanager().getDriver();
-    }
+//    public void launchBrowser() throws Exception {
+//    	
+//    	driver= new WebDrivermanager().getDriver();
+//    }
     
-    public static WebDriver getDriver() {
-    	return driver;
-    }
+//    public static  WebDriver getDriver() {
+//    	return driver;
+//    }
 
 	public boolean safeClick(By by, long timeout, long pollingInterval) {
 		try {
