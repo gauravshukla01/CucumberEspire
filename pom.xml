@@ -65,11 +65,10 @@
                 <!-- Configure TestNG parallelism -->
                 <systemPropertyVariables>
                     <dataproviderthreadcount>3</dataproviderthreadcount>
-                </systemPropertyVariables>
-
-                
+                </systemPropertyVariables>            
                 <includes>
                     <include>**/TestRunner</include>
+                    <include>**/TestRunnerFailed</include>
                 </includes>
                
             </configuration>
@@ -216,14 +215,6 @@
             <artifactId>commons-cli</artifactId>
             <version>1.5.0</version>
         </dependency>
-      <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher -->
-<dependency>
-    <groupId>org.junit.platform</groupId>
-    <artifactId>junit-platform-launcher</artifactId>
-    <version>1.9.1</version>
-    <scope>test</scope>
-</dependency>
-
 
 	</dependencies>
 </project>

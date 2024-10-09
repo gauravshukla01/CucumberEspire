@@ -57,18 +57,18 @@ public class WebDrivermanager {
 				chromeOptions.addArguments("--remote-allow-origins=*");
 				chromeOptions.addArguments("--test-type");
 				chromeOptions.addArguments("--disable-extensions");
-				chromeOptions.addArguments("--headless");
-				chromeOptions.addArguments("--no-sandbox");
-	            chromeOptions.addArguments("--disable-dev-shm-usage");
+//				chromeOptions.addArguments("--headless");
+//				chromeOptions.addArguments("--no-sandbox");
+//	            chromeOptions.addArguments("--disable-dev-shm-usage");
 				chromeOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
 				String projectPath = System.getProperty("user.dir");
-//				String downloadFilePath = projectPath+"\\src\\test\\resources\\Downloads";
-//				 Map<String, Object> prefs = new HashMap<>();
-//			        prefs.put("download.default_directory", downloadFilePath); 
-//			        prefs.put("download.prompt_for_download", false); 
-//			        prefs.put("safebrowsing.enabled", true); 
+				String downloadFilePath = projectPath+"/src/test/resources/Downloads";
+				 Map<String, Object> prefs = new HashMap<>();
+			        prefs.put("download.default_directory", downloadFilePath); 
+			        prefs.put("download.prompt_for_download", false); 
+			        prefs.put("safebrowsing.enabled", true); 
 
-			    //chromeOptions.setExperimentalOption("prefs", prefs);
+			    chromeOptions.setExperimentalOption("prefs", prefs);
 				driver = new ChromeDriver(chromeOptions);
 				break;
 				

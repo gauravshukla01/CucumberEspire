@@ -26,10 +26,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
+
 
 import io.cucumber.java.Scenario;
-import testResourceManager.WebDrivermanager;
+
 
 
 public class BaseClass {
@@ -235,21 +235,6 @@ public class BaseClass {
 
 		return rowNum;
 	}
-	
-	public void validatePopUp (String PopUpText,String ValidationMessage) {
-
-		WebElement popup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".snackbar-text")));
-		String popupText = popup.getText();
-		try {
-			Assert.assertEquals(PopUpText, popupText);       
-			System.out.println(ValidationMessage);
-		} 
-		catch (AssertionError e) {	
-			e.printStackTrace();
-		}
-	
-
-}
 
 	public void waitVisibilityOfElement(WebElement element) {
 
