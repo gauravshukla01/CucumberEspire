@@ -1,8 +1,0 @@
-<suite name="Our Suite" verbose="1" >
-    <test name="App test on Chrome">
-        <classes>
-            <class name="testrunner.TestRunner" />
-            <class name="testrunner.TestRunnerFailed" />
-        </classes>
-    </test>
-</suite>

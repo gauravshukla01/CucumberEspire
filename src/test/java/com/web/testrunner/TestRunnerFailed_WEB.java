@@ -1,4 +1,4 @@
-package testrunner;
+package com.web.testrunner;
 
 
 
@@ -23,18 +23,18 @@ import testResourceManager.FileReaderManager;
 					"json:target1/cucumber-reports"
 					},
 			features = "@target/failed.txt"
-	        ,glue={"stepDefinitions","hooks"}
+	        ,glue={"com.web.stepDefinitions","hooks"}
 	        ,dryRun = false
 	        ,monochrome = true
 	)
 
-public class TestRunnerFailed extends AbstractTestNGCucumberTests {
+public class TestRunnerFailed_WEB extends AbstractTestNGCucumberTests {
 		
-//	 @Override
-//	    @DataProvider(parallel = true)
-//	    public Object[][] scenarios() {
-//	        return super.scenarios();
-//	 }
+	 @Override
+	    @DataProvider(parallel = true)
+	    public Object[][] scenarios() {
+	        return super.scenarios();
+	 }
 	    @AfterSuite
 	    public void createReportAndSend() {
 	    	

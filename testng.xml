@@ -1,0 +1,9 @@
+<suite name="Our Suite" verbose="1" >
+    <test name="App test on Chrome">
+        <classes>
+            <class name="com.web.testrunner.TestRunner_WEB" />
+            <class name="com.web.testrunner.TestRunnerFailed_WEB" />
+            <class name="com.api.testrunner.TestRunner_API" />
+        </classes>
+    </test>
+</suite>

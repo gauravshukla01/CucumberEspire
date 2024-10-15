@@ -1,11 +1,12 @@
-package testContext;
+package com.web.testContext;
 
 import java.util.HashMap;
 
 import org.openqa.selenium.WebDriver;
 
+import com.web.pageObjects.PageObjectManager;
+
 import commonUtils.BaseClass;
-import pageObjects.PageObjectManager;
 import testResourceManager.WebDrivermanager;
 
 public class TestContext {
