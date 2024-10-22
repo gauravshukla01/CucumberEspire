@@ -17,7 +17,7 @@ public class TestContext {
 	WebDriver driver;
 	public HashMap<String,String> Hmap;
 	
-	public TestContext(){
+	public TestContext() throws Exception{
 		webdrivermanager = new WebDrivermanager();
 		Hmap = new HashMap<String,String>();
 		this.driver = webdrivermanager.getDriver();

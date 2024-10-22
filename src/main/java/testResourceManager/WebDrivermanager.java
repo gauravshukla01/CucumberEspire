@@ -1,5 +1,6 @@
 package testResourceManager;
 
+import java.net.URL;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import enums.DriverType;
 import enums.EnvironmentType;
@@ -19,18 +21,48 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class WebDrivermanager {
 
 	WebDriver driver;
-	private static DriverType driverType;
-	private static EnvironmentType environmentType;
+	RemoteWebDriver remoteDriver;
+	private static DriverType driverType = FileReaderManager.getInstance().getConfigReader().getBrowser();
+	private static EnvironmentType environmentType=FileReaderManager.getInstance().getConfigReader().getEnvironment();
 	
 
 	public WebDrivermanager() {
 		
 	}
-
-	public WebDriver getDriver() {
+	
+	public WebDriver getDriver() throws Exception {
 		
-		driverType = FileReaderManager.getInstance().getConfigReader().getBrowser();
-		environmentType = FileReaderManager.getInstance().getConfigReader().getEnvironment();
+		if(driver == null) driver = createDriver();
+		return driver;
+	}
+	
+	private WebDriver createDriver() throws Exception {
+		switch (environmentType) {	    
+		case LOCAL : driver = createLocalDriver();
+		break;
+		case REMOTE : driver = createRemoteDriver();
+		break;
+		}
+		return driver;
+	}
+	
+   private RemoteWebDriver createRemoteDriver() throws Exception {
+		
+	   ChromeOptions chromeOptions = new ChromeOptions();
+	   chromeOptions.addArguments("--headless");
+	   chromeOptions.addArguments("--no-sandbox");
+       chromeOptions.addArguments("--disable-dev-shm-usage");
+       chromeOptions.addArguments("--remote-allow-origins=*");
+	   chromeOptions.addArguments("--test-type");
+	   chromeOptions.addArguments("--disable-extensions");
+	
+		
+	   driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), chromeOptions);
+		
+	   return (RemoteWebDriver) driver;
+	}
+
+	private WebDriver createLocalDriver() {
 		
 		if(driver == null) {
 			switch (driverType) {	
