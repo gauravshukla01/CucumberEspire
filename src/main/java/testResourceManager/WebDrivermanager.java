@@ -21,7 +21,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class WebDrivermanager {
 
 	WebDriver driver;
-	RemoteWebDriver remoteDriver;
+
 	private static DriverType driverType = FileReaderManager.getInstance().getConfigReader().getBrowser();
 	private static EnvironmentType environmentType=FileReaderManager.getInstance().getConfigReader().getEnvironment();
 	
@@ -46,21 +46,54 @@ public class WebDrivermanager {
 		return driver;
 	}
 	
-   private RemoteWebDriver createRemoteDriver() throws Exception {
-		
-	   ChromeOptions chromeOptions = new ChromeOptions();
-	   chromeOptions.addArguments("--headless");
-	   chromeOptions.addArguments("--no-sandbox");
-       chromeOptions.addArguments("--disable-dev-shm-usage");
-       chromeOptions.addArguments("--remote-allow-origins=*");
-	   chromeOptions.addArguments("--test-type");
-	   chromeOptions.addArguments("--disable-extensions");
-	
-		
-	   driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), chromeOptions);
-		
-	   return (RemoteWebDriver) driver;
+	private WebDriver createRemoteDriver() throws Exception {
+
+	    try {
+	        switch (driverType) {
+	            case FIREFOX:
+	                FirefoxOptions firefoxOptions = new FirefoxOptions()
+	                    .setAcceptInsecureCerts(true)
+	                    .addPreference("browser.helperApps.alwaysAsk.force", false)
+	                    .addPreference("dom.webnotifications.enabled", false)
+	                    .addPreference("geo.enabled", false)
+	                    .addPreference("geo.provider.use_corelocation", false)
+	                    .addPreference("geo.prompt.testing", false)
+	                    .addPreference("geo.prompt.testing.allow", false)
+	                    .addArguments("--headless");
+	                
+	                driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), firefoxOptions);
+	                break;
+
+	            case CHROME:
+	                ChromeOptions chromeOptions = new ChromeOptions();
+	                chromeOptions.addArguments("--headless");
+	                chromeOptions.addArguments("--no-sandbox");
+	                chromeOptions.addArguments("--disable-dev-shm-usage");
+	                chromeOptions.addArguments("--remote-allow-origins=*");
+	                chromeOptions.addArguments("--disable-extensions");
+
+	                driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
+	                break;
+
+	            case EDGE:
+	                EdgeOptions edgeOptions = new EdgeOptions();
+	                edgeOptions.addArguments("--remote-allow-origins=*");
+	                edgeOptions.addArguments("--headless");
+	                driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), edgeOptions);
+	                break;
+	        }
+
+	        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+	        driver.manage().window().maximize();
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();  // Log the exception
+	        throw new Exception("Failed to create remote driver: " + e.getMessage());
+	    }
+	    
+	    return driver;
 	}
+
 
 	private WebDriver createLocalDriver() {
 		
