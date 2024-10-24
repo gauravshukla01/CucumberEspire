@@ -21,7 +21,7 @@ public class ExcelData {
 	public String getDataFromExcel(String excelName,String sheetName,int rowNumber,String columnName) throws InvalidFormatException, IOException {
 	
 		  projectPath = System.getProperty("user.dir");
-		  filePath = projectPath + "/src/test/resources/Excel_Data/"+excelName;
+		  filePath = projectPath + "/src/test/resources/com/web/testData/"+excelName;
 		    
 		  List<Map<String,String>> testData = reader.getData(filePath,sheetName);
 
